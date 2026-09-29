@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+<rect width="1200" height="800" fill="#ebe7df"/>
+<circle cx="920" cy="210" r="260" fill="#d7d0c4"/>
+<path d="M110 630 C310 380 470 720 700 430 S1050 220 1160 360" fill="none" stroke="#121212" stroke-width="7"/>
+<circle cx="700" cy="430" r="18" fill="#d65a36"/><circle cx="470" cy="610" r="12" fill="#121212"/>
+<text x="90" y="120" font-family="Arial" font-size="38" fill="#121212">DATA / HUMAN / MACHINE</text>
+</svg>

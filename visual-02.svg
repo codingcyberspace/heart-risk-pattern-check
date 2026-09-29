@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+<rect width="1200" height="800" fill="#17231f"/>
+<g fill="none" stroke="#d9e1da" stroke-width="2" opacity=".7">
+<path d="M120 620 L260 490 L390 540 L540 300 L710 410 L860 210 L1080 330"/>
+<path d="M120 670 L1080 670"/><path d="M120 170 L120 670"/>
+</g>
+<g fill="#e16a3d"><circle cx="260" cy="490" r="10"/><circle cx="540" cy="300" r="10"/><circle cx="860" cy="210" r="10"/></g>
+<text x="120" y="120" font-family="Arial" font-size="42" fill="#f2efe9">MODEL BEHAVIOUR</text>
+</svg>
