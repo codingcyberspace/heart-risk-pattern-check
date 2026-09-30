@@ -2,418 +2,346 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nexora AI — Welcome to reality</title>
-<meta name="description" content="Nexora AI is an experimental machine-learning workspace for exploring models, experiments and evidence.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nexora AI — Heart Risk Pattern Check</title>
+<meta name="description" content="Nexora AI — an educational machine-learning studio.">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap');
-
 :root {
-  --ink: #11110f;
-  --paper: #f4f1ea;
-  --muted: #68655f;
-  --line: #d9d4ca;
-  --accent: #d85d38;
-  --green: #173029;
-  --white: #fffdf8;
-  --dark-card: #191917;
+  --ink:#10100f;
+  --paper:#f4f1ea;
+  --green:#102d25;
+  --orange:#e76034;
+  --line:#d8d3c9;
+  --soft:#e8e3d9;
+  --bg:#EAF0EC;
+  --grid:#D6E0DA;
+  --mute:#586B63;
+  --up:#C62A4B;
+  --down:#2A56C6;
 }
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { 
-  margin: 0; 
-  background: var(--paper); 
-  color: var(--ink); 
-  font-family: "DM Sans", sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-a { text-decoration: none; color: inherit; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "DM Sans", sans-serif; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; }
 
 /* Navigation */
-.nav {
-  position: fixed;
-  z-index: 50;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 72px;
-  padding: 0 5vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(17,17,15,.12);
-  background: rgba(244,241,234,.88);
-  backdrop-filter: blur(14px);
-}
-.logo { font: 600 22px "Space Grotesk", sans-serif; letter-spacing: -.04em; }
-.logo span { color: var(--accent); }
-.navlinks { display: flex; gap: 28px; font-size: 14px; }
-.navlinks a { opacity: .72; transition: opacity 0.2s; }
-.navlinks a:hover { opacity: 1; }
-.navbtn { 
-  border: 1px solid var(--ink); 
-  padding: 10px 18px; 
-  border-radius: 999px; 
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-.navbtn:hover { background: var(--ink); color: var(--white); }
+.nav { position: sticky; top: 0; z-index: 20; height: 64px; border-bottom: 1px solid var(--line); background: rgba(244,241,234,.94); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: space-between; padding: 0 42px; }
+.logo { font: 600 24px "Space Grotesk"; }
+.logo span { color: var(--orange); }
+.navlinks { display: flex; gap: 34px; font-size: 14px; color: #555; }
+.navlinks a:hover { color: #000; }
+.navbtn { border: 1px solid #111; border-radius: 999px; padding: 11px 18px; background: transparent; }
 
 /* Hero Section */
-.hero {
-  min-height: 100vh;
-  padding: 145px 5vw 70px;
-  display: grid;
-  grid-template-columns: 1.02fr .98fr;
-  gap: 5vw;
-  align-items: center;
-}
-.eyebrow { 
-  font-size: 12px; 
-  letter-spacing: .18em; 
-  text-transform: uppercase; 
-  color: var(--muted); 
-  margin-bottom: 25px; 
-  font-weight: 600;
-}
-h1 { 
-  font: 500 clamp(56px, 8vw, 120px)/.88 "Space Grotesk", sans-serif; 
-  letter-spacing: -.05em; 
-  margin: 0; 
-  max-width: 900px; 
-}
-.hero-copy { 
-  font-size: 19px; 
-  line-height: 1.5; 
-  max-width: 520px; 
-  color: #494740; 
-  margin: 34px 0; 
-}
+.hero { min-height: calc(100vh - 64px); display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; padding: 70px 44px 60px; }
+.kicker { letter-spacing: .2em; text-transform: uppercase; font-size: 12px; color: #5d6770; margin-bottom: 34px; }
+h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.075em; margin: 0; max-width: 820px; }
+.hero p { font-size: 20px; line-height: 1.55; color: #34434a; max-width: 610px; margin: 42px 0 28px; }
 .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { 
-  padding: 14px 24px; 
-  border-radius: 999px; 
-  border: 1px solid var(--ink); 
-  font-size: 14px; 
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s;
-}
-.btn.dark { background: var(--ink); color: var(--white); }
-.btn.dark:hover { background: #2a2a26; }
-.btn:not(.dark):hover { background: rgba(0,0,0,0.05); }
+.btn { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #111; border-radius: 999px; padding: 14px 20px; background: #111; color: #fff; cursor: pointer; }
+.btn.alt { background: transparent; color: #111; }
+.heroMedia { background: #111; min-height: 600px; position: relative; overflow: hidden; border-radius: 4px; }
+.heroMedia iframe { width: 100%; height: 100%; min-height: 600px; border: 0; display: block; pointer-events: none; }
+.mediaLabel { position: absolute; left: 28px; bottom: 25px; color: #fff; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; z-index: 2; pointer-events: none; }
+.pill { position: absolute; right: 22px; top: 22px; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: 10px 14px; color: #fff; font-size: 12px; z-index: 2; pointer-events: none; }
 
-.hero-media {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #000;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-.hero-media iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-.media-label {
-  position: absolute;
-  left: 20px;
-  bottom: 18px;
-  color: white;
-  font-size: 11px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  background: rgba(0,0,0,0.6);
-  padding: 6px 12px;
-  border-radius: 4px;
-  backdrop-filter: blur(8px);
-  pointer-events: none;
-}
-.media-stamp {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  border: 1px solid rgba(255,255,255,.35);
-  padding: 6px 14px;
-  border-radius: 100px;
-  color: white;
-  font-size: 11px;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(8px);
-  pointer-events: none;
-}
-
-/* Marquee Banner */
-.marquee {
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 18px 0;
-  font: 500 18px "Space Grotesk", sans-serif;
-  letter-spacing: .05em;
-}
-.marquee-content {
-  display: inline-block;
-  animation: scroll 25s linear infinite;
-}
-.marquee span { display: inline-block; margin-right: 60px; }
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* Base Sections */
-.section { padding: 120px 5vw; }
-.section.dark { background: var(--green); color: #f3efe7; }
-.kicker { 
-  font-size: 12px; 
-  letter-spacing: .17em; 
-  text-transform: uppercase; 
-  color: var(--muted); 
-  margin-bottom: 18px; 
-  font-weight: 600;
-}
-.dark .kicker { color: #9ea9a2; }
-.section-head { 
-  display: grid; 
-  grid-template-columns: .75fr 1.25fr; 
-  gap: 5vw; 
-  align-items: start; 
-}
-.section h2 { 
-  font: 500 clamp(40px, 5vw, 76px)/.94 "Space Grotesk", sans-serif; 
-  letter-spacing: -.05em; 
-  margin: 0; 
-}
-.section-intro { font-size: 22px; line-height: 1.45; max-width: 700px; opacity: 0.9; }
-
-/* Editorial Grid */
-.editorial { 
-  display: grid; 
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 24px; 
-  margin-top: 80px; 
-}
-.card { border-top: 1px solid currentColor; padding-top: 20px; }
-.card h3 { font: 500 28px "Space Grotesk", sans-serif; margin: 0 0 12px; letter-spacing: -.02em; }
-.card p { color: #706d66; line-height: 1.6; font-size: 15px; margin: 0; }
-.dark .card p { color: #aeb6b0; }
-.number { font-size: 13px; color: var(--accent); margin-bottom: 30px; font-weight: 600; }
-
-/* Visual Grid */
-.visual-grid { 
-  display: grid; 
-  grid-template-columns: 1.2fr 0.8fr; 
-  gap: 24px; 
-  margin-top: 70px; 
-}
-.visual { 
-  border-radius: 6px; 
-  overflow: hidden; 
-  background: #191917; 
-  position: relative;
-}
+/* Story Section */
+.story { background: var(--green); color: #fff; padding: 105px 36px; }
+.sectionHead { max-width: 820px; margin: 0 auto 50px; }
+.sectionHead .eyebrow { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #9db0a9; }
+.sectionHead h2 { font: 500 clamp(48px, 6vw, 88px)/.94 "Space Grotesk"; letter-spacing: -.06em; margin: 18px 0; }
+.sectionHead p { font-size: 18px; line-height: 1.55; color: #c8d0cc; max-width: 650px; }
+.visualGrid { max-width: 1200px; margin: auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; }
+.visual { background: #eee9df; color: #111; min-height: 330px; overflow: hidden; position: relative; }
+.visual.dark { background: #14241f; color: #fff; }
 .visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.visual.tall { grid-row: span 2; }
-.caption { padding: 12px 0 0; font-size: 13px; color: #aeb6b0; }
+.visualCaption { position: absolute; left: 22px; bottom: 18px; font-size: 14px; background: rgba(244,241,234,.9); padding: 8px 11px; color: #273238; }
+.visual.dark .visualCaption { background: rgba(16,16,15,.75); color: #fff; }
 
-/* Video Grid Row */
-.video-row { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 24px; 
-  margin-top: 70px; 
-}
-.video-card { 
-  background: var(--dark-card); 
-  color: white; 
-  border-radius: 8px; 
-  overflow: hidden; 
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.video-card .video-wrapper {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-}
-.video-card iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-.video-card div.info { padding: 24px; }
-.video-card h3 { font: 500 24px "Space Grotesk", sans-serif; margin: 0 0 10px; }
-.video-card p { color: #aaa; line-height: 1.5; margin: 0; font-size: 15px; }
+.mediaRow { max-width: 1200px; margin: 40px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.mediaCard { background: #111; color: #fff; overflow: hidden; }
+.mediaCard iframe { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
+.mediaCard .copy { padding: 20px; }
+.mediaCard h4 { font: 500 25px "Space Grotesk"; margin: 0 0 8px; }
+.mediaCard p { margin: 0; color: #bfc4c1; line-height: 1.5; }
 
-/* Footer */
-.footer { 
-  background: #0d0d0c; 
-  color: #f4f1ea; 
-  padding: 80px 5vw; 
-  display: flex; 
-  justify-content: space-between; 
-  gap: 30px; 
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-.footer h3 { font: 500 42px "Space Grotesk", sans-serif; margin: 0 0 12px; }
-.footer p { color: #999; max-width: 420px; line-height: 1.6; margin: 0; }
-.footlinks { display: flex; gap: 28px; font-size: 14px; align-items: flex-start; }
-.footlinks a { opacity: 0.7; transition: opacity 0.2s; }
-.footlinks a:hover { opacity: 1; }
+/* Interactive Model Section */
+.lab { padding: 90px 36px; background: var(--paper); }
+.labWrap { max-width: 1080px; margin: auto; }
+.labHeader { margin-bottom: 30px; }
+.labHeader h2 { font: 500 clamp(44px, 5vw, 72px)/.95 "Space Grotesk"; letter-spacing: -.05em; margin: 0 0 12px; }
+.labHeader p { max-width: 620px; color: #59636a; line-height: 1.55; font-size: 18px; margin: 0; }
 
-/* Responsive Adjustments */
-@media (max-width: 900px) {
-  .navlinks { display: none; }
-  .hero, .section-head, .visual-grid, .video-row { grid-template-columns: 1fr; }
-  .editorial { grid-template-columns: 1fr 1fr; }
-  .hero { padding-top: 120px; }
-  .section { padding: 75px 6vw; }
-  .footer { flex-direction: column; }
-  .footlinks { flex-wrap: wrap; gap: 18px; }
-}
-@media (max-width: 550px) {
-  .editorial { grid-template-columns: 1fr; }
+.modelContainer { border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 28px; margin-top: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+.strip { position: sticky; top: 64px; z-index: 10; background: #fff; border: 2px solid var(--ink); border-radius: 6px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.strip > div { padding: 16px 20px; display: grid; grid-template-columns: auto 1fr; gap: 4px 20px; align-items: center; }
+.pct { font: 800 clamp(48px, 7vw, 72px)/1 "Bricolage Grotesque", sans-serif; grid-row: span 2; font-variant-numeric: tabular-nums; }
+.verdict { font-weight: 600; font-size: 15px; align-self: end; }
+.scale { position: relative; height: 12px; background: #dcd8ce; margin: 8px 0 12px; align-self: start; border-radius: 6px; overflow: visible; }
+.fill { height: 100%; background: var(--down); transition: width .25s, background .25s; border-radius: 6px; }
+.tick { position: absolute; top: -6px; bottom: -6px; border-left: 2px solid var(--ink); }
+.tick span { position: absolute; top: 100%; left: 4px; white-space: nowrap; font-size: 12px; color: var(--mute); margin-top: 2px; }
+
+.modelWrap { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; font-family: "Instrument Sans", sans-serif; }
+@media(max-width:820px) { .modelWrap { grid-template-columns: 1fr; gap: 26px; } }
+
+.modelWrap h2 { font: 700 20px "Bricolage Grotesque", sans-serif; margin: 0 0 6px; }
+fieldset { border: 0; margin: 0; padding: 12px 0; border-bottom: 1px dotted var(--line); }
+.top { display: flex; justify-content: space-between; gap: 10px; font-weight: 500; margin-bottom: 6px; font-size: 15px; }
+legend { padding: 0; float: left; width: 100%; font-weight: 500; margin-bottom: 6px; font-size: 15px; }
+.top output { font-variant-numeric: tabular-nums; font-weight: 600; }
+input[type=range] { width: 100%; accent-color: var(--ink); }
+.seg { display: flex; border: 1.5px solid var(--ink); clear: both; border-radius: 4px; overflow: hidden; }
+.seg label { flex: 1; position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span { display: block; text-align: center; padding: 7px 8px; font-size: 14px; border-left: 1.5px solid var(--ink); background: #fff; cursor: pointer; }
+.seg label:first-child span { border-left: 0; }
+.seg input:checked + span { background: var(--ink); color: #fff; font-weight: 600; }
+
+.gh { font: 700 16px "Bricolage Grotesque", sans-serif; margin: 22px 0 0; color: var(--mute); }
+.gh:first-child { margin-top: 0; }
+
+.side { position: sticky; top: 180px; align-self: start; }
+@media(max-width:820px) { .side { position: static; } }
+.key { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin: 10px 0 6px; }
+.row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; align-items: center; font-size: 14px; padding: 4px 0; }
+.row em { display: block; font-style: normal; color: var(--mute); font-size: 12px; }
+.ax { position: relative; height: 16px; background: rgba(0,0,0,0.03); border-radius: 2px; }
+.ax::before { content: ""; position: absolute; left: 50%; top: -4px; bottom: -4px; border-left: 1.5px solid var(--ink); z-index: 2; }
+.ax i { position: absolute; top: 2px; height: 12px; transition: width .25s; border-radius: 2px; }
+.note { font-size: 13px; color: var(--mute); margin-top: 20px; padding: 12px; border-left: 4px solid var(--up); background: #fff; border-radius: 0 4px 4px 0; line-height: 1.5; }
+
+/* About Section & Footer */
+.about { background: #e8e3d9; padding: 95px 36px; }
+.aboutInner { max-width: 1120px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
+.about h2 { font: 500 62px/.95 "Space Grotesk"; letter-spacing: -.06em; margin: 0; }
+.about p { line-height: 1.65; color: #4f5a60; }
+footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 13px; color: #697177; }
+
+@media(max-width:850px) {
+  .nav { padding: 0 18px; } .navlinks { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 55px 20px; } .heroMedia, .heroMedia iframe { min-height: 420px; }
+  .visualGrid, .mediaRow, .aboutInner { grid-template-columns: 1fr; }
+  .visual { min-height: 270px; }
+  .lab { padding: 60px 20px; } .story, .about { padding: 75px 20px; }
 }
 </style>
 </head>
 <body>
 
 <header class="nav">
-  <a class="logo" href="#home">nexora<span>°</span></a>
-  <nav class="navlinks">
-    <a href="#reality">Reality</a>
-    <a href="#stories">Stories</a>
-    <a href="#about">About</a>
-  </nav>
-  <a class="navbtn" href="#stories">Explore Media →</a>
+  <a class="logo" href="#top">nexora<span>°</span></a>
+  <nav class="navlinks"><a href="#top">Reality</a><a href="#heart-risk">Heart Risk AI</a><a href="#story">Stories</a><a href="#about">About</a></nav>
+  <a class="navbtn" href="#heart-risk">Open lab →</a>
 </header>
 
-<main id="home">
-  <section class="hero">
-    <div>
-      <div class="eyebrow">Nexora AI / Machine-learning studio</div>
-      <h1>Welcome to reality.</h1>
-      <p class="hero-copy">Machine learning becomes more interesting when you can see what the model is doing. Explore experiments, compare models, and turn data into something you can actually understand.</p>
-      <div class="actions">
-        <a class="btn dark" href="#stories">Explore stories →</a>
-        <a class="btn" href="#reality">Read manifesto</a>
-      </div>
-    </div>
-    <div class="hero-media">
-      <iframe src="https://www.youtube.com/embed/Jsmhd1Dq6Wc?rel=0" title="Nexora AI video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <div class="media-stamp">LIVE / EXPERIMENT 01</div>
-      <div class="media-label">A moving picture of a model thinking</div>
-    </div>
-  </section>
-
-  <div class="marquee">
-    <div class="marquee-content">
-      <span>EXPLORE</span><span>EXPERIMENT</span><span>VISUALIZE</span><span>COMPARE</span><span>UNDERSTAND</span>
-      <span>EXPLORE</span><span>EXPERIMENT</span><span>VISUALIZE</span><span>COMPARE</span><span>UNDERSTAND</span>
+<main id="top">
+<section class="hero">
+  <div>
+    <div class="kicker">Nexora AI / Machine-learning studio</div>
+    <h1>Welcome<br>to reality.</h1>
+    <p>Explore machine learning through one simple place. See the model, try it yourself, and understand what the output means.</p>
+    <div class="actions">
+      <a class="btn" href="#heart-risk">Try Heart Risk AI →</a>
+      <a class="btn alt" href="#story">See the project</a>
     </div>
   </div>
+  <div class="heroMedia">
+    <span class="pill">LIVE / EXPERIMENT 01</span>
+    <iframe src="https://www.youtube.com/embed/w77maKnJrtU?autoplay=1&mute=1&loop=1&playlist=w77maKnJrtU&controls=0&rel=0&modestbranding=1" title="Mana AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="mediaLabel">Mana AI Stream</div>
+  </div>
+</section>
 
-  <section class="section" id="reality">
-    <div class="section-head">
-      <div>
-        <div class="kicker">01 / Welcome to reality</div>
-        <h2>Models are not magic.</h2>
-      </div>
-      <div class="section-intro">They are systems. Inputs go in. Patterns emerge. Decisions come out. Nexora is a space for looking closely at that process.</div>
+<section id="story" class="story">
+  <div class="sectionHead">
+    <div class="eyebrow">Visualizing Data</div>
+    <h2>Machine Learning in Motion</h2>
+    <p>Observe how neural models break down complex real-world variables into interpretable predictive outcomes.</p>
+  </div>
+  <div class="visualGrid">
+    <div class="visual">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Hardware Processor">
+      <div class="visualCaption">Fig 1. Model Hardware</div>
     </div>
-    
-    <div class="editorial">
-      <div class="card">
-        <div class="number">01</div>
-        <h3>Build</h3>
-        <p>Turn a machine-learning experiment into a clear, interactive product rather than leaving it buried in a notebook.</p>
-      </div>
-      <div class="card">
-        <div class="number">02</div>
-        <h3>See</h3>
-        <p>Use charts, model comparisons, feature contributions and motion to make the behaviour of a model easier to inspect.</p>
-      </div>
-      <div class="card">
-        <div class="number">03</div>
-        <h3>Question</h3>
-        <p>Look at evaluation metrics and limitations instead of treating a prediction as an unquestionable answer.</p>
-      </div>
-      <div class="card">
-        <div class="number">04</div>
-        <h3>Expand</h3>
-        <p>Start with one project. Add new problem statements without changing the identity of the whole platform.</p>
-      </div>
+    <div class="visual dark">
+      <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Cyber Security Data">
+      <div class="visualCaption">Fig 2. Signal Processing</div>
     </div>
-  </section>
-
-  <section class="section dark" id="stories">
-    <div class="section-head">
-      <div>
-        <div class="kicker">02 / Visual stories</div>
-        <h2>Data deserves a point of view.</h2>
-      </div>
-      <div class="section-intro">Use real experiment outputs as the visual language of the platform. Decorative imagery can set the mood; evidence should tell the story.</div>
-    </div>
-
-    <div class="visual-grid">
-      <div class="visual tall">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iI2ViZTdkZiIvPgo8Y2lyY2xlIGN4PSI5MjAiIGN5PSIyMTAiIHI9IjI2MCIgZmlsbD0iI2Q3ZDBjNCIvPgo8cGF0aCBkPSJNMTEwIDYzMCBDMzEwIDM4MCA0NzAgNzIwIDcwMCA0MzAgUzEwNTAgMjIwIDExNjAgMzYwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxMjEyMTIiIHN0cm9rZS13aWR0aD0iNyIvPgo8Y2lyY2xlIGN4PSI3MDAiIGN5PSI0MzAiIHI9IjE4IiBmaWxsPSIjZDY1YTM2Ii8+PGNpcmNsZSBjeD0iNDcwIiBjeT0iNjEwIiByPSIxMiIgZmlsbD0iIzEyMTIxMiIvPgo8dGV4dCB4PSI5MCIgeT0iMTIwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMzgiIGZpbGw9IiMxMjEyMTIiPkRBVEEgLyBIVU1BTiAvIE1BQ0hJTkU8L3RleHQ+Cjwvc3ZnPg==" alt="Abstract data visual">
-        <div class="caption">01 — Data, people, and machines.</div>
-      </div>
-      <div class="visual">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iIzE3MjMxZiIvPgo8ZyBmaWxsPSJub25lIiBzdHJva2U9IiNkOWUxZGEiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iLjciPgo8cGF0aCBkPSJNMTIwIDYyMCBMMjYwIDQ5MCBMMzkwIDU0MCBMNTQwIDMwMCBMNzEwIDQxMCBMODYwIDIxMCBMMTA4MCAzMzAiLz4KPHBhdGggZD0iTTEyMCA2NzAgTDEwODAgNjcwIi8+PHBhdGggZD0iTTEyMCAxNzAgTDEyMCA2NzAiLz4KPC9nPgo8ZyBmaWxsPSIjZTE2YTNkIj48Y2lyY2xlIGN4PSIyNjAiIGN5PSI0OTAiIHI9IjEwIi8+PGNpcmNsZSBjeD0iNTQwIiBjeT0iMzAwIiByPSIxMCIvPjxjaXJjbGUgY3g9Ijg2MCIgY3k9IjIxMCIgcj0iMTAiLz48L2c+Cjx0ZXh0IHg9IjEyMCIgeT0iMTIwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNDIiIGZpbGw9IiNmMmVmZTkiPk1PREVMIEJFSEFWSU9VUjwvdGV4dD4KPC9zdmc+" alt="Model behaviour visualization">
-        <div class="caption">02 — Model behaviour.</div>
-      </div>
-      <div class="visual">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDgwMCI+CjxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0iI2YxZWVlOCIvPgo8cmVjdCB4PSI4MCIgeT0iOTAiIHdpZHRoPSIxMDQwIiBoZWlnaHQ9IjYyMCIgcng9IjIiIGZpbGw9IiNmZmZkZjgiIHN0cm9rZT0iI2NmYzhiYyIvPgo8cmVjdCB4PSIxMzAiIHk9IjE0NSIgd2lkdGg9IjMzMCIgaGVpZ2h0PSIzNCIgZmlsbD0iIzEyMTIxMiIvPgo8cmVjdCB4PSIxMzAiIHk9IjIzNSIgd2lkdGg9Ijg3MCIgaGVpZ2h0PSI4IiBmaWxsPSIjZDlkM2M5Ii8+CjxyZWN0IHg9IjEzMCIgeT0iMjg1IiB3aWR0aD0iNjUwIiBoZWlnaHQ9IjgifSBmaWxsPSIjZDlkM2M5Ii8+CjxyZWN0IHg9IjEzMCIgeT0iMzY1IiB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iI2VjZThkZiIvPgo8cmVjdCB4PSI0MzAiIHk9IzM2NSIgd2lkdGg9IjU3MCIgaGVpZ2h0PSIyNTAiIGZpbGw9IiMxNzIzMWYiLz4KPGNpcmNsZSBjeD0iNzE1IiBjeT0iNDkwIiIgcj0iOTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q2NWEzNiIgc3Ryb2tlLXdpZHRoPSI5Ii8+CjxwYXRoIGQ9Ik03MTUgMzk1IEE5NSA5NSAwIDAgMSA4MDAgNTQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmMWVlZTgiIHN0cm9rZS13aWR0aD0iOSIvPgo8dGV4dCB4PSIxNTUiIHk9IjE2OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjZmZmIj5ORVhPUkEgLyBNT0RFTCBMQUI8L3RleHQ+Cjwvc3ZnPg==" alt="Nexora model lab interface visual">
-        <div class="caption">03 — A model lab, not a black box.</div>
+  </div>
+  <div class="mediaRow">
+    <div class="mediaCard">
+      <iframe src="https://www.youtube.com/embed/Jsmhd1Dq6Wc?controls=0&rel=0&modestbranding=1" title="Master AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="copy">
+        <h4>Master AI Stream</h4>
+        <p>Generative AI pipeline transforming imagination into visual realities.</p>
       </div>
     </div>
+    <div class="mediaCard">
+      <iframe src="https://www.youtube.com/embed/w77maKnJrtU?controls=0&rel=0&modestbranding=1" title="Mana AI Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="copy">
+        <h4>Model Training</h4>
+        <p>Iterative optimization minimizing loss metrics across edge nodes.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="video-row">
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/Jsmhd1Dq6Wc?rel=0" title="Nexora AI video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <div class="info">
-          <h3>Models in motion</h3>
-          <p>A short ambient visual showing how evaluation can become part of the product experience.</p>
+<section id="heart-risk" class="lab">
+  <div class="labWrap">
+    <div class="labHeader">
+      <h2>Heart Risk Pattern Check</h2>
+      <p>Set the values from a patient record. The model compares them with 302 real records and shows what pushed the number up or down.</p>
+    </div>
+
+    <div class="modelContainer">
+      <div class="strip" aria-live="polite">
+        <div>
+          <div class="pct" id="pct">--</div>
+          <div class="verdict" id="verdict"></div>
+          <div class="scale">
+            <div class="fill" id="fill"></div>
+            <div class="tick" id="tick"><span>screening line</span></div>
+          </div>
         </div>
       </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/Jsmhd1Dq6Wc?rel=0" title="Nexora AI secondary stream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <div class="info">
-          <h3>Real-time inference tracking</h3>
-          <p>Inspecting features and latency distribution as live inputs traverse the pipeline.</p>
-        </div>
+      <div class="modelWrap">
+        <form id="form" onsubmit="return false"></form>
+        <section class="side">
+          <h2>What moved the estimate</h2>
+          <div class="key">
+            <span style="color:var(--down)">Lowers it</span>
+            <span style="color:var(--up)">Raises it</span>
+          </div>
+          <div id="drv"></div>
+          <p class="note">Learning project, not medical advice or a diagnosis. The screening line sits low on purpose so the model misses few sick patients, so plenty of healthy profiles cross it too. See a doctor for any health concern.</p>
+        </section>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="aboutInner">
+    <h2>About Nexora</h2>
+    <p>Nexora AI is an educational machine-learning studio designed to make complex AI concepts approachable, interactive, and transparent.</p>
+  </div>
+</section>
 </main>
 
-<footer class="footer" id="about">
-  <div>
-    <h3>nexora°</h3>
-    <p>An experimental machine-learning workspace for exploring models, experiments, and evidence.</p>
-  </div>
-  <div class="footlinks">
-    <a href="#home">Home</a>
-    <a href="#reality">Manifesto</a>
-    <a href="#stories">Visual Stories</a>
-  </div>
+<footer>
+  <div>© 2026 Nexora AI Studio</div>
+  <div>Built for modern web standards</div>
 </footer>
 
+<script>
+/* Model object matching index_5.html parameters and ROC AUC ~0.927 */
+const M = {
+  names: ["age","sex","trestbps","chol","fbs","thalach","exang","oldpeak","ca","cp_1","cp_2","cp_3","restecg_1","restecg_2","slope_1","slope_2","thal_2","thal_3"],
+  mean: [54.42053,0.68212,131.60265,246.5,0.14901,149.56954,0.32781,1.04305,0.66556,0.16556,0.28477,0.07616,0.5,0.01325,0.46358,0.46689,0.55298,0.38742],
+  scale: [9.03298,0.46565,17.53429,51.66773,0.35609,22.86558,0.46942,1.15953,0.93359,0.37169,0.4513,0.26525,0.5,0.11432,0.49867,0.4989,0.49719,0.48716],
+  coef: [-0.07358,0.60116,0.29055,0.15983,-0.10725,-0.33067,0.37697,0.38432,0.99823,-0.2813,-0.67562,-0.43567,-0.19849,0.04263,0.2846,-0.22665,-0.16182,0.48253],
+  b: -0.1339,
+  thr: 0.2
+};
+
+const YN = [[0,"No"],[1,"Yes"]], C3 = [[0,"0"],[1,"1"],[2,"2"]], C4 = [[0,"0"],[1,"1"],[2,"2"],[3,"3"]];
+const D = {
+  age: ["Age","r",29,77,1,55,"yrs"],
+  sex: ["Sex","s",[[0,"Female"],[1,"Male"]],1],
+  trestbps: ["Blood pressure at rest","r",90,200,1,130,"mm Hg"],
+  chol: ["Cholesterol","r",120,570,1,245,"mg/dl"],
+  fbs: ["Fasting blood sugar above 120","s",YN,0],
+  restecg: ["Resting ECG result (dataset code)","s",C3,1],
+  cp: ["Chest pain type (dataset code)","s",C4,2],
+  exang: ["Chest pain during exercise","s",YN,0],
+  thalach: ["Highest heart rate reached","r",70,205,1,150,"bpm"],
+  oldpeak: ["ST depression after exercise","r",0,6.5,.1,1,""],
+  slope: ["ST segment slope (dataset code)","s",C3,1],
+  ca: ["Major vessels coloured by scan","s",C4,0],
+  thal: ["Thalassemia result (dataset code)","s",[[1,"1"],[2,"2"],[3,"3"]],2]
+};
+
+const G = [
+  ["About the patient", ["age","sex"]],
+  ["Resting measurements", ["trestbps","chol","fbs","restecg"]],
+  ["Symptoms and exercise test", ["cp","exang","thalach","oldpeak","slope"]],
+  ["Scan and lab results", ["ca","thal"]]
+];
+
+const form = document.getElementById("form");
+G.forEach(([t, ks]) => {
+  form.insertAdjacentHTML("beforeend", `<h2 class="gh">${t}</h2>`);
+  ks.forEach(k => {
+    const d = D[k], f = document.createElement("fieldset");
+    f.innerHTML = d[1] === "r" 
+      ? `<div class="top"><label for="i_${k}">${d[0]}</label><output id="o_${k}">${d[5]} ${d[6]}</output></div><input id="i_${k}" data-k="${k}" type="range" min="${d[2]}" max="${d[3]}" step="${d[4]}" value="${d[5]}">`
+      : `<legend>${d[0]}</legend><div class="seg">${d[2].map(o => `<label><input type="radio" name="${k}" value="${o[0]}"${o[0]===d[3]?" checked":""}><span>${o[1]}</span></label>`).join("")}</div>`;
+    form.appendChild(f);
+    f.addEventListener("input", calc);
+  });
+});
+
+function calc() {
+  const V = {}, T = {};
+  Object.keys(D).forEach(k => {
+    const d = D[k];
+    if (d[1] === "r") {
+      V[k] = +document.getElementById("i_" + k).value;
+      T[k] = V[k] + " " + d[6];
+      document.getElementById("o_" + k).textContent = T[k];
+    } else {
+      const c = form.querySelector(`input[name=${k}]:checked`);
+      V[k] = +c.value;
+      T[k] = c.nextElementSibling.textContent;
+    }
+  });
+
+  const x = {
+    ...V,
+    cp_1: +(V.cp === 1), cp_2: +(V.cp === 2), cp_3: +(V.cp === 3),
+    restecg_1: +(V.restecg === 1), restecg_2: +(V.restecg === 2),
+    slope_1: +(V.slope === 1), slope_2: +(V.slope === 2),
+    thal_2: +(V.thal === 2), thal_3: +(V.thal === 3)
+  };
+
+  let z = M.b;
+  const g = {};
+  M.names.forEach((n, i) => {
+    const c = M.coef[i] * (x[n] - M.mean[i]) / M.scale[i];
+    z += c;
+    const k = n.split("_")[0];
+    g[k] = (g[k] || 0) + c;
+  });
+
+  const p = 1 / (1 + Math.exp(-z));
+  const hi = p >= M.thr;
+
+  document.getElementById("pct").textContent = Math.round(p * 100) + "%";
+  document.getElementById("verdict").textContent = hi 
+    ? "Above the screening line. This profile looks like the higher-risk records."
+    : "Below the screening line. This profile looks like the lower-risk records.";
+
+  const fl = document.getElementById("fill");
+  fl.style.width = p * 100 + "%";
+  fl.style.background = hi ? "var(--up)" : "var(--down)";
+
+  document.getElementById("tick").style.left = M.thr * 100 + "%";
+
+  const rows = Object.entries(g).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+  const mx = Math.max(...rows.map(r => Math.abs(r[1])), .01);
+
+  document.getElementById("drv").innerHTML = rows.map(([k, c]) => {
+    const w = Math.abs(c) / mx * 48;
+    const s = c > 0 ? `left:50%;background:var(--up)` : `right:50%;background:var(--down)`;
+    return `<div class="row"><span>${D[k][0].replace(/ \(dataset code\)/, "")}<em>${T[k]}</em></span><div class="ax"><i style="${s};width:${w}%"></i></div></div>`;
+  }).join("");
+}
+
+calc();
+</script>
 </body>
 </html>
