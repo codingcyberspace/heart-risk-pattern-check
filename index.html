@@ -43,7 +43,7 @@ h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.
 .btn { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #111; border-radius: 999px; padding: 14px 20px; background: #111; color: #fff; cursor: pointer; }
 .btn.alt { background: transparent; color: #111; }
 .heroMedia { background: #111; min-height: 600px; position: relative; overflow: hidden; border-radius: 4px; }
-.heroMedia iframe { width: 100%; height: 100%; min-height: 600px; border: 0; display: block; }
+.heroMedia iframe { width: 100%; height: 100%; min-height: 600px; border: 0; display: block; pointer-events: none; }
 .mediaLabel { position: absolute; left: 28px; bottom: 25px; color: #fff; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; z-index: 2; pointer-events: none; }
 .pill { position: absolute; right: 22px; top: 22px; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: 10px 14px; color: #fff; font-size: 12px; z-index: 2; pointer-events: none; }
 
@@ -150,7 +150,7 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
   </div>
   <div class="heroMedia">
     <span class="pill">LIVE / EXPERIMENT 01</span>
-    <iframe src="https://www.youtube.com/embed/w77maKnJrtU?autoplay=1&mute=1&loop=1&playlist=w77maKnJrtU" title="Mana AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/w77maKnJrtU?autoplay=1&mute=1&loop=1&playlist=w77maKnJrtU&controls=0&rel=0&modestbranding=1" title="Mana AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class="mediaLabel">Mana AI Stream</div>
   </div>
 </section>
@@ -173,14 +173,14 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
   </div>
   <div class="mediaRow">
     <div class="mediaCard">
-      <iframe src="https://www.youtube.com/embed/Jsmhd1Dq6Wc" title="Master AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/Jsmhd1Dq6Wc?controls=0&rel=0&modestbranding=1" title="Master AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <div class="copy">
         <h4>Master AI Stream</h4>
         <p>Generative AI pipeline transforming imagination into visual realities.</p>
       </div>
     </div>
     <div class="mediaCard">
-      <iframe src="https://www.youtube.com/embed/w77maKnJrtU" title="Mana AI Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/w77maKnJrtU?controls=0&rel=0&modestbranding=1" title="Mana AI Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <div class="copy">
         <h4>Model Training</h4>
         <p>Iterative optimization minimizing loss metrics across edge nodes.</p>
