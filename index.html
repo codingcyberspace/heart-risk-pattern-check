@@ -43,9 +43,9 @@ h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.
 .btn { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #111; border-radius: 999px; padding: 14px 20px; background: #111; color: #fff; cursor: pointer; }
 .btn.alt { background: transparent; color: #111; }
 .heroMedia { background: #111; min-height: 600px; position: relative; overflow: hidden; border-radius: 4px; }
-.heroMedia video { width: 100%; height: 100%; min-height: 600px; object-fit: cover; display: block; }
-.mediaLabel { position: absolute; left: 28px; bottom: 25px; color: #fff; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; z-index: 2; }
-.pill { position: absolute; right: 22px; top: 22px; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: 10px 14px; color: #fff; font-size: 12px; z-index: 2; }
+.heroMedia iframe { width: 100%; height: 100%; min-height: 600px; border: 0; display: block; }
+.mediaLabel { position: absolute; left: 28px; bottom: 25px; color: #fff; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; z-index: 2; pointer-events: none; }
+.pill { position: absolute; right: 22px; top: 22px; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: 10px 14px; color: #fff; font-size: 12px; z-index: 2; pointer-events: none; }
 
 /* Story Section */
 .story { background: var(--green); color: #fff; padding: 105px 36px; }
@@ -61,8 +61,8 @@ h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.
 .visual.dark .visualCaption { background: rgba(16,16,15,.75); color: #fff; }
 
 .mediaRow { max-width: 1200px; margin: 40px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.mediaCard { background: #111; color: #fff; }
-.mediaCard video { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+.mediaCard { background: #111; color: #fff; overflow: hidden; }
+.mediaCard iframe { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 .mediaCard .copy { padding: 20px; }
 .mediaCard h4 { font: 500 25px "Space Grotesk"; margin: 0 0 8px; }
 .mediaCard p { margin: 0; color: #bfc4c1; line-height: 1.5; }
@@ -122,7 +122,7 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 
 @media(max-width:850px) {
   .nav { padding: 0 18px; } .navlinks { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 55px 20px; } .heroMedia, .heroMedia video { min-height: 420px; }
+  .hero { grid-template-columns: 1fr; padding: 55px 20px; } .heroMedia, .heroMedia iframe { min-height: 420px; }
   .visualGrid, .mediaRow, .aboutInner { grid-template-columns: 1fr; }
   .visual { min-height: 270px; }
   .lab { padding: 60px 20px; } .story, .about { padding: 75px 20px; }
@@ -150,11 +150,8 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
   </div>
   <div class="heroMedia">
     <span class="pill">LIVE / EXPERIMENT 01</span>
-    <video autoplay muted loop playsinline controls preload="metadata">
-      <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-    <div class="mediaLabel">Neural Data Pipeline</div>
+    <iframe src="https://www.youtube.com/embed/w77maKnJrtU?autoplay=1&mute=1&loop=1&playlist=w77maKnJrtU" title="Mana AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="mediaLabel">Mana AI Stream</div>
   </div>
 </section>
 
@@ -176,18 +173,14 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
   </div>
   <div class="mediaRow">
     <div class="mediaCard">
-      <video autoplay muted loop playsinline controls preload="metadata">
-        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-      </video>
+      <iframe src="https://www.youtube.com/embed/Jsmhd1Dq6Wc" title="Master AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <div class="copy">
-        <h4>Data Streams</h4>
-        <p>Continuous training loops analyzing multi-dimensional feature sets.</p>
+        <h4>Master AI Stream</h4>
+        <p>Generative AI pipeline transforming imagination into visual realities.</p>
       </div>
     </div>
     <div class="mediaCard">
-      <video autoplay muted loop playsinline controls preload="metadata">
-        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-      </video>
+      <iframe src="https://www.youtube.com/embed/w77maKnJrtU" title="Mana AI Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <div class="copy">
         <h4>Model Training</h4>
         <p>Iterative optimization minimizing loss metrics across edge nodes.</p>
