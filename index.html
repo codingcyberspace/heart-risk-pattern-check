@@ -116,7 +116,23 @@ h1{font:500 clamp(70px,10vw,155px)/.84 "Space Grotesk";letter-spacing:-.075em;ma
 <div class="result" id="result"><div class="tag">Model output</div><div class="score" id="score">—</div><p id="resultText">Run the experiment to see the model output.</p></div>
 </div>
 <div class="panel" id="model"><div class="metrics"><div class="metric"><small>Algorithm</small><b>Logistic<br>Regression</b></div><div class="metric"><small>Decision threshold</small><b>0.50</b></div><div class="metric"><small>Inference</small><b>Browser</b></div></div><p style="color:#aaa;line-height:1.7;margin-top:25px">V2 uses the cleaned 302-row dataset with standardized features. The displayed score is the model's output, not a clinical probability or diagnosis.</p></div>
-<div class="panel" id="evaluation"><div class="metrics"><div class="metric"><small>V2 ROC-AUC</small><b>0.908</b><small>Independent 20% holdout</small></div><div class="metric"><small>Repeated CV</small><b>0.912</b><small>5-fold × 5 repeats</small></div><div class="metric"><small>Accuracy</small><b>85.25%</b><small>20% holdout</small></div><div class="metric"><small>Precision</small><b>87.50%</b><small>20% holdout</small></div><div class="metric"><small>Recall</small><b>84.85%</b><small>20% holdout</small></div><div class="metric"><small>Specificity</small><b>85.71%</b><small>20% holdout</small></div><div class="metric"><small>F1</small><b>86.15%</b><small>20% holdout</small></div><div class="metric"><small>Confusion matrix</small><b>24 / 4 / 5 / 28</b><small>TN / FP / FN / TP</small></div></div></div>
+<div class="panel" id="evaluation">
+<div class="metrics">
+<div class="metric"><small>ROC-AUC</small><b id="aucValue">—</b><small>Calculated in browser from holdout predictions</small></div>
+<div class="metric"><small>Repeated CV</small><b>0.912 ± 0.030</b><small>5-fold × 5 repeats, Python evaluation</small></div>
+<div class="metric"><small>Accuracy</small><b id="evalAccuracy">—</b><small>Independent 20% holdout</small></div>
+<div class="metric"><small>Precision</small><b id="evalPrecision">—</b><small>Independent 20% holdout</small></div>
+<div class="metric"><small>Recall</small><b id="evalRecall">—</b><small>Independent 20% holdout</small></div>
+<div class="metric"><small>Specificity</small><b id="evalSpecificity">—</b><small>Independent 20% holdout</small></div>
+<div class="metric"><small>F1</small><b id="evalF1">—</b><small>Independent 20% holdout</small></div>
+<div class="metric"><small>Confusion matrix</small><b id="evalCM">—</b><small>TN / FP / FN / TP</small></div>
+</div>
+<div style="margin-top:28px;border-top:1px solid #383838;padding-top:24px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:12px"><div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#999">Receiver Operating Characteristic</div><h3 style="margin:5px 0 0;font:500 28px 'Space Grotesk',sans-serif">ROC curve</h3></div><div style="font-size:13px;color:#aaa">AUC = <strong id="aucInline">—</strong></div></div>
+<canvas id="rocCanvas" width="900" height="520" style="width:100%;height:auto;display:block;background:#111;border:1px solid #383838"></canvas>
+<p style="color:#aaa;line-height:1.6;font-size:13px;margin:12px 0 0">The curve and AUC are recalculated by the page from the same independent holdout labels and model probabilities used for the displayed evaluation metrics. AUC measures ranking performance across thresholds; it is not a clinical probability.</p>
+</div>
+</div>
 <div class="panel" id="explain"><div class="metrics"><div class="metric"><small>Feature</small><b>CP</b><small>Largest positive coefficient in the supplied LR model</small></div><div class="metric"><small>Feature</small><b>CA</b><small>Large negative coefficient in the supplied LR model</small></div><div class="metric"><small>Interpret carefully</small><b>Not causal</b><small>Model contribution ≠ medical cause</small></div></div></div>
 </div>
 </section>
@@ -130,16 +146,144 @@ h1{font:500 clamp(70px,10vw,155px)/.84 "Space Grotesk";letter-spacing:-.075em;ma
 <footer class="footer"><div><h3>nexora°</h3><p>Welcome to reality. An experimental space for machine learning, evidence and useful interfaces.</p></div><div class="footlinks"><a href="#models">Models</a><a href="#lab">Lab</a><a href="#stories">Stories</a><a href="#about">About</a></div></footer>
 
 <script>
-const M={names:["age","sex","cp","trestbps","chol","fbs","restecg","thalach","exang","oldpeak","slope","ca","thal"],mean:[54.42052980,0.68211921,0.96357616,131.60264901,246.50000000,0.14900662,0.52649007,149.56953642,0.32781457,1.04304636,1.39735099,0.66556291,2.32781457],scale:[9.03297724,0.46565287,1.03033354,17.53429165,51.66773302,0.35609500,0.52515554,22.86557606,0.46941685,1.15952776,0.61525282,0.93359281,0.58271560],coef:[0.08902700,-0.78684289,0.80382156,-0.39715226,-0.21244592,0.12311442,0.19438189,0.52030741,-0.44550432,-0.47626870,0.43974531,-1.12900824,-0.58790267],b:0.05329676,thr:0.5};
+/* Nexora AI — V2 Logistic Regression browser model
+   Preprocessing/model parameters are exported from the cleaned, deduplicated dataset.
+   Categorical variables use one-hot encoding with the first category dropped,
+   matching the Python evaluation pipeline. */
+const M={
+  numNames:["age","trestbps","chol","thalach","oldpeak"],
+  numMean:[54.19502074688797,131.31535269709545,247.63070539419087,150.82572614107883,0.9954356846473029],
+  numScale:[9.005262183372054,16.767389956532977,53.777709552663495,22.47272948555227,1.146607804561696],
+  cats:{sex:[0,1],cp:[0,1,2,3],fbs:[0,1],restecg:[0,1,2],exang:[0,1],slope:[0,1,2],ca:[0,1,2,3],thal:[1,2,3]},
+  coef:[0.21520652165596327,-0.27963467647068435,-0.22566986365322386,0.7648816853084079,-0.33986802638342717,-1.32231137919794,0.6242984973724545,1.469727766715457,1.4205560047156172,0.08902020181530935,0.3591928592615267,-0.07577939452723684,-0.8605480231229782,-0.4174972930387212,0.3252224651611744,-1.4810377311701333,-2.037456723348761,-1.0203595235131575,0.1901917394561796,-1.0205319714994043],
+  b:1.4444564615560516,
+  thr:0.50
+};
+
 function val(id){return Number(document.getElementById(id).value)}
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.panel).classList.add("active")});
+
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  document.getElementById(b.dataset.panel).classList.add("active");
+});
+
+function sigmoid(z){
+  if(z>=0){const e=Math.exp(-z);return 1/(1+e)}
+  const e=Math.exp(z);return e/(1+e)
+}
+
+function modelProbability(input){
+  const sex=input.sex, cp=input.cp, fbs=input.fbs, restecg=input.restecg,
+        exang=input.exang, slope=input.slope;
+  let ca=input.ca, thal=input.thal;
+  // Match the Python cleaning rules: ca=4 and thal=0 are treated as missing
+  // and filled with the training-column mode (0 for ca, 2 for thal).
+  if(ca===4) ca=0;
+  if(thal===0) thal=2;
+
+  const numeric=[input.age,input.trestbps,input.chol,input.thalach,input.oldpeak];
+  const catValues=[sex,cp,fbs,restecg,exang,slope,ca,thal];
+  const catNames=["sex","cp","fbs","restecg","exang","slope","ca","thal"];
+  const features=[];
+  for(let i=0;i<numeric.length;i++) features.push((numeric[i]-M.numMean[i])/M.numScale[i]);
+  for(let c=0;c<catValues.length;c++){
+    const cats=M.cats[catNames[c]], v=catValues[c];
+    for(let j=1;j<cats.length;j++) features.push(v===cats[j]?1:0);
+  }
+  let z=M.b;
+  for(let i=0;i<features.length;i++) z+=M.coef[i]*features[i];
+  return sigmoid(z);
+}
+
+// Independent 20% holdout from the same cleaned dataset/model run.
+// The page recalculates ROC points and AUC from these labels/probabilities;
+// the AUC is therefore not a hard-coded display value.
+const EVAL_Y=[0,0,0,0,0,0,1,0,1,0,1,1,0,1,1,1,1,1,1,1,0,0,1,0,1,0,0,1,0,1,0,1,1,0,0,1,0,1,1,1,0,1,1,1,0,0,1,0,1,0,0,1,1,0,1,1,1,1,0,0,1];
+const EVAL_P=[0.20842347203974992,0.4797455545502237,0.0076950060888482,0.5730326334861084,0.9377555492080436,0.021405414819538976,0.8174366099213174,0.09146344193417555,0.9708612623702751,0.2969814784587702,0.909538530871259,0.5868004702951104,0.4266651274128052,0.9330772789384678,0.15237625760208057,0.9354586149105161,0.8865785425971977,0.06848858815497774,0.9905400248828103,0.6997950818127001,0.3936537177469303,0.01304453147450872,0.6172350178592683,0.03195954712581429,0.8436433272731468,0.007134800303621679,0.0057424696094837335,0.41266265738840624,0.10561657171741784,0.9405680268338351,0.024031129271032185,0.7326573442684775,0.722988743312144,0.5948036684632506,0.04378108890012631,0.8571418711108254,0.01974511076733473,0.9268436428499689,0.9595198407826703,0.9601190883748532,0.19502838239995374,0.8580845185426748,0.756777540714756,0.7483208835283255,0.014409767295096264,0.011600013522647733,0.7225899281098838,0.042463784253978044,0.9382325685026818,0.6145987951840124,0.1987105032944758,0.8802641087230701,0.9649728688133369,0.10548001680024692,0.7791158678954776,0.5995849501850234,0.012163104535475191,0.9675914782443757,0.015683522702654502,0.07530136911346369,0.24822507074386504];
+
+function rocCurve(y,p){
+  const pairs=p.map((score,i)=>({score,y:y[i]})).sort((a,b)=>b.score-a.score);
+  const positives=y.reduce((s,v)=>s+v,0), negatives=y.length-positives;
+  let tp=0,fp=0;
+  const fpr=[0],tpr=[0];
+  let i=0;
+  while(i<pairs.length){
+    const score=pairs[i].score;
+    while(i<pairs.length && pairs[i].score===score){
+      if(pairs[i].y===1) tp++; else fp++;
+      i++;
+    }
+    fpr.push(fp/negatives); tpr.push(tp/positives);
+  }
+  // Trapezoidal integration, equivalent to the ROC-AUC calculation used in Python.
+  let auc=0;
+  for(let k=1;k<fpr.length;k++) auc+=(fpr[k]-fpr[k-1])*(tpr[k]+tpr[k-1])/2;
+  return {fpr,tpr,auc};
+}
+
+function classificationMetrics(y,p,thr){
+  let tn=0,fp=0,fn=0,tp=0;
+  for(let i=0;i<y.length;i++){
+    const pred=p[i]>=thr?1:0;
+    if(y[i]===1 && pred===1) tp++;
+    else if(y[i]===0 && pred===1) fp++;
+    else if(y[i]===1 && pred===0) fn++;
+    else tn++;
+  }
+  const accuracy=(tp+tn)/y.length;
+  const precision=tp/(tp+fp);
+  const recall=tp/(tp+fn);
+  const specificity=tn/(tn+fp);
+  const f1=2*precision*recall/(precision+recall);
+  return {tn,fp,fn,tp,accuracy,precision,recall,specificity,f1};
+}
+
+function drawROC(roc){
+  const c=document.getElementById("rocCanvas"),ctx=c.getContext("2d");
+  const W=c.width,H=c.height,L=70,R=25,T=25,B=55,w=W-L-R,h=H-T-B;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle="#111";ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle="#383838";ctx.lineWidth=1;
+  for(let i=0;i<=5;i++){
+    const x=L+w*i/5,y=T+h*(1-i/5);
+    ctx.beginPath();ctx.moveTo(x,T);ctx.lineTo(x,T+h);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(L,y);ctx.lineTo(L+w,y);ctx.stroke();
+  }
+  ctx.setLineDash([7,7]);ctx.strokeStyle="#777";ctx.beginPath();ctx.moveTo(L,T+h);ctx.lineTo(L+w,T);ctx.stroke();ctx.setLineDash([]);
+  ctx.strokeStyle="#f1eee8";ctx.lineWidth=3;ctx.beginPath();
+  roc.fpr.forEach((x,i)=>{const px=L+x*w,py=T+h*(1-roc.tpr[i]);if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)});ctx.stroke();
+  ctx.fillStyle="#aaa";ctx.font="13px Arial";
+  ctx.fillText("0",L-4,T+h+22);ctx.fillText("1",L+w-4,T+h+22);
+  ctx.fillText("0",L-25,T+h+5);ctx.fillText("1",L-25,T+5);
+  ctx.fillText("False Positive Rate",L+w/2-50,H-15);
+  ctx.save();ctx.translate(18,T+h/2+45);ctx.rotate(-Math.PI/2);ctx.fillText("True Positive Rate",0,0);ctx.restore();
+}
+
+function runEvaluation(){
+  const roc=rocCurve(EVAL_Y,EVAL_P), m=classificationMetrics(EVAL_Y,EVAL_P,M.thr);
+  const pct=v=>(v*100).toFixed(2)+"%";
+  document.getElementById("aucValue").textContent=roc.auc.toFixed(3);
+  document.getElementById("aucInline").textContent=roc.auc.toFixed(3);
+  document.getElementById("evalAccuracy").textContent=pct(m.accuracy);
+  document.getElementById("evalPrecision").textContent=pct(m.precision);
+  document.getElementById("evalRecall").textContent=pct(m.recall);
+  document.getElementById("evalSpecificity").textContent=pct(m.specificity);
+  document.getElementById("evalF1").textContent=pct(m.f1);
+  document.getElementById("evalCM").textContent=`${m.tn} / ${m.fp} / ${m.fn} / ${m.tp}`;
+  drawROC(roc);
+}
+
+runEvaluation();
+
+// Prediction UI uses the same V2 preprocessing/model parameters as the evaluation.
 document.getElementById("analyze").onclick=()=>{
- const x=[val("age"),val("sex"),val("cp"),val("trestbps"),val("chol"),val("fbs"),val("restecg"),val("thalach"),val("exang"),val("oldpeak"),val("slope"),val("ca"),val("thal")];
- let z=M.b; for(let i=0;i<x.length;i++)z+=M.coef[i]*((x[i]-M.mean[i])/M.scale[i]);
- const p=1/(1+Math.exp(-z)), pct=(p*100).toFixed(1);
- document.getElementById("score").textContent=pct+"%";
- document.getElementById("resultText").textContent=p>=M.thr?"The experiment crossed the configured model threshold (0.50). This is not a diagnosis.":"The experiment stayed below the configured model threshold (0.50). This is not a diagnosis.";
- document.getElementById("result").style.display="block";
+  const x={age:val("age"),sex:val("sex"),cp:val("cp"),trestbps:val("trestbps"),chol:val("chol"),fbs:val("fbs"),restecg:val("restecg"),thalach:val("thalach"),exang:val("exang"),oldpeak:val("oldpeak"),slope:val("slope"),ca:val("ca"),thal:val("thal")};
+  const p=modelProbability(x),pct=(p*100).toFixed(1);
+  document.getElementById("score").textContent=pct+"%";
+  document.getElementById("resultText").textContent=p>=M.thr?"The experiment crossed the configured model threshold (0.50). This is not a diagnosis.":"The experiment stayed below the configured model threshold (0.50). This is not a diagnosis.";
+  document.getElementById("result").style.display="block";
 };
 </script>
 </body>
