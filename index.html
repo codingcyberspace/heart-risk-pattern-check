@@ -41,7 +41,7 @@ button, input, select { font: inherit; }
 h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.075em; margin: 0; max-width: 820px; }
 .hero p { font-size: 20px; line-height: 1.55; color: #34434a; max-width: 610px; margin: 42px 0 28px; }
 .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #111; border-radius: 999px; padding: 14px 20px; background: #111; color: #fff; cursor: pointer; }
+.btn { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #111; border-radius: 999px; padding: 14px 20px; background: #111; color: #fff; cursor: pointer; text-decoration: none; font-size: 15px; }
 .btn.alt { background: transparent; color: #111; }
 .heroMedia { background: #111; min-height: 600px; position: relative; overflow: hidden; border-radius: 4px; }
 .heroMedia iframe { width: 100%; height: 100%; min-height: 600px; border: 0; display: block; pointer-events: none; }
@@ -83,7 +83,86 @@ h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.
 .tabPane { display: none; }
 .tabPane.active { display: block; }
 
-.modelContainer { border: 1px solid var(--line); border-top: none; background: var(--bg); border-radius: 0 0 8px 8px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+/* Dedicated Per-Tab Intro Card */
+.modelIntroBanner {
+  background: var(--green);
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+.modelIntroBanner.unlocked {
+  background: var(--soft);
+  color: var(--ink);
+  padding: 16px 24px;
+}
+.modelIntroBanner .tag {
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #9db0a9;
+  font-weight: 600;
+}
+.modelIntroBanner.unlocked .tag {
+  color: var(--mute);
+}
+.modelIntroBanner h3 {
+  font: 600 24px "Space Grotesk";
+  margin: 0;
+}
+.modelIntroBanner p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #c8d0cc;
+  max-width: 780px;
+}
+.modelIntroBanner.unlocked p {
+  color: #4a5550;
+  font-size: 14px;
+}
+.enterBtn {
+  align-self: flex-start;
+  margin-top: 8px;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.enterBtn:hover {
+  background: #d45227;
+  transform: translateY(-1px);
+}
+.modelIntroBanner.unlocked .enterBtn {
+  display: none;
+}
+
+/* Locked Interactive Overlay State */
+.modelContainer {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  border-radius: 0 0 8px 8px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.modelContainer.locked {
+  pointer-events: none;
+  user-select: none;
+  filter: blur(2.5px) opacity(0.55);
+  transition: filter 0.3s ease;
+}
+
 .strip { position: sticky; top: 64px; z-index: 10; background: #fff; border: 2px solid var(--ink); border-radius: 6px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 .strip > div { padding: 16px 20px; display: grid; grid-template-columns: auto 1fr; gap: 4px 20px; align-items: center; }
 .pct { font: 800 clamp(48px, 7vw, 72px)/1 "Bricolage Grotesque", sans-serif; grid-row: span 2; font-variant-numeric: tabular-nums; }
@@ -127,7 +206,9 @@ input[type=range] { width: 100%; accent-color: var(--ink); }
 .about { background: #e8e3d9; padding: 95px 36px; }
 .aboutInner { max-width: 1120px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; }
 .about h2 { font: 500 62px/.95 "Space Grotesk"; letter-spacing: -.06em; margin: 0; }
-.about p { line-height: 1.65; color: #4f5a60; }
+.about p { line-height: 1.65; color: #4f5a60; font-size: 18px; margin: 0 0 16px; }
+.founders-list { margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--line); font-size: 15px; color: var(--mute); font-weight: 500; }
+.founders-list span { font-weight: 700; color: var(--ink); }
 footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 13px; color: #697177; }
 
 @media(max-width:850px) {
@@ -217,7 +298,15 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 
     <!-- TAB 1: HEART RISK MODEL -->
     <div id="heart-model" class="tabPane active">
-      <div class="modelContainer">
+      <!-- Heart Model Intro & Description -->
+      <div class="modelIntroBanner" id="heart-banner">
+        <div class="tag">Clinical Perceptron Engine</div>
+        <h3>Heart Risk Pattern Check</h3>
+        <p>This model evaluates cardiac biomarker indicators (including ST depression, heart rate thresholds, and vessel scans) through a calibrated binary perceptron achieving 88.5% classification accuracy and high screening sensitivity.</p>
+        <button class="enterBtn" onclick="unlockModel('heart-banner', 'heart-container')">Enter Heart Model Engine →</button>
+      </div>
+
+      <div class="modelContainer locked" id="heart-container">
         <div class="strip" aria-live="polite">
           <div>
             <div class="pct" id="pct">--</div>
@@ -247,7 +336,15 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 
     <!-- TAB 2: PLACEMENT CHECKER MODEL -->
     <div id="placement-model" class="tabPane">
-      <div class="modelContainer">
+      <!-- Placement Model Intro & Description -->
+      <div class="modelIntroBanner" id="placement-banner">
+        <div class="tag">Career Readiness Evaluator</div>
+        <h3>Placement Intelligence Predictor</h3>
+        <p>This model analyzes student recruitment probability based on academic CGPA, standardized aptitude testing, technical project experience, and mock interview performance metrics.</p>
+        <button class="enterBtn" onclick="unlockModel('placement-banner', 'placement-container')">Enter Placement Model Engine →</button>
+      </div>
+
+      <div class="modelContainer locked" id="placement-container">
         <div class="strip" aria-live="polite">
           <div>
             <div class="pct" id="p_pct">--</div>
@@ -281,7 +378,13 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 <section id="about" class="about">
   <div class="aboutInner">
     <h2>About Nexora</h2>
-    <p>Nexora AI is an educational machine-learning studio designed to make complex AI concepts approachable, interactive, and transparent.</p>
+    <div>
+      <p>Nexora AI is a platform that contains educational models built by team <strong>ROLEX</strong> whose founders are Arpit, Manav, Shayan, and Harit.</p>
+      <p>This is a database-trained model platform which welcomes Humans into the world of A.I. and M.L.</p>
+      <div class="founders-list">
+        Built by Team ROLEX — Founders: <span>Arpit, Manav, Shayan, Harit</span>
+      </div>
+    </div>
   </div>
 </section>
 </main>
@@ -292,6 +395,12 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 </footer>
 
 <script>
+/* Individual Model Unlock Function */
+function unlockModel(bannerId, containerId) {
+  document.getElementById(bannerId).classList.add('unlocked');
+  document.getElementById(containerId).classList.remove('locked');
+}
+
 /* Tab Switching System */
 function switchStudioTab(tabId, btnElement) {
   document.querySelectorAll('.tabPane').forEach(pane => pane.classList.remove('active'));
