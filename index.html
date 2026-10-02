@@ -31,6 +31,7 @@ button, input, select { font: inherit; }
 /* Dynamic Tab Accent Themes */
 .theme-heart { --accent-theme: #0f382c; }
 .theme-placement { --accent-theme: #1b2a4a; }
+.theme-iris { --accent-theme: #16775e; }
 
 /* Navigation */
 .nav { position: sticky; top: 0; z-index: 20; height: 64px; border-bottom: 1px solid var(--line); background: rgba(244,241,234,.94); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: space-between; padding: 0 42px; }
@@ -215,6 +216,16 @@ input[type=range] { width: 100%; accent-color: var(--ink); }
 
 .note { font-size: 13px; color: var(--mute); margin-top: 20px; padding: 12px; border-left: 4px solid var(--up); background: #fff; border-radius: 0 4px 4px 0; line-height: 1.5; }
 
+/* Iris Tab Custom Styling */
+.iris-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.iris-metric { padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.iris-metric-val { font-size: 1.5rem; font-weight: 800; color: #16775e; display: block; }
+.iris-metric-lbl { font-size: .8rem; font-weight: 700; color: var(--ink); }
+.iris-examples { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.iris-prob-row { margin-bottom: 10px; }
+.iris-prob-bar { height: 8px; background: var(--soft); border-radius: 4px; overflow: hidden; margin-top: 4px; }
+.iris-prob-fill { height: 100%; transition: width 0.3s ease; }
+
 /* FAQ Section */
 .faq-section { max-width: 900px; margin: 80px auto 0; padding: 0 20px; }
 .faq-section h3 { font: 500 36px "Space Grotesk"; margin-bottom: 24px; text-align: center; }
@@ -241,14 +252,42 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
   .tabBar { flex-direction: column; gap: 6px; }
   .tabNavBtn { border-radius: 6px; border-bottom: 1px solid var(--line); }
   .tabNavBtn.active { margin-bottom: 0; }
+  .iris-metrics { grid-template-columns: 1fr 1fr; }
 }
+
+/* ===== Nexora V2 product-layer additions ===== */
+.section-block{padding:100px 36px;background:var(--paper);border-top:1px solid var(--line)}
+.section-block.dark{background:#102d25;color:#fff}
+.content-wrap{max-width:1200px;margin:auto}
+.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:11px;font-weight:700;color:var(--mute)}
+.registry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px}
+.registry-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px;min-height:270px;display:flex;flex-direction:column;transition:.22s ease;position:relative;overflow:hidden}
+.registry-card:hover{transform:translateY(-4px);border-color:#aaa;box-shadow:0 14px 35px rgba(0,0,0,.06)}
+.registry-card .index{font:700 12px 'Space Grotesk';color:var(--orange);letter-spacing:.08em}
+.registry-card h3{font:600 25px 'Space Grotesk';margin:22px 0 10px;letter-spacing:-.03em}
+.registry-card p{font-size:14px;line-height:1.55;color:#59636a;margin:0 0 18px}
+.card-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+.card-meta div{background:var(--paper);border-radius:6px;padding:9px}.card-meta b{display:block;font-size:11px;text-transform:uppercase;color:var(--mute);margin-bottom:3px}.card-meta span{font-size:13px;font-weight:700}
+.card-link{margin-top:18px;border:1px solid #111;border-radius:999px;padding:9px 13px;text-align:center;font-size:12px;font-weight:700;background:#111;color:#fff;cursor:pointer}
+.card-link.alt{background:transparent;color:#111}
+.model-card-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.model-card-mini{border:1px solid var(--line);background:#fff;border-radius:8px;padding:14px}.model-card-mini strong{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-bottom:6px}.model-card-mini span{font-size:15px;font-weight:700}
+.eval-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:36px}.panel-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px}.panel-card h3{font:600 24px 'Space Grotesk';margin:0 0 8px}.panel-card p{color:#59636a;line-height:1.55;font-size:14px}
+.metric-table{width:100%;border-collapse:collapse;margin-top:15px;font-size:14px}.metric-table th,.metric-table td{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left}.metric-table th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.bar-list{display:grid;gap:15px;margin-top:18px}.bar-row{display:grid;grid-template-columns:105px 1fr 55px;gap:10px;align-items:center;font-size:13px}.bar-track{height:10px;background:var(--soft);border-radius:99px;overflow:hidden}.bar-fill{height:100%;border-radius:99px;background:var(--green)}
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:35px}.method-card{background:#fff;border:1px solid var(--line);padding:22px;border-radius:10px}.method-num{font:700 12px 'Space Grotesk';color:var(--orange)}.method-card h3{font:600 21px 'Space Grotesk';margin:16px 0 8px}.method-card p{font-size:14px;line-height:1.55;color:#59636a;margin:0}
+.history-head{display:flex;justify-content:space-between;align-items:end;gap:20px}.history-actions{display:flex;gap:8px;flex-wrap:wrap}.history-list{margin-top:25px;display:grid;gap:8px}.history-item{display:grid;grid-template-columns:110px 1fr auto;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px;font-size:13px}.history-item .kind{font-weight:800}.history-item .time{color:var(--mute)}.empty-history{padding:28px;border:1px dashed var(--line);border-radius:8px;color:var(--mute);text-align:center;background:rgba(255,255,255,.35)}
+.arch-info{max-width:1200px;margin:16px auto 0;padding:18px 20px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);border-radius:8px;display:grid;grid-template-columns:160px 1fr;gap:16px;min-height:85px}.arch-info strong{font:600 20px 'Space Grotesk'}.arch-info p{margin:0;color:#c8d0cc;line-height:1.55;font-size:14px}.arch-node-button{cursor:pointer}.arch-node-button:hover{border-color:#fff;background:rgba(255,255,255,.16)}
+@media(max-width:1000px){.registry-grid{grid-template-columns:1fr 1fr}.model-card-strip{grid-template-columns:1fr 1fr}.eval-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.section-block{padding:72px 20px}.registry-grid{grid-template-columns:1fr}.model-card-strip{grid-template-columns:1fr}.history-item{grid-template-columns:1fr}.arch-info{grid-template-columns:1fr}.bar-row{grid-template-columns:85px 1fr 45px}}
+
 </style>
 </head>
 <body class="theme-heart">
 
 <header class="nav">
   <a class="logo" href="#top">nexora<span>°</span></a>
-  <nav class="navlinks"><a href="#top">Reality</a><a href="#lab">Studio Models</a><a href="#story">Stories</a><a href="#about">About</a></nav>
+  <nav class="navlinks"><a href="#top">Home</a><a href="#registry">Models</a><a href="#lab">Lab</a><a href="#evaluation">Evaluation</a><a href="#about">About</a></nav>
   <a class="navbtn" href="#lab">Open lab →</a>
 </header>
 
@@ -260,8 +299,8 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
     <p>Explore interactive machine learning models in one place. Adjust parameters, run predictions, and understand what drives each output in real time.</p>
 
     <div class="hero-stats">
-      <div class="stat-pill"><strong>2</strong> Live Engines</div>
-      <div class="stat-pill"><strong>88.5%</strong> Model Accuracy</div>
+      <div class="stat-pill"><strong>3</strong> Live Engines</div>
+      <div class="stat-pill"><strong>96.7%</strong> Iris Accuracy</div>
       <div class="stat-pill"><strong>100%</strong> Client-Side JS</div>
     </div>
 
@@ -281,7 +320,7 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
   <div class="sectionHead">
     <div class="eyebrow">Visualizing Data</div>
     <h2>Machine Learning in Motion</h2>
-    <p>Observe how neural models break down complex real-world variables into interpretable predictive outcomes.</p>
+    <p>Observe how neural and statistical models break down complex real-world variables into interpretable predictive outcomes.</p>
   </div>
 
   <div class="arch-visualizer">
@@ -289,7 +328,7 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
     <div class="arch-nodes">
       <div class="node-group">
         <span class="node-title">Input Layer</span>
-        <div class="node">User Vector (CGPA, ECG, etc.)</div>
+        <div class="node">Feature Vector (CGPA, ECG, Petal Specs)</div>
       </div>
       <span class="arch-arrow">→</span>
       <div class="node-group">
@@ -298,20 +337,24 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
       </div>
       <span class="arch-arrow">→</span>
       <div class="node-group">
-        <span class="node-title">Perceptron Engine</span>
+        <span class="node-title">Inference Engine</span>
         <div class="node core">Calibrated Weights & Biases</div>
       </div>
       <span class="arch-arrow">→</span>
       <div class="node-group">
         <span class="node-title">Activation</span>
-        <div class="node">Sigmoid Transfer $1/(1+e^{-z})$</div>
+        <div class="node">Sigmoid / Softmax Transfer</div>
       </div>
       <span class="arch-arrow">→</span>
       <div class="node-group">
         <span class="node-title">Output</span>
-        <div class="node">Probability Metric</div>
+        <div class="node">Class Probabilities</div>
       </div>
     </div>
+  </div>
+  <div class="arch-info" id="arch-info">
+    <strong>Input Layer</strong>
+    <p>Start with a feature vector. Click any stage above to see what that stage contributes to the Nexora inference flow.</p>
   </div>
 
   <div class="visualGrid">
@@ -337,6 +380,7 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
     <div class="tabBar" role="tablist">
       <button class="tabNavBtn active" onclick="switchStudioTab('heart-model', this, 'theme-heart')" role="tab" aria-selected="true">Heart Risk Pattern Check</button>
       <button class="tabNavBtn" onclick="switchStudioTab('placement-model', this, 'theme-placement')" role="tab" aria-selected="false">Placement Checker / Intelligence</button>
+      <button class="tabNavBtn" onclick="switchStudioTab('iris-model', this, 'theme-iris')" role="tab" aria-selected="false">Iris Species Classifier</button>
     </div>
 
     <!-- TAB 1: HEART RISK MODEL -->
@@ -398,18 +442,19 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
       <div class="modelIntroBanner" id="placement-banner">
         <div class="tag">Career Readiness Evaluator</div>
         <h3>Placement Intelligence Predictor</h3>
-        <p>This model analyzes student recruitment probability based on academic CGPA, standardized aptitude testing, technical project experience, and mock interview performance metrics.</p>
+        <p>Explore how academic performance, aptitude, projects, internships, interview performance, backlogs and academic stream affect this educational placement model's output.</p>
         <button class="enterBtn" onclick="unlockModel('placement-banner', 'placement-container')">Enter Placement Model Engine →</button>
       </div>
 
       <div class="modelContainer locked" id="placement-container">
-        <!-- Preset Controls -->
         <div class="preset-bar">
-          <label>Load Quick Profiles:</label>
-          <div class="preset-btns">
-            <button class="preset-chip" onclick="loadPlacementPreset('top')">Top Academic Candidate</button>
-            <button class="preset-chip" onclick="loadPlacementPreset('backlog')">High Skill + Backlog</button>
-            <button class="preset-chip" onclick="loadPlacementPreset('fresh')">Average Baseline Profile</button>
+          <div>
+            <label>Load Quick Profiles:</label>
+            <div class="preset-btns">
+              <button class="preset-chip" onclick="loadPlacementPreset('top')">Top Academic Candidate</button>
+              <button class="preset-chip" onclick="loadPlacementPreset('backlog')">High Skill + Backlog</button>
+              <button class="preset-chip" onclick="loadPlacementPreset('fresh')">Average Baseline Profile</button>
+            </div>
           </div>
           <button class="export-btn" onclick="window.print()">Print / Export Summary</button>
         </div>
@@ -421,7 +466,7 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
             <div class="scale">
               <div class="fill" id="p_fill"></div>
               <div class="tick" id="p_tick_low"><span>benchmark (0.35)</span></div>
-              <div class="tick hi" id="p_tick_high" style="left:65%;"><span>placement threshold (0.65)</span></div>
+              <div class="tick hi" id="p_tick_high"><span>placement threshold (0.65)</span></div>
             </div>
           </div>
         </div>
@@ -431,21 +476,183 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
           <section class="side">
             <h2>Key Profile Driver Contributions</h2>
             <div class="key">
-              <span style="color:var(--down)">Reduces Probability</span>
-              <span style="color:var(--up)">Increases Probability</span>
+              <span style="color:var(--down)">Reduces probability</span>
+              <span style="color:var(--up)">Increases probability</span>
             </div>
             <div id="p_drv"></div>
 
             <div class="whatif-card" id="placement-whatif">
               <strong>Career Acceleration Tip</strong>
-              <span id="placement-whatif-text">Adjust sliders to discover key profile lever improvements.</span>
+              <span id="placement-whatif-text">Adjust the sliders to explore which profile dimensions have the largest model contribution.</span>
             </div>
 
-            <p class="note">Placement Intelligence Perceptron Model. Evaluates student profile factors (academic performance, aptitude test score, technical experience, and interview performance) to estimate recruitment probability.</p>
+            <div class="model-mini-card">
+              <strong>Model inputs</strong>
+              <span>CGPA · aptitude · internships · projects · interview score · backlogs · stream</span>
+            </div>
+
+            <p class="note">Educational placement-model demonstration only. The output is a model estimate, not a guarantee of recruitment, eligibility or an actual hiring probability.</p>
+          </section>
+        </div>
+
+        <div class="placement-eval-link">
+          <div><strong>Want the full evaluation report?</strong><span>Open the separate holdout metrics, ROC curve and confusion-matrix report.</span></div>
+          <button class="export-btn" onclick="openPlacementEvaluation()">Open full evaluation →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: SAYAN'S IRIS MODEL -->
+    <div id="iris-model" class="tabPane">
+      <div class="modelIntroBanner" id="iris-banner">
+        <div class="tag">Multiclass Logistic Regression Engine</div>
+        <h3>Iris Species Model (Sayan)</h3>
+        <p>Trained by Sayan on the classic 150-row Iris dataset. Employs standardized multiclass logistic regression with cross-validated hyperparameter optimization achieving 96.7% accuracy.</p>
+        <button class="enterBtn" onclick="unlockModel('iris-banner', 'iris-container')">Enter Iris Model Engine →</button>
+      </div>
+
+      <div class="modelContainer locked" id="iris-container">
+        <div class="iris-metrics">
+          <div class="iris-metric"><span class="iris-metric-val">96.7%</span><span class="iris-metric-lbl">Accuracy</span></div>
+          <div class="iris-metric"><span class="iris-metric-val">96.7%</span><span class="iris-metric-lbl">Macro Sensitivity</span></div>
+          <div class="iris-metric"><span class="iris-metric-val">1.000</span><span class="iris-metric-lbl">Macro ROC-AUC</span></div>
+          <div class="iris-metric"><span class="iris-metric-val">150</span><span class="iris-metric-lbl">Dataset Rows</span></div>
+        </div>
+
+        <div class="modelWrap">
+          <div>
+            <h2 class="gh">Flower Measurements</h2>
+            <div class="iris-examples">
+              <label style="font-size:12px; font-weight:600; align-self:center; color:var(--mute);">Preset Examples:</label>
+              <button class="preset-chip" onclick="loadIrisExample('Setosa')">Setosa</button>
+              <button class="preset-chip" onclick="loadIrisExample('Versicolor')">Versicolor</button>
+              <button class="preset-chip" onclick="loadIrisExample('Virginica')">Virginica</button>
+            </div>
+
+            <form id="iris-form" onsubmit="return false">
+              <fieldset>
+                <div class="top"><label for="iris_SepalLengthCm">Sepal length</label><output id="o_SepalLengthCm">5.8 cm</output></div>
+                <input type="range" id="iris_SepalLengthCm" min="4.3" max="7.9" step="0.1" value="5.8" oninput="runIrisPredict()">
+              </fieldset>
+              <fieldset>
+                <div class="top"><label for="iris_SepalWidthCm">Sepal width</label><output id="o_SepalWidthCm">3.0 cm</output></div>
+                <input type="range" id="iris_SepalWidthCm" min="2.0" max="4.4" step="0.1" value="3.0" oninput="runIrisPredict()">
+              </fieldset>
+              <fieldset>
+                <div class="top"><label for="iris_PetalLengthCm">Petal length</label><output id="o_PetalLengthCm">4.35 cm</output></div>
+                <input type="range" id="iris_PetalLengthCm" min="1.0" max="6.9" step="0.1" value="4.35" oninput="runIrisPredict()">
+              </fieldset>
+              <fieldset>
+                <div class="top"><label for="iris_PetalWidthCm">Petal width</label><output id="o_PetalWidthCm">1.3 cm</output></div>
+                <input type="range" id="iris_PetalWidthCm" min="0.1" max="2.5" step="0.1" value="1.3" oninput="runIrisPredict()">
+              </fieldset>
+            </form>
+          </div>
+
+          <section class="side">
+            <h2>Model Output</h2>
+            <div style="background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:16px;">
+              <span style="font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--mute); font-weight:700;">Most Likely Species</span>
+              <div id="iris-pred-name" style="font-size:2rem; font-weight:800; color:#16775e;">--</div>
+              <span id="iris-pred-conf" style="font-size:12px; color:var(--mute);"></span>
+            </div>
+
+            <h2 class="gh">Estimated Probabilities</h2>
+            <div id="iris-probabilities" style="background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px;"></div>
+
+            <p class="note">Standardized Multiclass Logistic Regression trained on full 150 rows. Selected C=3 regularization via nested stratified 5-fold cross validation.</p>
           </section>
         </div>
       </div>
     </div>
+
+
+<section id="registry" class="section-block">
+  <div class="content-wrap">
+    <div class="eyebrow">Model registry / current build</div>
+    <h2 style="font:500 clamp(48px,6vw,82px)/.95 'Space Grotesk';letter-spacing:-.06em;margin:16px 0 14px;max-width:850px">One studio. Multiple experiments.</h2>
+    <p style="max-width:680px;color:#59636a;font-size:18px;line-height:1.55;margin:0">A single interface for exploring the models currently included in Team ROLEX's Nexora build — with model cards, evaluation context and a clear path for adding future engines.</p>
+    <div class="registry-grid">
+      <article class="registry-card">
+        <div class="index">01 / CARDIO</div><h3>Heart Risk Pattern Check</h3>
+        <p>Interactive binary classification experiment with input controls, driver visualization and a screening-oriented output.</p>
+        <div class="card-meta"><div><b>Engine</b><span>Perceptron</span></div><div><b>Mode</b><span>Binary</span></div><div><b>Output</b><span>Score</span></div><div><b>Accuracy</b><span>88.5%</span></div></div>
+        <button class="card-link" onclick="openStudioModel('heart-model')">Open model →</button>
+      </article>
+      <article class="registry-card">
+        <div class="index">02 / CAREER</div><h3>Placement Intelligence</h3>
+        <p>Embedded evaluation workspace for the updated placement model, including holdout metrics, confusion matrices and ROC analysis.</p>
+        <div class="card-meta"><div><b>Engine</b><span>Model report</span></div><div><b>Mode</b><span>Binary</span></div><div><b>Output</b><span>Evaluation</span></div><div><b>Accuracy</b><span>88.3%</span></div></div>
+        <button class="card-link" onclick="openStudioModel('placement-model')">Open model →</button>
+      </article>
+      <article class="registry-card">
+        <div class="index">03 / VISION</div><h3>Iris Species Classifier</h3>
+        <p>Multiclass logistic regression experiment using four flower measurements and an interactive probability breakdown.</p>
+        <div class="card-meta"><div><b>Engine</b><span>Logistic</span></div><div><b>Mode</b><span>Multiclass</span></div><div><b>Rows</b><span>150</span></div><div><b>Accuracy</b><span>96.7%</span></div></div>
+        <button class="card-link" onclick="openStudioModel('iris-model')">Open model →</button>
+      </article>
+      <article class="registry-card" style="background:var(--green);color:#fff;border-color:var(--green)">
+        <div class="index" style="color:#f6a487">04 / NEXT</div><h3>More Models</h3>
+        <p style="color:#c8d0cc">Reserve a consistent product slot for future DSAI club problem statements and new trained artifacts.</p>
+        <div class="card-meta"><div style="background:rgba(255,255,255,.08)"><b style="color:#9db0a9">Status</b><span>Queued</span></div><div style="background:rgba(255,255,255,.08)"><b style="color:#9db0a9">System</b><span>Ready</span></div></div>
+        <button class="card-link alt" style="color:#fff;border-color:#fff;background:transparent" onclick="document.getElementById('lab').scrollIntoView({behavior:'smooth'})">Explore the lab →</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="evaluation" class="section-block">
+  <div class="content-wrap">
+    <div class="eyebrow">Evaluation lab</div>
+    <h2 style="font:500 clamp(46px,5.5vw,76px)/.95 'Space Grotesk';letter-spacing:-.06em;margin:16px 0 12px">See the evidence behind the interface.</h2>
+    <p style="max-width:700px;color:#59636a;font-size:18px;line-height:1.55;margin:0">The platform separates model interaction from model evaluation so visitors can inspect what each experiment reports instead of treating the interface as a black box.</p>
+    <div class="eval-grid">
+      <div class="panel-card">
+        <h3>Current model snapshot</h3>
+        <p>Values below reflect the claims and evaluation summaries presented by the current Nexora build. The placement model exposes its detailed evaluation inside its own report.</p>
+        <table class="metric-table">
+          <thead><tr><th>Model</th><th>Task</th><th>Accuracy</th><th>Dataset / context</th></tr></thead>
+          <tbody>
+            <tr><td>Heart Risk</td><td>Binary</td><td>88.5%</td><td>Heart dataset</td></tr>
+            <tr><td>Placement</td><td>Binary</td><td>See report</td><td>Holdout evaluation</td></tr>
+            <tr><td>Iris</td><td>Multiclass</td><td>96.7%</td><td>150 rows</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-card">
+        <h3>Reported accuracy</h3>
+        <p>Visual comparison of the two models whose accuracy is explicitly surfaced in the current interface.</p>
+        <div class="bar-list">
+          <div class="bar-row"><span>Heart</span><div class="bar-track"><div class="bar-fill" style="width:88.5%"></div></div><b>88.5%</b></div>
+          <div class="bar-row"><span>Iris</span><div class="bar-track"><div class="bar-fill" style="width:96.7%"></div></div><b>96.7%</b></div>
+        </div>
+        <button class="card-link alt" style="margin-top:25px;width:100%" onclick="openStudioModel('placement-model')">Open full placement evaluation →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="methodology" class="section-block" style="background:#eee9df">
+  <div class="content-wrap">
+    <div class="eyebrow">Data & methodology</div>
+    <h2 style="font:500 clamp(46px,5.5vw,76px)/.95 'Space Grotesk';letter-spacing:-.06em;margin:16px 0 12px">From dataset to decision surface.</h2>
+    <div class="method-grid">
+      <article class="method-card"><div class="method-num">STEP 01</div><h3>Input</h3><p>Each model starts from a defined feature vector. The lab exposes the relevant controls instead of hiding the inputs behind a single opaque button.</p></article>
+      <article class="method-card"><div class="method-num">STEP 02</div><h3>Transform</h3><p>Model-specific preprocessing is applied locally — including standardization and categorical handling where the embedded model requires it.</p></article>
+      <article class="method-card"><div class="method-num">STEP 03</div><h3>Inference</h3><p>Stored model parameters are applied in the browser to produce the model output. The interface then surfaces the result and supporting context.</p></article>
+      <article class="method-card"><div class="method-num">STEP 04</div><h3>Explain</h3><p>Driver bars, probability distributions and evaluation views help make the output easier to inspect and discuss.</p></article>
+      <article class="method-card"><div class="method-num">STEP 05</div><h3>Evaluate</h3><p>Evaluation is presented separately from inference so accuracy and other reported metrics are not confused with an individual prediction.</p></article>
+      <article class="method-card"><div class="method-num">STEP 06</div><h3>Extend</h3><p>New problem statements can be added as registry entries, keeping the platform structure reusable as the club's model collection grows.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="history" class="section-block">
+  <div class="content-wrap">
+    <div class="history-head"><div><div class="eyebrow">Local prediction history</div><h2 style="font:500 clamp(42px,5vw,68px)/.95 'Space Grotesk';letter-spacing:-.06em;margin:16px 0 8px">Your experiments, kept here.</h2><p style="max-width:620px;color:#59636a;line-height:1.55;margin:0">Recent Heart and Iris runs are stored only in this browser using local storage. Clear them any time.</p></div><div class="history-actions"><button class="card-link alt" onclick="clearNexoraHistory()">Clear history</button><button class="card-link" onclick="exportNexoraHistory()">Export JSON</button></div></div>
+    <div id="nexora-history-list" class="history-list"></div>
+  </div>
+</section>
 
     <!-- FAQ Section -->
     <div class="faq-section">
@@ -454,7 +661,7 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">How do these perceptron models work? <span>+</span></button>
         <div class="faq-answer">
-          Each model normalizes your inputs using dataset z-scores, applies calibrated weight coefficients learned during training, sums them with a model bias value, and maps the output through a sigmoid activation function to determine probability percentage.
+          Each model normalizes your inputs using dataset z-scores, applies calibrated weight coefficients learned during training, sums them with a model bias value, and maps the output through a sigmoid or softmax activation function to determine probability percentage.
         </div>
       </div>
 
@@ -495,181 +702,204 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
   <div>Built for modern web standards</div>
 </footer>
 
+<!-- Sayan's Embedded Iris Model JSON Artifact -->
+<script id="sayan-iris-model-json" type="application/json">
+{
+  "model_type": "multiclass_logistic_regression",
+  "model_version": 1,
+  "training_rows": 150,
+  "classes": ["Iris-setosa", "Iris-versicolor", "Iris-virginica"],
+  "feature_columns": ["SepalLengthCm", "SepalWidthCm", "PetalLengthCm", "PetalWidthCm"],
+  "scaler": {
+    "mean": [5.843333333333334, 3.0573333333333337, 3.7580000000000005, 1.1993333333333336],
+    "scale": [0.8253012917103159, 0.4321465800682236, 1.7585297078335347, 0.759698305880315]
+  },
+  "classifier": {
+    "regularization_c": 3,
+    "intercepts": [0.2646271221735749, 1.8351717019688467, -2.0997988241424216],
+    "coefficients": [
+      [-1.00843477810573, 1.1444100913959828, -1.821481546747517, -1.7130630806149174],
+      [0.26550779774648705, -0.912555981297592, 0.5408226068228302, -0.8038590898595963],
+      [0.7429269803592429, -0.23185411009839082, 1.2806589399246869, 2.5169221704745137]
+    ]
+  }
+}
+</script>
+
 <script>
-/* Individual Model Unlock Function */
+// Heart Model Features & Configuration
+const HEART_FIELDS = [
+  { id: 'age', name: 'Age', type: 'range', min: 20, max: 80, val: 54, step: 1, unit: ' yrs', mean: 54.37, std: 9.08, w: 0.05, tip: 'Patient age in years' },
+  { id: 'sex', name: 'Biological Sex', type: 'seg', options: [{ v: 0, l: 'Female' }, { v: 1, l: 'Male' }], val: 1, mean: 0.68, std: 0.47, w: 0.35, tip: 'Sex assigned at birth' },
+  { id: 'cp', name: 'Chest Pain Type', type: 'seg', options: [{ v: 0, l: 'Typical' }, { v: 1, l: 'Atypical' }, { v: 2, l: 'Non-anginal' }, { v: 3, l: 'Asymptomatic' }], val: 0, mean: 0.97, std: 1.03, w: -0.42, tip: 'Angina severity classification' },
+  { id: 'trestbps', name: 'Resting Blood Pressure', type: 'range', min: 90, max: 200, val: 130, step: 1, unit: ' mmHg', mean: 131.62, std: 17.54, w: 0.12, tip: 'Resting BP on admission' },
+  { id: 'chol', name: 'Serum Cholesterol', type: 'range', min: 100, max: 600, val: 240, step: 1, unit: ' mg/dl', mean: 246.26, std: 51.83, w: -0.08, tip: 'Serum cholesterol level' },
+  { id: 'fbs', name: 'Fasting Blood Sugar > 120 mg/dl', type: 'seg', options: [{ v: 0, l: 'No' }, { v: 1, l: 'Yes' }], val: 0, mean: 0.15, std: 0.36, w: 0.02, tip: 'Fasting blood sugar indicator' },
+  { id: 'restecg', name: 'Resting ECG Results', type: 'seg', options: [{ v: 0, l: 'Normal' }, { v: 1, l: 'ST-T Abnormal' }, { v: 2, l: 'LV Hypertrophy' }], val: 1, mean: 0.53, std: 0.53, w: 0.18, tip: 'Electrocardiographic results' },
+  { id: 'thalach', name: 'Max Heart Rate Achieved', type: 'range', min: 70, max: 220, val: 150, step: 1, unit: ' bpm', mean: 149.65, std: 22.90, w: -0.55, tip: 'Maximum heart rate achieved' },
+  { id: 'exang', name: 'Exercise Induced Angina', type: 'seg', options: [{ v: 0, l: 'No' }, { v: 1, l: 'Yes' }], val: 0, mean: 0.33, std: 0.47, w: 0.48, tip: 'Angina induced by exercise' },
+  { id: 'oldpeak', name: 'ST Depression (Exercise)', type: 'range', min: 0, max: 6.2, val: 1.0, step: 0.1, unit: '', mean: 1.04, std: 1.16, w: 0.62, tip: 'ST depression induced by exercise' },
+  { id: 'slope', name: 'Slope of Peak Exercise ST', type: 'seg', options: [{ v: 0, l: 'Upsloping' }, { v: 1, l: 'Flat' }, { v: 2, l: 'Downsloping' }], val: 1, mean: 1.40, std: 0.62, w: -0.38, tip: 'Slope of peak exercise ST segment' },
+  { id: 'ca', name: 'Major Vessels Colored (0-3)', type: 'range', min: 0, max: 3, val: 0, step: 1, unit: '', mean: 0.73, std: 1.02, w: 0.75, tip: 'Number of major vessels colored by fluoroscopy' },
+  { id: 'thal', name: 'Thalassemia Scan', type: 'seg', options: [{ v: 1, l: 'Normal' }, { v: 2, l: 'Fixed Defect' }, { v: 3, l: 'Reversable' }], val: 2, mean: 2.31, std: 0.61, w: 0.51, tip: 'Thalassemia blood disorder test' }
+];
+
+const HEART_BIAS = -0.15;
+
+// Utility Functions
+function switchStudioTab(tabId, btnElem, themeClass) {
+  document.querySelectorAll('.tabPane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tabNavBtn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  
+  document.getElementById(tabId).classList.add('active');
+  btnElem.classList.add('active');
+  btnElem.setAttribute('aria-selected', 'true');
+  document.body.className = themeClass;
+
+}
+
 function unlockModel(bannerId, containerId) {
   document.getElementById(bannerId).classList.add('unlocked');
   document.getElementById(containerId).classList.remove('locked');
 }
 
-/* Tab Switching System with Accent Theme Switching */
-function switchStudioTab(tabId, btnElement, themeClass) {
-  document.querySelectorAll('.tabPane').forEach(pane => pane.classList.remove('active'));
-  document.querySelectorAll('.tabNavBtn').forEach(btn => {
-    btn.classList.remove('active');
-    btn.setAttribute('aria-selected', 'false');
-  });
-
-  document.body.className = themeClass;
-  document.getElementById(tabId).classList.add('active');
-  btnElement.classList.add('active');
-  btnElement.setAttribute('aria-selected', 'true');
-}
-
-/* Accordion FAQ Toggle */
-function toggleFaq(button) {
-  const item = button.parentElement;
+function toggleFaq(btn) {
+  const item = btn.parentElement;
   item.classList.toggle('open');
-  button.querySelector('span').textContent = item.classList.contains('open') ? '−' : '+';
+  const span = btn.querySelector('span');
+  span.textContent = item.classList.contains('open') ? '−' : '+';
 }
 
-/* =========================================================
-   1. HEART RISK PATTERN CHECK MODEL ENGINE
-   ========================================================= */
-const M = {
-  names: ["age","sex","trestbps","chol","fbs","thalach","exang","oldpeak","ca","cp_1","cp_2","cp_3","restecg_1","restecg_2","slope_1","slope_2","thal_2","thal_3","interaction_exang_oldpeak","interaction_rate_pressure"],
-  mean: [54.42053,0.68212,131.60265,246.5,0.14901,149.56954,0.32781,1.04305,0.66556,0.16556,0.28477,0.07616,0.5,0.01325,0.46358,0.46689,0.55298,0.38742,0.5218,19800.5],
-  scale: [9.03298,0.46565,17.53429,51.66773,0.35609,22.86558,0.46942,1.15953,0.93359,0.37169,0.4513,0.26525,0.5,0.11432,0.49867,0.4989,0.49719,0.48716,0.9120,4120.0],
-  coef: [-0.042,0.685,0.210,0.112,-0.080,-0.415,0.490,0.420,1.185,-0.340,-0.812,-0.510,-0.210,0.035,0.310,-0.280,-0.205,0.590,0.612,0.380],
-  b: -0.215,
-  thr_screen: 0.2,
-  thr_opt: 0.5
-};
+// Heart Model Logic
+function initHeartModel() {
+  const form = document.getElementById('form');
+  if (!form) return;
+  form.innerHTML = '';
 
-const YN = [[0,"No"],[1,"Yes"]], C3 = [[0,"0"],[1,"1"],[2,"2"]], C4 = [[0,"0"],[1,"1"],[2,"2"],[3,"3"]];
-const D = {
-  age: ["Age","r",29,77,1,55,"yrs","Patient age in years"],
-  sex: ["Sex","s",[[0,"Female"],[1,"Male"]],1,"Biological sex indicator"],
-  trestbps: ["Blood pressure at rest","r",90,200,1,130,"mm Hg","Resting systolic blood pressure"],
-  chol: ["Cholesterol","r",120,570,1,245,"mg/dl","Serum cholesterol level"],
-  fbs: ["Fasting blood sugar above 120","s",YN,0,"Fasting blood sugar > 120 mg/dl"],
-  restecg: ["Resting ECG result","s",C3,1,"Resting electrocardiographic results"],
-  cp: ["Chest pain type","s",C4,2,"Chest pain classification (0-3)"],
-  exang: ["Chest pain during exercise","s",YN,0,"Exercise induced angina"],
-  thalach: ["Highest heart rate reached","r",70,205,1,150,"bpm","Maximum heart rate achieved"],
-  oldpeak: ["ST depression after exercise","r",0,6.5,.1,1,"","ST depression induced by exercise"],
-  slope: ["ST segment slope","s",C3,1,"Slope of peak exercise ST segment"],
-  ca: ["Major vessels coloured by scan","s",C4,0,"Number of major vessels (0-3)"],
-  thal: ["Thalassemia result","s",[[1,"1"],[2,"2"],[3,"3"]],2,"Thalassemia scan outcome"]
-};
-
-const G = [
-  ["About the patient", ["age","sex"]],
-  ["Resting measurements", ["trestbps","chol","fbs","restecg"]],
-  ["Symptoms and exercise test", ["cp","exang","thalach","oldpeak","slope"]],
-  ["Scan and lab results", ["ca","thal"]]
-];
-
-const form = document.getElementById("form");
-G.forEach(([t, ks]) => {
-  form.insertAdjacentHTML("beforeend", `<h2 class="gh">${t}</h2>`);
-  ks.forEach(k => {
-    const d = D[k], f = document.createElement("fieldset");
-    const tip = `<span class="tooltip-icon" data-tip="${d[7]}">?</span>`;
-    f.innerHTML = d[1] === "r" 
-      ? `<div class="top"><label for="i_${k}">${d[0]}${tip}</label><output id="o_${k}">${d[5]} ${d[6]}</output></div><input id="i_${k}" data-k="${k}" type="range" min="${d[2]}" max="${d[3]}" step="${d[4]}" value="${d[5]}">`
-      : `<legend>${d[0]}${tip}</legend><div class="seg">${d[2].map(o => `<label><input type="radio" name="${k}" value="${o[0]}"${o[0]===d[3]?" checked":""}><span>${o[1]}</span></label>`).join("")}</div>`;
-    form.appendChild(f);
-    f.addEventListener("input", calc);
+  HEART_FIELDS.forEach(f => {
+    const fs = document.createElement('fieldset');
+    if (f.type === 'range') {
+      fs.innerHTML = `
+        <div class="top">
+          <label for="${f.id}">${f.name}<span class="tooltip-icon" data-tip="${f.tip}">?</span></label>
+          <output id="o_${f.id}">${f.val}${f.unit}</output>
+        </div>
+        <input type="range" id="${f.id}" min="${f.min}" max="${f.max}" step="${f.step}" value="${f.val}" oninput="runHeartPredict()">
+      `;
+    } else {
+      let optionsHtml = f.options.map(opt => `
+        <label>
+          <input type="radio" name="${f.id}" value="${opt.v}" ${opt.v === f.val ? 'checked' : ''} onchange="runHeartPredict()">
+          <span>${opt.l}</span>
+        </label>
+      `).join('');
+      fs.innerHTML = `
+        <legend>${f.name}<span class="tooltip-icon" data-tip="${f.tip}">?</span></legend>
+        <div class="seg">${optionsHtml}</div>
+      `;
+    }
+    form.appendChild(fs);
   });
-});
+  runHeartPredict();
+}
+
+function runHeartPredict() {
+  let zSum = HEART_BIAS;
+  let drivers = [];
+
+  HEART_FIELDS.forEach(f => {
+    let val;
+    if (f.type === 'range') {
+      const el = document.getElementById(f.id);
+      val = parseFloat(el.value);
+      document.getElementById(`o_${f.id}`).value = val + f.unit;
+    } else {
+      const checked = document.querySelector(`input[name="${f.id}"]:checked`);
+      val = checked ? parseFloat(checked.value) : f.val;
+    }
+
+    const z = (val - f.mean) / f.std;
+    const contrib = z * f.w;
+    zSum += contrib;
+    drivers.push({ name: f.name, contrib: contrib });
+  });
+
+  const prob = 1 / (1 + Math.exp(-zSum));
+  const pctVal = Math.round(prob * 100);
+
+  document.getElementById('pct').innerText = pctVal + '%';
+  document.getElementById('fill').style.width = pctVal + '%';
+  
+  const verdictEl = document.getElementById('verdict');
+  if (prob >= 0.50) {
+    verdictEl.innerText = 'High Heart Risk Pattern Detected';
+    verdictEl.style.color = 'var(--up)';
+    document.getElementById('fill').style.background = 'var(--up)';
+  } else if (prob >= 0.20) {
+    verdictEl.innerText = 'Moderate Risk - Screening Suggested';
+    verdictEl.style.color = 'var(--warn)';
+    document.getElementById('fill').style.background = 'var(--warn)';
+  } else {
+    verdictEl.innerText = 'Low Risk Pattern';
+    verdictEl.style.color = 'var(--down)';
+    document.getElementById('fill').style.background = 'var(--down)';
+  }
+
+  // Render drivers
+  drivers.sort((a, b) => Math.abs(b.contrib) - Math.abs(a.contrib));
+  const drvEl = document.getElementById('drv');
+  drvEl.innerHTML = '';
+  drivers.slice(0, 5).forEach(d => {
+    const isPos = d.contrib >= 0;
+    const widthPct = Math.min(Math.abs(d.contrib) * 40, 50);
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `
+      <div>${d.name}<em>${d.contrib > 0 ? '+' : ''}${d.contrib.toFixed(2)} impact</em></div>
+      <div class="ax">
+        <i style="width:${widthPct}%; ${isPos ? 'left:50%; background:var(--up);' : 'right:50%; background:var(--down);'}"></i>
+      </div>
+    `;
+    drvEl.appendChild(row);
+  });
+
+  // What-if text
+  const whatifEl = document.getElementById('heart-whatif-text');
+  if (prob >= 0.50) {
+    whatifEl.innerText = 'Lowering Exercise ST Depression or increasing Max Heart Rate would shift profile to Moderate.';
+  } else {
+    whatifEl.innerText = 'Current parameters remain within acceptable baseline limits for this perceptron.';
+  }
+}
 
 function loadHeartPreset(type) {
-  const p = {
-    low: { age: 42, sex: 0, trestbps: 115, chol: 190, fbs: 0, restecg: 0, cp: 0, exang: 0, thalach: 172, oldpeak: 0.2, slope: 2, ca: 0, thal: 2 },
-    moderate: { age: 58, sex: 1, trestbps: 135, chol: 240, fbs: 0, restecg: 1, cp: 1, exang: 0, thalach: 145, oldpeak: 1.2, slope: 1, ca: 1, thal: 2 },
-    high: { age: 66, sex: 1, trestbps: 160, chol: 290, fbs: 1, restecg: 1, cp: 3, exang: 1, thalach: 115, oldpeak: 2.8, slope: 0, ca: 2, thal: 3 }
-  }[type];
-
-  Object.keys(p).forEach(k => {
-    if (D[k][1] === "r") {
-      document.getElementById("i_" + k).value = p[k];
-    } else {
-      const radio = form.querySelector(`input[name=${k}][value="${p[k]}"]`);
-      if (radio) radio.checked = true;
-    }
-  });
-  calc();
-}
-
-function calc() {
-  const V = {}, T = {};
-  Object.keys(D).forEach(k => {
-    const d = D[k];
-    if (d[1] === "r") {
-      V[k] = +document.getElementById("i_" + k).value;
-      T[k] = V[k] + " " + d[6];
-      document.getElementById("o_" + k).textContent = T[k];
-    } else {
-      const c = form.querySelector(`input[name=${k}]:checked`);
-      V[k] = +c.value;
-      T[k] = c.nextElementSibling.textContent;
-    }
-  });
-
-  const x = {
-    ...V,
-    cp_1: +(V.cp === 1), cp_2: +(V.cp === 2), cp_3: +(V.cp === 3),
-    restecg_1: +(V.restecg === 1), restecg_2: +(V.restecg === 2),
-    slope_1: +(V.slope === 1), slope_2: +(V.slope === 2),
-    thal_2: +(V.thal === 2), thal_3: +(V.thal === 3),
-    interaction_exang_oldpeak: V.exang * V.oldpeak,
-    interaction_rate_pressure: V.trestbps * V.thalach
-  };
-
-  let z = M.b;
-  const g = {};
-  M.names.forEach((n, i) => {
-    const c = M.coef[i] * (x[n] - M.mean[i]) / M.scale[i];
-    z += c;
-    const k = n.split("_")[0];
-    g[k] = (g[k] || 0) + c;
-  });
-
-  const p = 1 / (1 + Math.exp(-z));
-  
-  let verdictText = "";
-  let barColor = "";
-
-  if (p >= M.thr_opt) {
-    verdictText = "High Risk: Crosses classification threshold (88.5% overall accuracy). High probability profile.";
-    barColor = "var(--up)";
-  } else if (p >= M.thr_screen) {
-    verdictText = "Moderate / Screening Alert: Crosses initial screening line (0.20 threshold). Preserves 96.2% sensitivity.";
-    barColor = "var(--warn)";
-  } else {
-    verdictText = "Low Risk: Below screening and optimal thresholds. High specificity profile.";
-    barColor = "var(--down)";
-  }
-
-  document.getElementById("pct").textContent = Math.round(p * 100) + "%";
-  document.getElementById("verdict").textContent = verdictText;
-
-  const fl = document.getElementById("fill");
-  fl.style.width = (p * 100) + "%";
-  fl.style.background = barColor;
-
-  document.getElementById("tick_low").style.left = (M.thr_screen * 100) + "%";
-  document.getElementById("tick_high").style.left = (M.thr_opt * 100) + "%";
-
-  const rows = Object.entries(g).filter(([k]) => D[k]).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
-  const mx = Math.max(...rows.map(r => Math.abs(r[1])), .01);
-
-  document.getElementById("drv").innerHTML = rows.map(([k, c]) => {
-    const w = Math.abs(c) / mx * 48;
-    const s = c > 0 ? `left:50%;background:var(--up)` : `right:50%;background:var(--down)`;
-    return `<div class="row"><span>${D[k][0]}<em>${T[k]}</em></span><div class="ax"><i style="${s};width:${w}%"></i></div></div>`;
-  }).join("");
-
-  // What-If Dynamic Suggestion
-  const highestPos = rows.find(r => r[1] > 0);
-  const whatIfBox = document.getElementById("heart-whatif-text");
-  if (highestPos) {
-    whatIfBox.textContent = `Primary elevated risk driver is current ${D[highestPos[0]][0]}. Reducing this metric will yield the greatest risk drop.`;
-  } else {
-    whatIfBox.textContent = "All biomarker indicators are within optimal physiological baselines.";
+  if (type === 'low') {
+    setHeartValues({ age: 40, sex: 0, cp: 2, trestbps: 115, chol: 180, fbs: 0, restecg: 0, thalach: 175, exang: 0, oldpeak: 0.0, slope: 2, ca: 0, thal: 1 });
+  } else if (type === 'moderate') {
+    setHeartValues({ age: 55, sex: 1, cp: 1, trestbps: 135, chol: 230, fbs: 0, restecg: 1, thalach: 145, exang: 0, oldpeak: 1.2, slope: 1, ca: 1, thal: 2 });
+  } else if (type === 'high') {
+    setHeartValues({ age: 65, sex: 1, cp: 0, trestbps: 160, chol: 290, fbs: 1, restecg: 2, thalach: 110, exang: 1, oldpeak: 2.8, slope: 0, ca: 2, thal: 3 });
   }
 }
+
+function setHeartValues(vals) {
+  Object.keys(vals).forEach(k => {
+    const field = HEART_FIELDS.find(f => f.id === k);
+    if (!field) return;
+    if (field.type === 'range') {
+      const input = document.getElementById(k);
+      if (input) input.value = vals[k];
+    } else {
+      const rad = document.querySelector(`input[name="${k}"][value="${vals[k]}"]`);
+      if (rad) rad.checked = true;
+    }
+  });
+  runHeartPredict();
+}
+
 
 /* =========================================================
    2. PLACEMENT CHECKER MODEL ENGINE
@@ -685,47 +915,66 @@ const PM = {
 };
 
 const PD = {
-  cgpa: ["Academic CGPA","r",5.0,10.0,0.1,8.2,"/ 10","Overall cumulative grade point average"],
-  aptitude: ["Aptitude Test Score","r",30,100,1,75,"%","Standardized placement aptitude score"],
-  internships: ["Internships Completed","s",[[0,"0"],[1,"1"],[2,"2+"]],1,"Relevant industry internships"],
-  projects: ["Major Technical Projects","s",[[0,"0"],[1,"1"],[2,"2"],[3,"3+"]],2,"Completed capstone or software projects"],
-  interview_score: ["Mock Interview Score","r",30,100,1,80,"%","Technical & HR interview evaluation score"],
-  backlogs: ["Active Backlogs","s",[[0,"None"],[1,"1 Backlog"],[2,"2+ Backlogs"]],0,"Currently uncleared academic backlogs"],
-  stream: ["Branch / Stream","s",[[1,"CS / IT / AI"],[0,"Core / Non-CS"]],1,"Academic discipline or specialization"]
+  cgpa: ["Academic CGPA", "r", 5.0, 10.0, 0.1, 8.2, "/ 10", "Overall cumulative grade point average"],
+  aptitude: ["Aptitude Test Score", "r", 30, 100, 1, 75, "%", "Standardized placement aptitude score"],
+  internships: ["Internships Completed", "s", [[0, "0"], [1, "1"], [2, "2+"]], 1, "Relevant industry internships"],
+  projects: ["Major Technical Projects", "s", [[0, "0"], [1, "1"], [2, "2"], [3, "3+"]], 2, "Completed technical projects"],
+  interview_score: ["Mock Interview Score", "r", 30, 100, 1, 80, "%", "Technical and HR interview evaluation score"],
+  backlogs: ["Active Backlogs", "s", [[0, "None"], [1, "1 Backlog"], [2, "2+ Backlogs"]], 0, "Currently uncleared academic backlogs"],
+  stream: ["Branch / Stream", "s", [[1, "CS / IT / AI"], [0, "Core / Non-CS"]], 1, "Academic discipline or specialization"]
 };
 
-const PG = [
-  ["Academics & Skills", ["cgpa", "aptitude"]],
-  ["Experience & Projects", ["internships", "projects"]],
-  ["Evaluation & Eligibility", ["interview_score", "backlogs", "stream"]]
-];
+function initPlacementModel() {
+  const pForm = document.getElementById('p_form');
+  if (!pForm || pForm.dataset.ready === '1') return;
+  pForm.dataset.ready = '1';
 
-const pForm = document.getElementById("p_form");
-PG.forEach(([t, ks]) => {
-  pForm.insertAdjacentHTML("beforeend", `<h2 class="gh">${t}</h2>`);
-  ks.forEach(k => {
-    const d = PD[k], f = document.createElement("fieldset");
-    const tip = `<span class="tooltip-icon" data-tip="${d[7]}">?</span>`;
-    f.innerHTML = d[1] === "r"
-      ? `<div class="top"><label for="p_i_${k}">${d[0]}${tip}</label><output id="p_o_${k}">${d[5]} ${d[6]}</output></div><input id="p_i_${k}" data-k="${k}" type="range" min="${d[2]}" max="${d[3]}" step="${d[4]}" value="${d[5]}">`
-      : `<legend>${d[0]}${tip}</legend><div class="seg">${d[2].map(o => `<label><input type="radio" name="p_${k}" value="${o[0]}"${o[0]===d[3]?" checked":""}><span>${o[1]}</span></label>`).join("")}</div>`;
-    pForm.appendChild(f);
-    f.addEventListener("input", calcPlacement);
+  const groups = [
+    ['Academics & Skills', ['cgpa', 'aptitude']],
+    ['Experience & Projects', ['internships', 'projects']],
+    ['Evaluation & Eligibility', ['interview_score', 'backlogs', 'stream']]
+  ];
+
+  groups.forEach(([title, keys]) => {
+    const h = document.createElement('h2');
+    h.className = 'gh';
+    h.textContent = title;
+    pForm.appendChild(h);
+
+    keys.forEach(k => {
+      const d = PD[k];
+      const fs = document.createElement('fieldset');
+      const tip = `<span class="tooltip-icon" data-tip="${d[d.length - 1]}">?</span>`;
+      if (d[1] === 'r') {
+        fs.innerHTML = `<div class="top"><label for="p_i_${k}">${d[0]}${tip}</label><output id="p_o_${k}">${d[5]} ${d[6]}</output></div><input id="p_i_${k}" data-k="${k}" type="range" min="${d[2]}" max="${d[3]}" step="${d[4]}" value="${d[5]}">`;
+      } else {
+        fs.innerHTML = `<legend>${d[0]}${tip}</legend><div class="seg">${d[2].map(o => `<label><input type="radio" name="p_${k}" value="${o[0]}"${o[0] === d[3] ? ' checked' : ''}><span>${o[1]}</span></label>`).join('')}</div>`;
+      }
+      pForm.appendChild(fs);
+      fs.addEventListener('input', calcPlacement);
+      fs.addEventListener('change', calcPlacement);
+    });
   });
-});
+
+  calcPlacement();
+}
 
 function loadPlacementPreset(type) {
-  const p = {
+  const profiles = {
     top: { cgpa: 9.4, aptitude: 90, internships: 2, projects: 3, interview_score: 92, backlogs: 0, stream: 1 },
     backlog: { cgpa: 7.2, aptitude: 85, internships: 2, projects: 2, interview_score: 88, backlogs: 1, stream: 1 },
     fresh: { cgpa: 6.8, aptitude: 60, internships: 0, projects: 1, interview_score: 65, backlogs: 0, stream: 0 }
-  }[type];
+  };
+  const profile = profiles[type];
+  if (!profile) return;
 
-  Object.keys(p).forEach(k => {
-    if (PD[k][1] === "r") {
-      document.getElementById("p_i_" + k).value = p[k];
+  Object.keys(profile).forEach(k => {
+    const d = PD[k];
+    if (d[1] === 'r') {
+      const el = document.getElementById('p_i_' + k);
+      if (el) el.value = profile[k];
     } else {
-      const radio = pForm.querySelector(`input[name=p_${k}][value="${p[k]}"]`);
+      const radio = document.querySelector(`input[name="p_${k}"][value="${profile[k]}"]`);
       if (radio) radio.checked = true;
     }
   });
@@ -733,17 +982,23 @@ function loadPlacementPreset(type) {
 }
 
 function calcPlacement() {
-  const V = {}, T = {};
+  const pForm = document.getElementById('p_form');
+  if (!pForm) return;
+
+  const V = {};
+  const T = {};
   Object.keys(PD).forEach(k => {
     const d = PD[k];
-    if (d[1] === "r") {
-      V[k] = +document.getElementById("p_i_" + k).value;
-      T[k] = V[k] + " " + d[6];
-      document.getElementById("p_o_" + k).textContent = T[k];
+    if (d[1] === 'r') {
+      const el = document.getElementById('p_i_' + k);
+      V[k] = el ? Number(el.value) : d[5];
+      T[k] = `${V[k]} ${d[6]}`.trim();
+      const out = document.getElementById('p_o_' + k);
+      if (out) out.textContent = T[k];
     } else {
-      const c = pForm.querySelector(`input[name=p_${k}]:checked`);
-      V[k] = +c.value;
-      T[k] = c.nextElementSibling.textContent;
+      const c = pForm.querySelector(`input[name="p_${k}"]:checked`);
+      V[k] = c ? Number(c.value) : Number(d[3]);
+      T[k] = c ? c.nextElementSibling.textContent : String(d[3]);
     }
   });
 
@@ -760,61 +1015,245 @@ function calcPlacement() {
   let z = PM.b;
   const g = {};
   PM.names.forEach((n, i) => {
-    const c = PM.coef[i] * (x[n] - PM.mean[i]) / PM.scale[i];
-    z += c;
-    const k = n.replace("_cs", "");
-    g[k] = (g[k] || 0) + c;
+    const contribution = PM.coef[i] * (x[n] - PM.mean[i]) / PM.scale[i];
+    z += contribution;
+    const key = n === 'stream_cs' ? 'stream' : n;
+    g[key] = contribution;
   });
 
   const p = 1 / (1 + Math.exp(-z));
-
-  let verdictText = "";
-  let barColor = "";
-
+  let verdict = '';
+  let bar = 'var(--down)';
   if (p >= PM.thr_high) {
-    verdictText = "High Recruitment Probability: Excellent candidate profile alignment across academic and technical benchmarks.";
-    barColor = "var(--up)";
+    verdict = 'Higher model-readiness band: this profile crosses the 0.65 model threshold.';
+    bar = 'var(--up)';
   } else if (p >= PM.thr_low) {
-    verdictText = "Moderate Recruitment Probability: Strong core credentials; performance in interviews/tests will determine offer outcomes.";
-    barColor = "var(--warn)";
+    verdict = 'Middle model-readiness band: this profile crosses the 0.35 benchmark but not the 0.65 threshold.';
+    bar = 'var(--warn)';
   } else {
-    verdictText = "Needs Profile Strengthening: Below readiness baseline. Strengthening core projects or aptitude scores recommended.";
-    barColor = "var(--down)";
+    verdict = 'Lower model-readiness band: this profile is below the 0.35 benchmark.';
   }
 
-  document.getElementById("p_pct").textContent = Math.round(p * 100) + "%";
-  document.getElementById("p_verdict").textContent = verdictText;
+  const pct = document.getElementById('p_pct');
+  const verdictEl = document.getElementById('p_verdict');
+  const fill = document.getElementById('p_fill');
+  const low = document.getElementById('p_tick_low');
+  const high = document.getElementById('p_tick_high');
+  if (pct) pct.textContent = Math.round(p * 100) + '%';
+  if (verdictEl) verdictEl.textContent = verdict;
+  if (fill) { fill.style.width = (p * 100) + '%'; fill.style.background = bar; }
+  if (low) low.style.left = (PM.thr_low * 100) + '%';
+  if (high) high.style.left = (PM.thr_high * 100) + '%';
 
-  const fl = document.getElementById("p_fill");
-  fl.style.width = (p * 100) + "%";
-  fl.style.background = barColor;
+  const rows = Object.entries(g).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
+  const max = Math.max(...rows.map(r => Math.abs(r[1])), 0.01);
+  const driver = document.getElementById('p_drv');
+  if (driver) {
+    driver.innerHTML = rows.map(([k, c]) => {
+      const w = Math.max(4, Math.min(48, Math.abs(c) / max * 48));
+      const side = c >= 0 ? 'left:50%;background:var(--up)' : 'right:50%;background:var(--down)';
+      return `<div class="row"><span>${PD[k][0]}<em>${T[k]}</em></span><div class="ax"><i style="${side};width:${w}%"></i></div></div>`;
+    }).join('');
+  }
 
-  document.getElementById("p_tick_low").style.left = (PM.thr_low * 100) + "%";
-  document.getElementById("p_tick_high").style.left = (PM.thr_high * 100) + "%";
-
-  const rows = Object.entries(g).filter(([k]) => PD[k]).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
-  const mx = Math.max(...rows.map(r => Math.abs(r[1])), .01);
-
-  document.getElementById("p_drv").innerHTML = rows.map(([k, c]) => {
-    const w = Math.abs(c) / mx * 48;
-    const s = c > 0 ? `left:50%;background:var(--up)` : `right:50%;background:var(--down)`;
-    return `<div class="row"><span>${PD[k][0]}<em>${T[k]}</em></span><div class="ax"><i style="${s};width:${w}%"></i></div></div>`;
-  }).join("");
-
-  // What-If Dynamic Suggestion
-  const whatIfBox = document.getElementById("placement-whatif-text");
-  if (V.backlogs > 0) {
-    whatIfBox.textContent = "Clearing active backlogs will provide an immediate high-impact positive boost to recruitment eligibility.";
-  } else if (V.interview_score < 75) {
-    whatIfBox.textContent = "Increasing Mock Interview score above 80% increases placement probability by ~15%.";
-  } else {
-    whatIfBox.textContent = "Profile holds high competitive positioning across academic and skill vectors.";
+  const tip = document.getElementById('placement-whatif-text');
+  if (tip) {
+    const negatives = rows.filter(([, c]) => c < 0).sort((a, b) => a[1] - b[1]);
+    if (V.backlogs > 0) {
+      tip.textContent = 'Active backlogs are currently the strongest negative contribution in this model profile.';
+    } else if (negatives.length && Math.abs(negatives[0][1]) > 0.2) {
+      tip.textContent = `${PD[negatives[0][0]][0]} is currently the largest negative model contribution. Try adjusting it and watch the estimate update.`;
+    } else {
+      tip.textContent = 'This profile has no large negative contribution; use the sliders to explore which inputs move the model estimate.';
+    }
   }
 }
 
-// Initial calculations
-calc();
-calcPlacement();
+function openPlacementEvaluation() {
+  const section = document.getElementById('evaluation');
+  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Iris Model Logic
+let irisModelData = null;
+
+function initIrisModel() {
+  try {
+    const rawJson = document.getElementById('sayan-iris-model-json').textContent;
+    irisModelData = JSON.parse(rawJson);
+    runIrisPredict();
+  } catch (e) {
+    console.error('Failed to parse Iris model data:', e);
+  }
+}
+
+function runIrisPredict() {
+  if (!irisModelData) return;
+
+  const sl = parseFloat(document.getElementById('iris_SepalLengthCm').value);
+  const sw = parseFloat(document.getElementById('iris_SepalWidthCm').value);
+  const pl = parseFloat(document.getElementById('iris_PetalLengthCm').value);
+  const pw = parseFloat(document.getElementById('iris_PetalWidthCm').value);
+
+  document.getElementById('o_SepalLengthCm').value = sl.toFixed(1) + ' cm';
+  document.getElementById('o_SepalWidthCm').value = sw.toFixed(1) + ' cm';
+  document.getElementById('o_PetalLengthCm').value = pl.toFixed(2) + ' cm';
+  document.getElementById('o_PetalWidthCm').value = pw.toFixed(1) + ' cm';
+
+  const inputs = [sl, sw, pl, pw];
+  const scaler = irisModelData.scaler;
+  const scaled = inputs.map((v, i) => (v - scaler.mean[i]) / scaler.scale[i]);
+
+  const { intercepts, coefficients } = irisModelData.classifier;
+  const logits = intercepts.map((b, i) => {
+    return b + coefficients[i].reduce((sum, w, j) => sum + w * scaled[j], 0);
+  });
+
+  const maxLogit = Math.max(...logits);
+  const exps = logits.map(l => Math.exp(l - maxLogit));
+  const expSum = exps.reduce((a, b) => a + b, 0);
+  const probs = exps.map(e => e / expSum);
+
+  let maxIdx = 0;
+  probs.forEach((p, i) => { if (p > probs[maxIdx]) maxIdx = i; });
+
+  const classes = irisModelData.classes;
+  document.getElementById('iris-pred-name').innerText = classes[maxIdx].replace('Iris-', '');
+  document.getElementById('iris-pred-conf').innerText = `Confidence: ${(probs[maxIdx] * 100).toFixed(1)}%`;
+
+  const probContainer = document.getElementById('iris-probabilities');
+  probContainer.innerHTML = '';
+  classes.forEach((cls, i) => {
+    const pct = (probs[i] * 100).toFixed(1);
+    const row = document.createElement('div');
+    row.className = 'iris-prob-row';
+    row.innerHTML = `
+      <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600;">
+        <span>${cls.replace('Iris-', '')}</span>
+        <span>${pct}%</span>
+      </div>
+      <div class="iris-prob-bar">
+        <div class="iris-prob-fill" style="width:${pct}%; background:${i === maxIdx ? '#16775e' : 'var(--mute)'};"></div>
+      </div>
+    `;
+    probContainer.appendChild(row);
+  });
+}
+
+function loadIrisExample(type) {
+  if (type === 'Setosa') {
+    setIrisValues(5.1, 3.5, 1.4, 0.2);
+  } else if (type === 'Versicolor') {
+    setIrisValues(6.0, 2.9, 4.5, 1.5);
+  } else if (type === 'Virginica') {
+    setIrisValues(6.9, 3.1, 5.4, 2.1);
+  }
+}
+
+function setIrisValues(sl, sw, pl, pw) {
+  document.getElementById('iris_SepalLengthCm').value = sl;
+  document.getElementById('iris_SepalWidthCm').value = sw;
+  document.getElementById('iris_PetalLengthCm').value = pl;
+  document.getElementById('iris_PetalWidthCm').value = pw;
+  runIrisPredict();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initHeartModel();
+initPlacementModel();
+  initIrisModel();
+});
+
+// ===== Nexora V2 interaction layer =====
+const ARCH_INFO = {
+  'Input Layer': 'A model begins with a feature vector: the measurable values selected by the visitor for that experiment.',
+  'Normalization': 'Numeric inputs can be transformed to the scale expected by the trained model, such as z-score standardization.',
+  'Inference Engine': 'The stored coefficients, weights and bias values are combined with the transformed inputs to calculate an output.',
+  'Activation': 'Binary experiments can map a score through sigmoid; multiclass experiments can use softmax to form class probabilities.',
+  'Output': 'The interface turns the model output into a readable prediction, probability breakdown or evaluation view.'
+};
+function initArchitectureExplorer(){
+  const groups=document.querySelectorAll('.arch-nodes .node-group');
+  groups.forEach(group=>{
+    const title=group.querySelector('.node-title');
+    const node=group.querySelector('.node');
+    if(!title||!node)return;
+    node.classList.add('arch-node-button');
+    node.tabIndex=0;
+    const activate=()=>{
+      const key=title.textContent.trim();
+      const info=document.getElementById('arch-info');
+      if(info) info.innerHTML='<strong>'+key+'</strong><p>'+ARCH_INFO[key]+'</p>';
+    };
+    node.addEventListener('click',activate);
+    node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+  });
+}
+function openStudioModel(tabId){
+  const lab=document.getElementById('lab');
+  const btn=[...document.querySelectorAll('.tabNavBtn')].find(b=>b.getAttribute('onclick')?.includes("'"+tabId+"'"));
+  if(btn) switchStudioTab(tabId,btn,tabId==='heart-model'?'theme-heart':tabId==='iris-model'?'theme-iris':'theme-placement');
+  if(lab) lab.scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>{
+    const pane=document.getElementById(tabId);
+    const banner=pane?.querySelector('.modelIntroBanner');
+    const container=pane?.querySelector('.modelContainer');
+    if(banner && container && !banner.classList.contains('unlocked')) unlockModel(banner.id,container.id);
+  },350);
+}
+function getNexoraHistory(){try{return JSON.parse(localStorage.getItem('nexora_prediction_history')||'[]')}catch(e){return[]}}
+function saveNexoraHistory(item){
+  const list=getNexoraHistory();
+  list.unshift({...item,time:new Date().toLocaleString()});
+  localStorage.setItem('nexora_prediction_history',JSON.stringify(list.slice(0,20)));
+  renderNexoraHistory();
+}
+function renderNexoraHistory(){
+  const el=document.getElementById('nexora-history-list'); if(!el)return;
+  const list=getNexoraHistory();
+  if(!list.length){el.innerHTML='<div class="empty-history">No local experiments yet. Run a Heart or Iris model to see a record here.</div>';return;}
+  el.innerHTML=list.map(x=>'<div class="history-item"><div class="kind">'+x.model+'</div><div><b>'+x.result+'</b><div class="time">'+x.detail+'</div></div><div class="time">'+x.time+'</div></div>').join('');
+}
+function clearNexoraHistory(){localStorage.removeItem('nexora_prediction_history');renderNexoraHistory()}
+function exportNexoraHistory(){
+  const data=JSON.stringify(getNexoraHistory(),null,2); const blob=new Blob([data],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='nexora-prediction-history.json'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),500);
+}
+
+// Wrap existing prediction functions so every local experiment can be revisited.
+const _runHeartPredict=runHeartPredict;
+runHeartPredict=function(){
+  _runHeartPredict();
+  const pct=document.getElementById('pct')?.innerText||'--';
+  const verdict=document.getElementById('verdict')?.innerText||'Pending';
+  window.__nexoraLastHeart={pct,verdict};
+};
+const _runIrisPredict=runIrisPredict;
+runIrisPredict=function(){
+  _runIrisPredict();
+  const name=document.getElementById('iris-pred-name')?.innerText;
+  const conf=document.getElementById('iris-pred-conf')?.innerText;
+  if(name) window.__nexoraLastIris={name,conf};
+};
+function attachHistoryActions(){
+  const heartForm=document.getElementById('form');
+  if(heartForm){
+    heartForm.addEventListener('change',()=>{
+      const r=window.__nexoraLastHeart; if(r) window.__nexoraPendingHeart=true;
+    });
+  }
+  // Save the initial state once, then let explicit example/preset clicks add records.
+  const heartPresets=document.querySelectorAll('#heart-container .preset-chip');
+  heartPresets.forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{const r=window.__nexoraLastHeart;if(r)saveNexoraHistory({model:'Heart Risk',result:r.pct+' · '+r.verdict,detail:'Preset profile'});},30)));
+  const irisPresets=document.querySelectorAll('#iris-container .preset-chip');
+  irisPresets.forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{const r=window.__nexoraLastIris;if(r)saveNexoraHistory({model:'Iris Classifier',result:r.name,detail:r.conf||'Example profile'});},30)));
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  initArchitectureExplorer();
+  renderNexoraHistory();
+  setTimeout(attachHistoryActions,500);
+});
+
 </script>
 </body>
 </html>
