@@ -396,6 +396,898 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
 }
 
 #nexora-scroll-progress{position:fixed;left:0;top:0;width:100%;height:3px;transform-origin:left center;transform:scaleX(0);background:var(--orange);z-index:10001;box-shadow:0 0 14px rgba(231,96,52,.45);pointer-events:none}
+
+/* =========================================================
+   NEXORA MOBILE PATCH
+   Optimized for phones/tablets without changing desktop UI.
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .nav {
+    height: auto;
+    min-height: 62px;
+    padding: 12px 20px;
+    gap: 14px;
+  }
+
+  .navlinks {
+    gap: 16px;
+    font-size: 13px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .navlinks::-webkit-scrollbar { display: none; }
+
+  .navbtn { padding: 9px 14px; white-space: nowrap; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 38px;
+    padding: 58px 24px 54px;
+  }
+
+  h1 {
+    font-size: clamp(58px, 13vw, 92px);
+    line-height: .88;
+    max-width: 100%;
+  }
+
+  .hero p {
+    font-size: 17px;
+    max-width: 680px;
+  }
+
+  .heroMedia {
+    min-height: 440px;
+    width: 100%;
+  }
+
+  .heroMedia iframe {
+    min-height: 500px;
+  }
+
+  .story,
+  .lab,
+  .about {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .arch-nodes {
+    justify-content: center;
+  }
+
+  .arch-arrow {
+    transform: rotate(90deg);
+  }
+
+  .visualGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    min-height: 300px;
+  }
+
+  .tabBar {
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 8px;
+    padding-bottom: 0;
+  }
+  .tabBar::-webkit-scrollbar { display: none; }
+
+  .tabNavBtn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    font-size: 14px;
+    padding: 11px 17px;
+  }
+
+  .modelContainer {
+    padding: 20px;
+  }
+
+  .strip {
+    top: 70px;
+  }
+
+  .aboutInner {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .about h2 {
+    font-size: clamp(46px, 12vw, 62px);
+  }
+
+  footer {
+    padding: 24px;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 650px) {
+  /* ---------- Global ---------- */
+  html {
+    scroll-padding-top: 76px;
+  }
+
+  body {
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Navigation ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    padding: 10px 14px;
+    min-height: 58px;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 21px;
+    flex: 0 0 auto;
+  }
+
+  .navlinks {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 2px 0;
+  }
+
+  .navlinks a {
+    font-size: 12px;
+  }
+
+  .sound-toggle-btn {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    font-size: 14px;
+  }
+
+  .navbtn {
+    display: none;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 30px;
+    padding: 42px 18px 44px;
+  }
+
+  .kicker {
+    font-size: 10px;
+    letter-spacing: .16em;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: clamp(52px, 16vw, 76px);
+    letter-spacing: -.065em;
+    line-height: .9;
+  }
+
+  .hero p {
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 22px 0 20px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  .stat-pill {
+    min-width: 0;
+    padding: 9px 11px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .stat-pill:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .stat-pill strong {
+    font-size: 14px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 17px;
+    font-size: 14px;
+  }
+
+  .heroMedia {
+    min-height: 0;
+    height: min(112vw, 470px);
+    border-radius: 8px;
+  }
+
+  .heroMedia iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    transform: scale(1.13);
+  }
+
+  .mediaLabel {
+    left: 16px;
+    bottom: 16px;
+    font-size: 10px;
+  }
+
+  .pill {
+    right: 12px;
+    top: 12px;
+    padding: 7px 10px;
+    font-size: 9px;
+  }
+
+  /* ---------- Story / architecture ---------- */
+  .story {
+    padding: 70px 18px;
+  }
+
+  .sectionHead {
+    margin-bottom: 32px;
+  }
+
+  .sectionHead .eyebrow {
+    font-size: 10px;
+  }
+
+  .sectionHead h2 {
+    font-size: clamp(42px, 12vw, 62px);
+    margin: 13px 0;
+  }
+
+  .sectionHead p {
+    font-size: 16px;
+  }
+
+  .arch-visualizer {
+    padding: 20px 14px;
+    margin-bottom: 18px;
+  }
+
+  .arch-visualizer h3 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .arch-nodes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .node-group {
+    width: 100%;
+  }
+
+  .node {
+    width: 100%;
+    padding: 11px 12px;
+    font-size: 12px;
+  }
+
+  .arch-arrow {
+    font-size: 17px;
+    transform: rotate(90deg);
+    line-height: 1;
+    margin: 2px 0;
+  }
+
+  .arch-info {
+    margin-top: 12px;
+    padding: 15px;
+    gap: 7px;
+  }
+
+  .arch-info strong {
+    font-size: 17px;
+  }
+
+  .arch-info p {
+    font-size: 13px;
+  }
+
+  .visualGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .visual {
+    min-height: 230px;
+  }
+
+  .visualCaption {
+    left: 12px;
+    bottom: 12px;
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+
+  /* ---------- Model lab ---------- */
+  .lab {
+    padding: 64px 18px;
+  }
+
+  .labHeader h2 {
+    font-size: clamp(40px, 11vw, 58px);
+  }
+
+  .labHeader p {
+    font-size: 16px;
+  }
+
+  .tabBar {
+    margin-top: 20px;
+    gap: 7px;
+    border-bottom-width: 1px;
+    padding-bottom: 1px;
+  }
+
+  .tabNavBtn {
+    font-size: 12px;
+    padding: 10px 13px;
+    border-radius: 7px 7px 0 0;
+  }
+
+  .modelIntroBanner {
+    padding: 20px 17px;
+    border-radius: 7px 7px 0 0;
+    gap: 9px;
+  }
+
+  .modelIntroBanner.unlocked {
+    padding: 14px 17px;
+  }
+
+  .modelIntroBanner .tag {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  .modelIntroBanner h3 {
+    font-size: 21px;
+    line-height: 1.15;
+  }
+
+  .modelIntroBanner p,
+  .modelIntroBanner.unlocked p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .enterBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 17px;
+    font-size: 13px;
+  }
+
+  .modelContainer {
+    padding: 15px;
+    border-radius: 0 0 7px 7px;
+  }
+
+  .preset-bar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 15px;
+    padding-bottom: 13px;
+  }
+
+  .preset-bar label {
+    font-size: 10px;
+  }
+
+  .preset-btns {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+
+  .preset-chip {
+    min-height: 36px;
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  .export-btn {
+    width: 100%;
+    margin-left: 0;
+    min-height: 36px;
+    padding: 7px 12px;
+  }
+
+  /* ---------- Prediction result strip ---------- */
+  .strip {
+    position: relative;
+    top: auto;
+    margin-bottom: 18px;
+    border-width: 1.5px;
+  }
+
+  .strip > div {
+    padding: 13px;
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .pct {
+    font-size: clamp(46px, 15vw, 64px);
+    grid-row: auto;
+  }
+
+  .verdict {
+    font-size: 13px;
+  }
+
+  .scale {
+    margin: 8px 0 27px;
+  }
+
+  .tick span {
+    font-size: 9px;
+    left: -15px;
+  }
+
+  .tick.hi span {
+    left: auto;
+    right: -4px;
+  }
+
+  /* ---------- Model controls ---------- */
+  .modelWrap {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .modelWrap h2 {
+    font-size: 18px;
+  }
+
+  fieldset {
+    padding: 11px 0;
+  }
+
+  .top,
+  legend {
+    font-size: 14px;
+  }
+
+  input[type=range] {
+    min-height: 24px;
+  }
+
+  .seg {
+    width: 100%;
+  }
+
+  .seg span {
+    padding: 9px 6px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .side {
+    position: static;
+  }
+
+  .key {
+    font-size: 11px;
+  }
+
+  .row {
+    grid-template-columns: 100px 1fr;
+    gap: 7px;
+    font-size: 12px;
+  }
+
+  .row em {
+    font-size: 10px;
+  }
+
+  .whatif-card,
+  .model-mini-card,
+  .note {
+    font-size: 12px;
+  }
+
+  .placement-eval-link {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .placement-eval-link strong {
+    font-size: 14px;
+  }
+
+  .placement-eval-link span {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Iris ---------- */
+  .iris-metrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .iris-metric {
+    padding: 10px;
+  }
+
+  .iris-metric-val {
+    font-size: 1.3rem;
+  }
+
+  .iris-metric-lbl {
+    font-size: .7rem;
+  }
+
+  .iris-examples {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+
+  .iris-examples label {
+    grid-column: 1 / -1;
+  }
+
+  .iris-examples .preset-chip {
+    width: 100%;
+  }
+
+  /* ---------- Product sections ---------- */
+  .section-block {
+    padding: 64px 18px;
+  }
+
+  .registry-grid,
+  .method-grid,
+  .eval-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+    margin-top: 25px;
+  }
+
+  .registry-card {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .registry-card h3 {
+    font-size: 22px;
+    margin-top: 15px;
+  }
+
+  .model-card-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .model-card-mini {
+    padding: 11px;
+  }
+
+  .model-card-mini span {
+    font-size: 13px;
+  }
+
+  .panel-card {
+    padding: 17px;
+  }
+
+  .panel-card h3 {
+    font-size: 20px;
+  }
+
+  .metric-table {
+    font-size: 12px;
+  }
+
+  .metric-table th,
+  .metric-table td {
+    padding: 9px 5px;
+  }
+
+  .metric-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .bar-row {
+    grid-template-columns: 78px 1fr 42px;
+    gap: 7px;
+    font-size: 11px;
+  }
+
+  .method-card {
+    padding: 17px;
+  }
+
+  .history-head {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .history-actions {
+    width: 100%;
+  }
+
+  .history-actions button {
+    flex: 1;
+  }
+
+  .history-item {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-section {
+    margin-top: 55px;
+    padding: 0;
+  }
+
+  .faq-section h3 {
+    font-size: 30px;
+  }
+
+  .faq-question {
+    padding: 15px 16px;
+    font-size: 14px;
+    gap: 12px;
+  }
+
+  .faq-answer {
+    padding: 0 16px 17px;
+    font-size: 13px;
+  }
+
+  /* ---------- About / footer ---------- */
+  .about {
+    padding: 68px 18px;
+  }
+
+  .aboutInner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about h2 {
+    font-size: clamp(44px, 13vw, 60px);
+  }
+
+  .about p {
+    font-size: 16px;
+  }
+
+  footer {
+    padding: 22px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 11px;
+  }
+
+  /* ---------- Pet modal ---------- */
+  #pet-select-modal {
+    padding: 14px;
+    align-items: center;
+  }
+
+  .pet-modal-card {
+    max-width: 100%;
+    padding: 23px 17px;
+    border-radius: 13px;
+  }
+
+  .pet-modal-card h2 {
+    font-size: 25px;
+    line-height: 1.08;
+  }
+
+  .pet-modal-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .pet-options-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 17px;
+  }
+
+  .pet-option-card {
+    min-height: 64px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 8px;
+    text-align: left;
+  }
+
+  .pet-option-avatar {
+    grid-row: 1 / 3;
+    align-self: center;
+    text-align: center;
+    font-size: 31px;
+  }
+
+  .pet-option-name,
+  .pet-option-role {
+    align-self: end;
+  }
+
+  .pet-option-role {
+    align-self: start;
+  }
+
+  .pet-modal-card .btn {
+    min-height: 44px;
+  }
+
+  /* ---------- Floating pet ---------- */
+  #pet-companion-widget {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .pet-speech-bubble {
+    max-width: min(280px, calc(100vw - 34px));
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .pet-speech-actions {
+    gap: 5px;
+  }
+
+  .pet-action-btn {
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+
+  .pet-avatar-container {
+    width: 54px;
+    height: 54px;
+    font-size: 27px;
+  }
+
+  /* Prevent the mouse-follow transform from creating horizontal overflow. */
+  #pet-companion-widget.corner-docked {
+    transform: translate(calc(100% - 54px), calc(100% - 54px));
+  }
+
+  /* Tooltips should not run off the phone screen. */
+  .tooltip-icon::after {
+    width: min(200px, calc(100vw - 42px));
+    left: auto;
+    right: -8px;
+    transform: translateY(4px);
+  }
+
+  .tooltip-icon:hover::after {
+    transform: translateY(0);
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .nav {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .navlinks {
+    gap: 10px;
+  }
+
+  .navlinks a {
+    font-size: 11px;
+  }
+
+  .hero {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .story,
+  .lab,
+  .about,
+  .section-block {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .modelContainer {
+    padding: 12px;
+  }
+
+  .model-card-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .preset-btns {
+    grid-template-columns: 1fr;
+  }
+
+  .iris-examples {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Touch devices: remove hover-only transforms that can feel jumpy on phones. */
+@media (hover: none) and (pointer: coarse) {
+  .heroMedia:hover,
+  .registry-card:hover,
+  .method-card:hover,
+  .visual:hover img,
+  .pet-option-card:hover,
+  .whatif-card:hover,
+  .placement-eval-link:hover {
+    transform: none;
+  }
+
+  .navlinks a:hover,
+  .btn:hover,
+  .preset-chip:hover,
+  .export-btn:hover {
+    transform: none;
+  }
+}
+
+/* Respect reduced-motion preferences on mobile and desktop. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 </style>
 </head>
 <body class="theme-heart">
