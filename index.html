@@ -32,6 +32,7 @@ button, input, select { font: inherit; }
 .theme-heart { --accent-theme: #0f382c; }
 .theme-placement { --accent-theme: #1b2a4a; }
 .theme-iris { --accent-theme: #16775e; }
+.theme-customer { --accent-theme: #6b4f2a; }
 
 /* Navigation */
 .nav { position: sticky; top: 0; z-index: 20; height: 64px; border-bottom: 1px solid var(--line); background: rgba(244,241,234,.94); backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: space-between; padding: 0 42px; transition: all 0.3s ease; }
@@ -1438,6 +1439,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
       <button class="tabNavBtn active" onclick="switchStudioTab('heart-model', this, 'theme-heart')" role="tab" aria-selected="true">Heart Risk Pattern Check</button>
       <button class="tabNavBtn" onclick="switchStudioTab('placement-model', this, 'theme-placement')" role="tab" aria-selected="false">Placement Checker / Intelligence</button>
       <button class="tabNavBtn" onclick="switchStudioTab('iris-model', this, 'theme-iris')" role="tab" aria-selected="false">Iris Species Classifier</button>
+      <button class="tabNavBtn" onclick="switchStudioTab('customer-model', this, 'theme-customer')" role="tab" aria-selected="false">Customer Response Intelligence</button>
     </div>
 
     <!-- TAB 1: HEART RISK MODEL -->
@@ -1622,6 +1624,69 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
         </div>
       </div>
     </div>
+
+    <!-- TAB 4: CUSTOMER RESPONSE MODEL -->
+    <div id="customer-model" class="tabPane">
+      <div class="modelIntroBanner" id="customer-banner">
+        <div class="tag">Customer Response Intelligence Engine</div>
+        <h3>Customer Response Pattern Check</h3>
+        <p>Explore customer-response patterns using an interactive browser simulator backed by the improved CatBoost experiment. The reported holdout ROC-AUC is <strong>0.9027</strong>, with <strong>86.0%</strong> accuracy, <strong>83.6%</strong> sensitivity and <strong>86.5%</strong> specificity.</p>
+        <button class="enterBtn" onclick="unlockModel('customer-banner', 'customer-container')">Enter Customer Model Engine →</button>
+      </div>
+
+      <div class="modelContainer locked" id="customer-container">
+        <div class="preset-bar">
+          <div>
+            <label>Load Quick Profiles:</label>
+            <div class="preset-btns">
+              <button class="preset-chip" onclick="loadCustomerPreset('high')">High Engagement</button>
+              <button class="preset-chip" onclick="loadCustomerPreset('average')">Average Customer</button>
+              <button class="preset-chip" onclick="loadCustomerPreset('risk')">Low Engagement</button>
+              <button class="preset-chip" onclick="loadCustomerPreset('reset')">Reset</button>
+            </div>
+          </div>
+          <button class="export-btn" onclick="window.print()">Print / Export Summary</button>
+        </div>
+
+        <div class="strip" aria-live="polite">
+          <div>
+            <div class="pct" id="c_pct">--</div>
+            <div>
+              <div class="verdict" id="c_verdict">Adjust the customer profile</div>
+              <div class="subverdict" id="c_subverdict" style="font-size:12px;color:var(--mute)">The response score is recalculated whenever a slider changes.</div>
+              <div class="scale">
+                <div class="fill" id="c_fill"></div>
+                <div class="tick" style="left:50%"><span>response line</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modelWrap">
+          <form id="customer_form" onsubmit="return false"></form>
+          <section class="side">
+            <h2>What moved the estimate</h2>
+            <div class="key">
+              <span style="color:var(--down)">Lowers response</span>
+              <span style="color:var(--up)">Raises response</span>
+            </div>
+            <div id="customer_drv"></div>
+
+            <div class="whatif-card">
+              <strong>Model Performance</strong>
+              <span>CatBoost holdout ROC-AUC: <b>0.9027</b>. Accuracy: <b>86.0%</b>. Sensitivity: <b>83.6%</b>. Specificity: <b>86.5%</b>.</span>
+            </div>
+
+            <div class="model-mini-card">
+              <strong>Important distinction</strong>
+              <span>The live slider score is an educational browser demonstration of learned feature directions. It is not a JavaScript reimplementation of the CatBoost model used for the reported holdout evaluation.</span>
+            </div>
+
+            <p class="note">Customer-response pattern demonstration only. Use the sliders to explore how the supplied feature directions affect the interactive score; do not treat the output as a guarantee of individual customer behavior.</p>
+          </section>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1649,8 +1714,14 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
         <div class="card-meta"><div><b>Engine</b><span>Logistic</span></div><div><b>Mode</b><span>Multiclass</span></div><div><b>Rows</b><span>150</span></div><div><b>Accuracy</b><span>97.3%</span></div></div>
         <button class="card-link" onclick="openStudioModel('iris-model')">Open model →</button>
       </article>
+      <article class="registry-card">
+        <div class="index">04 / CUSTOMER</div><h3>Customer Response Intelligence</h3>
+        <p>Interactive customer-response experiment using the improved CatBoost evaluation, presented in the same Nexora model-lab interface.</p>
+        <div class="card-meta"><div><b>Engine</b><span>CatBoost</span></div><div><b>Mode</b><span>Binary</span></div><div><b>ROC-AUC</b><span>0.9027</span></div><div><b>Accuracy</b><span>86.0%</span></div></div>
+        <button class="card-link" onclick="openStudioModel('customer-model')">Open model →</button>
+      </article>
       <article class="registry-card" style="background:var(--green);color:#fff;border-color:var(--green)">
-        <div class="index" style="color:#f6a487">04 / NEXT</div><h3>More Models</h3>
+        <div class="index" style="color:#f6a487">05 / NEXT</div><h3>More Models</h3>
         <p style="color:#c8d0cc">Reserve a consistent product slot for future DSAI club problem statements and new trained artifacts.</p>
         <div class="card-meta"><div style="background:rgba(255,255,255,.08)"><b style="color:#9db0a9">Status</b><span>Queued</span></div><div style="background:rgba(255,255,255,.08)"><b style="color:#9db0a9">System</b><span>Ready</span></div></div>
         <button class="card-link alt" style="color:#fff;border-color:#fff;background:transparent" onclick="document.getElementById('lab').scrollIntoView({behavior:'smooth'})">Explore the lab →</button>
@@ -1674,6 +1745,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
             <tr><td>Heart Risk</td><td>Binary</td><td>88.5%</td><td>302 unique rows · holdout[cite: 1]</td></tr>
             <tr><td>Placement</td><td>Binary</td><td>88.3%</td><td>Holdout evaluation[cite: 1]</td></tr>
             <tr><td>Iris</td><td>Multiclass</td><td>97.3%</td><td>150 rows · 10-fold CV[cite: 1]</td></tr>
+            <tr><td>Customer Response</td><td>Binary</td><td>86.0%</td><td>CatBoost · holdout</td></tr>
           </tbody>
         </table>
       </div>
@@ -1685,6 +1757,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
           <div class="bar-row"><span>Iris</span><div class="bar-track"><div class="bar-fill" style="width:97.3%"></div></div><b>97.3%</b></div>
           <div class="bar-row"><span>Heart AUC</span><div class="bar-track"><div class="bar-fill" style="width:90.5%"></div></div><b>90.5%</b></div>
           <div class="bar-row"><span>Iris AUC</span><div class="bar-track"><div class="bar-fill" style="width:99.8%"></div></div><b>99.8%</b></div>
+          <div class="bar-row"><span>Customer AUC</span><div class="bar-track"><div class="bar-fill" style="width:90.27%"></div></div><b>90.27%</b></div>
         </div>
         <button class="card-link alt" style="margin-top:25px;width:100%" onclick="openStudioModel('placement-model')">Open full placement evaluation →</button>
       </div>
@@ -1883,7 +1956,7 @@ let petFollowActive = false;
 const petTips = [
   "Welcome to Nexora AI! I'm your companion pet. Scroll down to check out our machine learning models!",
   "Want to see how data flows? Check out the Visualizing Data architecture diagram above!",
-  "Head over to the Interactive Studio Lab to test out live Heart, Placement, and Iris classifiers!",
+  "Head over to the Interactive Studio Lab to test out live Heart, Placement, Iris, and Customer Response classifiers!",
   "Need me out of the way? Click the 'Dock Corner' button to tuck me away quietly!"
 ];
 
@@ -2014,6 +2087,7 @@ function openStudioModel(tabId) {
   let btnIndex = 0;
   if (tabId === 'placement-model') { theme = 'theme-placement'; btnIndex = 1; }
   if (tabId === 'iris-model') { theme = 'theme-iris'; btnIndex = 2; }
+  if (tabId === 'customer-model') { theme = 'theme-customer'; btnIndex = 3; }
 
   const btns = document.querySelectorAll('.tabNavBtn');
   if (btns[btnIndex]) {
@@ -2369,6 +2443,95 @@ function openPlacementEvaluation() {
   alert("Placement Model Evaluation Report:\n• Holdout Accuracy: 88.3%\n• ROC-AUC: 0.921\n• Cross-Validation Precision: 87.5%");
 }
 
+// --- Customer Response Model ---
+const customerFields = [
+  { id:'age', label:'Age', min:25, max:80, step:1, val:45, unit:' yrs', tip:'Customer age in years' },
+  { id:'income', label:'Income', min:10000, max:150000, step:1000, val:50000, unit:' ₹', tip:'Annual/customer income value used by the supplied model' },
+  { id:'children', label:'Children at Home', min:0, max:5, step:1, val:1, tip:'Number of children at home' },
+  { id:'recency', label:'Recency', min:0, max:100, step:1, val:30, unit:' days', tip:'Recency value supplied to the model' },
+  { id:'spend', label:'Total Spend', min:0, max:3000, step:25, val:500, unit:' ₹', tip:'Total customer spend' },
+  { id:'web', label:'Web Purchases', min:0, max:30, step:1, val:5, tip:'Number of web purchases' },
+  { id:'catalog', label:'Catalog Purchases', min:0, max:30, step:1, val:3, tip:'Number of catalog purchases' },
+  { id:'store', label:'Store Purchases', min:0, max:15, step:1, val:5, tip:'Number of store purchases' },
+  { id:'visits', label:'Web Visits / Month', min:0, max:30, step:1, val:6, tip:'Monthly web visits' },
+  { id:'campaigns', label:'Accepted Campaigns', min:0, max:5, step:1, val:1, tip:'Accepted campaign count' },
+  { id:'wine', label:'Wine Spend', min:0, max:1500, step:25, val:250, unit:' ₹' },
+  { id:'meat', label:'Meat Spend', min:0, max:1800, step:25, val:250, unit:' ₹' },
+  { id:'fruit', label:'Fruit Spend', min:0, max:250, step:10, val:30, unit:' ₹' },
+  { id:'fish', label:'Fish Spend', min:0, max:300, step:10, val:35, unit:' ₹' },
+  { id:'sweet', label:'Sweet Spend', min:0, max:250, step:10, val:30, unit:' ₹' },
+  { id:'gold', label:'Gold Spend', min:0, max:300, step:10, val:50, unit:' ₹' }
+];
+
+const CUSTOMER_CONFIG = {
+  weights:{age:-0.1,income:-0.15,children:-0.1,recency:-0.85,spend:0.55,web:-0.2,catalog:-0.05,store:-0.55,visits:-0.15,campaigns:-0.45,wine:-0.1,meat:0.5,fruit:0.12,fish:-0.06,sweet:-0.03,gold:0.1},
+  ranges:{age:{min:25,max:80,default:45,unit:' yrs'},income:{min:10000,max:150000,default:50000,unit:' ₹'},children:{min:0,max:5,default:1,unit:''},recency:{min:0,max:100,default:30,unit:' days'},spend:{min:0,max:3000,default:500,unit:' ₹'},web:{min:0,max:30,default:5,unit:''},catalog:{min:0,max:30,default:3,unit:''},store:{min:0,max:15,default:5,unit:''},visits:{min:0,max:30,default:6,unit:''},campaigns:{min:0,max:5,default:1,unit:''},wine:{min:0,max:1500,default:250,unit:' ₹'},meat:{min:0,max:1800,default:250,unit:' ₹'},fruit:{min:0,max:250,default:30,unit:' ₹'},fish:{min:0,max:300,default:35,unit:' ₹'},sweet:{min:0,max:250,default:30,unit:' ₹'},gold:{min:0,max:300,default:50,unit:' ₹'}},
+  labels:{age:'Age',income:'Income',children:'Children at home',recency:'Recency',spend:'Total spend',web:'Web purchases',catalog:'Catalog purchases',store:'Store purchases',visits:'Web visits / month',campaigns:'Accepted campaigns',wine:'Wine spend',meat:'Meat spend',fruit:'Fruit spend',fish:'Fish spend',sweet:'Sweet spend',gold:'Gold spend'}
+};
+
+function buildCustomerForm(){
+  const form=document.getElementById('customer_form'); if(!form)return;
+  let html='<h2 class="gh">Customer Profile</h2>';
+  const groups=[
+    ['Profile',['age','income','children']],
+    ['Engagement',['recency','spend','web','catalog','store','visits','campaigns']],
+    ['Spending',['wine','meat','fruit','fish','sweet','gold']]
+  ];
+  groups.forEach(([title,keys])=>{
+    html+=`<h2 class="gh" style="margin-top:18px">${title}</h2>`;
+    keys.forEach(id=>{
+      const f=customerFields.find(x=>x.id===id); const unit=f.unit||'';
+      html+=`<fieldset><div class="top"><label for="c_${f.id}">${f.label}${f.tip?`<span class="tooltip-icon" data-tip="${f.tip}">?</span>`:''}</label><output id="co_${f.id}">${formatCustomerValue(f.id,f.val)}</output></div><input type="range" id="c_${f.id}" min="${f.min}" max="${f.max}" step="${f.step}" value="${f.val}" oninput="runCustomerPredict()"></fieldset>`;
+    });
+  });
+  form.innerHTML=html;
+}
+
+function formatCustomerValue(k,v){
+  const r=CUSTOMER_CONFIG.ranges[k];
+  if(r.unit===' ₹') return '₹'+Number(v).toLocaleString('en-IN');
+  return String(v)+(r.unit||'');
+}
+
+function customerValues(){
+  const v={}; customerFields.forEach(f=>{const el=document.getElementById('c_'+f.id); v[f.id]=Number(el?.value ?? f.val);}); return v;
+}
+
+function customerScore(v){
+  let z=0,c={};
+  for(const k of Object.keys(CUSTOMER_CONFIG.weights)){
+    const r=CUSTOMER_CONFIG.ranges[k], mid=(r.min+r.max)/2, span=(r.max-r.min)/2||1;
+    const n=(v[k]-mid)/span, x=CUSTOMER_CONFIG.weights[k]*n; c[k]=x; z+=x;
+  }
+  const p=1/(1+Math.exp(-2.05*z)); return {p,c,z};
+}
+
+function runCustomerPredict(){
+  const v=customerValues();
+  try{localStorage.setItem('nexoraCustomerState',JSON.stringify(v));}catch(e){}
+  customerFields.forEach(f=>{const o=document.getElementById('co_'+f.id); if(o)o.value=formatCustomerValue(f.id,v[f.id]);});
+  const o=customerScore(v), pct=Math.round(o.p*100), hi=pct>=50;
+  const pctEl=document.getElementById('c_pct'), verdict=document.getElementById('c_verdict'), sub=document.getElementById('c_subverdict'), fill=document.getElementById('c_fill');
+  if(pctEl)pctEl.textContent=pct+'%';
+  if(verdict){verdict.textContent=hi?'Higher response likelihood':'Lower response likelihood';verdict.style.color=hi?'var(--up)':'var(--down)';}
+  if(sub)sub.textContent=hi?'This profile has more of the patterns associated with response.':'This profile has more of the patterns associated with non-response.';
+  if(fill){fill.style.width=pct+'%';fill.style.background=hi?'var(--up)':'var(--down)';}
+  const rows=Object.entries(o.c).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,10), mx=Math.max(...rows.map(x=>Math.abs(x[1])),.001), drv=document.getElementById('customer_drv');
+  if(drv)drv.innerHTML=rows.map(([k,c])=>{const w=Math.max(3,Math.abs(c)/mx*47), st=c>=0?`left:50%;background:var(--up);width:${w}%`:`right:50%;background:var(--down);width:${w}%`;return `<div class="row" title="Impact: ${c>0?'+':''}${c.toFixed(3)}"><div><strong>${CUSTOMER_CONFIG.labels[k]}</strong><em>${formatCustomerValue(k,v[k])}</em></div><div class="ax"><i style="${st}"></i></div></div>`;}).join('');
+  if(typeof saveNexoraHistory==='function' && !runCustomerPredict._historyStarted){saveNexoraHistory('Customer Model','Interactive profile initialized');runCustomerPredict._historyStarted=true;}
+}
+
+function loadCustomerPreset(type){
+  const presets={
+    high:{age:38,income:75000,children:0,recency:8,spend:1200,web:12,catalog:8,store:8,visits:3,campaigns:4,wine:500,meat:650,fruit:70,fish:70,sweet:60,gold:80},
+    average:{age:45,income:50000,children:1,recency:30,spend:500,web:5,catalog:3,store:5,visits:6,campaigns:1,wine:250,meat:250,fruit:30,fish:35,sweet:30,gold:50},
+    risk:{age:58,income:35000,children:3,recency:75,spend:150,web:1,catalog:1,store:2,visits:15,campaigns:0,wine:80,meat:70,fruit:10,fish:10,sweet:5,gold:20}
+  };
+  const p=presets[type];
+  customerFields.forEach(f=>{const el=document.getElementById('c_'+f.id); if(el)el.value=p?Math.min(+el.max,Math.max(+el.min,p[f.id])):f.val;});
+  runCustomerPredict(); playSound('click');
+}
+
 // --- Iris Classifier Model ---
 let irisModelData = null;
 
@@ -2536,9 +2699,11 @@ function initNexoraMotion(){
 document.addEventListener('DOMContentLoaded', () => {
   buildHeartForm();
   buildPlacementForm();
+  buildCustomerForm();
   loadIrisModelJSON();
   runHeartPredict();
   runPlacementPredict();
+  runCustomerPredict();
   runIrisPredict();
   renderHistoryUI();
   initScrollObserver();
