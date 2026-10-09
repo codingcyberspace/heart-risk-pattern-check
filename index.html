@@ -308,10 +308,91 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 @media(max-width:1000px){.registry-grid{grid-template-columns:1fr 1fr}.model-card-strip{grid-template-columns:1fr 1fr}.eval-grid{grid-template-columns:1fr}.method-grid{grid-template-columns:1fr}}
 @media(max-width:650px){.section-block{padding:72px 20px}.registry-grid{grid-template-columns:1fr}.model-card-strip{grid-template-columns:1fr}.history-item{grid-template-columns:1fr}.arch-info{grid-template-columns:1fr}.bar-row{grid-template-columns:85px 1fr 45px}}
 
+/* ===== Black cinematic galaxy landing experience ===== */
+.hero {
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  background: #000000 !important;
+  color: #fff;
+}
+/* Remove inherited warm pointer glow so the hero remains truly black. */
+.hero::before {
+  background: none !important;
+  opacity: 0 !important;
+}
+#galaxy-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: #000000;
+}
+.hero > .hero-content,
+.hero > .heroMedia { position: relative; z-index: 2; }
+@keyframes cinematicFadeUp {
+  0% { opacity: 0; transform: translateY(40px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes cinematicMediaReveal {
+  0% { opacity: 0; transform: scale(.92) translateY(30px); filter: blur(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+.hero-content > * {
+  opacity: 0;
+  animation: cinematicFadeUp 1.2s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-content .kicker { animation-delay: .1s; color: #9ab4c2; }
+.hero-content h1 { animation-delay: .25s; }
+.hero-content p { animation-delay: .4s; color: #c8d2d9; }
+.hero-content .hero-stats { animation-delay: .55s; }
+.hero-content .actions { animation-delay: .7s; }
+.hero .stat-pill {
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.1);
+  backdrop-filter: blur(4px);
+}
+.hero .heroMedia {
+  opacity: 0;
+  animation: cinematicMediaReveal 1.4s cubic-bezier(.16,1,.3,1) forwards;
+  animation-delay: .45s;
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 30px 60px rgba(0,0,0,.4);
+  transition: transform .5s ease;
+}
+.hero .heroMedia:hover { transform: translateY(-4px); }
+.hero .pill { background: rgba(0,0,0,.3); }
+.hero .btn {
+  border-color: #fff;
+  background: #fff;
+  color: #111;
+  font-weight: 600;
+}
+.hero .btn:hover { background: #eee; box-shadow: 0 10px 25px rgba(255,255,255,.15); }
+.hero .btn.alt {
+  background: rgba(255,255,255,.05);
+  color: #fff;
+  border-color: rgba(255,255,255,.3);
+  backdrop-filter: blur(4px);
+}
+.hero .btn.alt:hover { background: rgba(255,255,255,.1); }
+.hero .hero-stats .stat-pill:hover { border-color: var(--orange); }
+.hero-content, .heroMedia { will-change: transform, opacity; }
+
+/* Previous-file landing card tilt */
+.registry-card, .panel-card { transform-style: preserve-3d; will-change: transform; }
+
+/* Previous-file navigation state */
+.nav.scrolled { background: rgba(244,241,234,.94); border-bottom: 1px solid var(--line); color: var(--ink); }
+.nav.scrolled .sound-toggle-btn:hover { background: var(--soft); }
+
 /* ===== Dynamic motion layer & Pet styles ===== */
 :root{--motion-ease:cubic-bezier(.22,.61,.36,1);--pointer-x:50%;--pointer-y:20%}
 body{overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.035;background-image:radial-gradient(circle at 1px 1px,currentColor 1px,transparent 0);background-size:18px 18px;mix-blend-mode:multiply}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.018;background-image:radial-gradient(circle at 1px 1px,currentColor 1px,transparent 0);background-size:18px 18px;mix-blend-mode:multiply}
 
 .hero,.story,.lab,.section-block,.about{position:relative;isolation:isolate}
 .hero::before,.story::before,.lab::before,.section-block::before,.about::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(520px 300px at var(--pointer-x) var(--pointer-y),rgba(231,96,52,.10),transparent 68%);transition:background-position .25s ease}
@@ -385,6 +466,51 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
   padding: 2px 6px; border-radius: 999px; border: 1px solid #fff; cursor: pointer;
   pointer-events: auto;
 }
+
+
+/* ===== AI PET CHAT ===== */
+.pet-ai-chat { margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,.10); }
+.pet-chat-row { display:flex; gap:6px; }
+#pet-ai-input { flex:1; min-width:0; border:1px solid var(--line); border-radius:999px; padding:7px 10px; font:500 11px Inter, sans-serif; outline:none; background:#fafafa; color:var(--ink); }
+#pet-ai-input:focus { border-color:var(--ink); box-shadow:0 0 0 3px rgba(0,0,0,.05); }
+.pet-chat-send { width:30px; height:30px; border:0; border-radius:50%; background:var(--ink); color:#fff; cursor:pointer; }
+.pet-chat-status { font-size:9px; color:#6d777d; margin-top:5px; }
+
+/* ===== AI BATTLE ARENA ===== */
+.arena-section { padding:100px 44px; background:#000; color:#fff; position:relative; overflow:hidden; }
+.arena-section .sectionHead { position:relative; z-index:2; }
+.arena-section .sectionHead p { color:#aab5bd; }
+.arena-shell { max-width:1200px; margin:38px auto 0; border:1px solid rgba(255,255,255,.13); border-radius:24px; background:radial-gradient(circle at 50% 45%, rgba(90,130,255,.12), transparent 42%), #05070b; box-shadow:0 30px 90px rgba(0,0,0,.5), inset 0 1px rgba(255,255,255,.05); overflow:hidden; }
+.arena-controls { display:grid; grid-template-columns:1fr 70px 1fr auto; gap:18px; align-items:end; padding:22px; border-bottom:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.025); }
+.arena-controls label { display:flex; flex-direction:column; gap:7px; color:#9ca9b2; font-size:11px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; }
+.arena-controls select { appearance:none; border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:12px 14px; background:#0c1017; color:#fff; font:600 14px Inter,sans-serif; outline:none; }
+.arena-controls select:focus { border-color:#fff; }
+.arena-vs { text-align:center; font:800 18px "Space Grotesk"; color:#8da7ff; padding-bottom:12px; }
+.arena-launch { height:43px; border:0; border-radius:10px; padding:0 18px; background:#fff; color:#050505; font-weight:800; cursor:pointer; transition:.2s; white-space:nowrap; }
+.arena-launch:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(255,255,255,.12); }
+.arena-stage { min-height:360px; display:grid; grid-template-columns:1fr 180px 1fr; align-items:center; gap:20px; padding:45px 38px; position:relative; }
+.arena-stage::before { content:""; position:absolute; left:10%; right:10%; top:50%; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent); }
+.arena-fighter { position:relative; z-index:2; padding:26px; border:1px solid rgba(255,255,255,.12); border-radius:18px; background:rgba(255,255,255,.035); backdrop-filter:blur(10px); transition:transform .4s, border-color .4s, box-shadow .4s; }
+.arena-fighter.winner { border-color:rgba(255,255,255,.7); box-shadow:0 0 45px rgba(110,150,255,.18); transform:translateY(-7px) scale(1.02); }
+.arena-fighter.loser { opacity:.55; }
+.fighter-icon { font-size:38px; margin-bottom:14px; }
+.fighter-name { font:800 21px "Space Grotesk"; }
+.fighter-role { color:#8996a0; font-size:12px; margin:5px 0 20px; }
+.health-track { height:8px; border-radius:99px; background:#171c24; overflow:hidden; }
+.health-fill { width:100%; height:100%; background:linear-gradient(90deg,#fff,#7fa3ff); transition:width 1.2s cubic-bezier(.16,1,.3,1); }
+.fighter-stats { display:flex; justify-content:space-between; margin-top:12px; color:#77838c; font-size:10px; letter-spacing:.1em; }
+.fighter-stats b { color:#fff; font-size:12px; }
+.arena-core { position:relative; z-index:3; width:150px; height:150px; margin:auto; display:grid; place-items:center; }
+.arena-ring { position:absolute; inset:8px; border:1px solid rgba(150,180,255,.55); border-radius:50%; box-shadow:0 0 50px rgba(90,130,255,.2), inset 0 0 30px rgba(90,130,255,.08); animation:arenaSpin 8s linear infinite; }
+.arena-ring::before,.arena-ring::after { content:""; position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.2); inset:18px; }
+.arena-ring::after { inset:31px; border-style:dashed; animation:arenaSpinReverse 5s linear infinite; }
+.arena-core-text { position:relative; font:900 17px "Space Grotesk"; letter-spacing:.16em; color:#fff; text-shadow:0 0 20px rgba(150,180,255,.6); }
+@keyframes arenaSpin { to { transform:rotate(360deg); } }
+@keyframes arenaSpinReverse { to { transform:rotate(-360deg); } }
+.arena-stage.battling .arena-core { animation:arenaPulse .8s ease-in-out infinite alternate; }
+@keyframes arenaPulse { from { transform:scale(.95); filter:brightness(.8); } to { transform:scale(1.08); filter:brightness(1.4); } }
+.arena-log { margin:0 22px 22px; padding:15px 18px; min-height:50px; border:1px solid rgba(255,255,255,.09); border-radius:12px; background:#090c12; color:#aab4bd; font-size:13px; line-height:1.5; }
+@media(max-width:900px){ .arena-section{padding:70px 24px}.arena-controls{grid-template-columns:1fr 1fr}.arena-vs{display:none}.arena-launch{grid-column:1/-1}.arena-stage{grid-template-columns:1fr;gap:25px;padding:30px 20px}.arena-core{order:2;width:100px;height:100px}.fighter-a{order:1}.fighter-b{order:3}.arena-stage::before{display:none} }
 
 /* Confetti Particle FX */
 .confetti-particle {
@@ -1290,6 +1416,32 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
 }
 
 </style>
+
+<style id="nexora-upgrade-css">
+/* ===== NEXORA EXPERIENCE UPGRADE ===== */
+.command-section,.neural-section,.builder-section{position:relative;overflow:hidden;background:#05070a;color:#fff;padding:100px 36px}
+.command-section:before,.neural-section:before,.builder-section:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(90,130,255,.12),transparent 45%);pointer-events:none}
+.command-wrap,.neural-wrap,.builder-wrap{max-width:1200px;margin:auto;position:relative;z-index:1}
+.command-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:34px}
+.command-panel,.telemetry-panel{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(255,255,255,.035);backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.command-panel{padding:26px}.telemetry-panel{padding:24px}
+.system-line{display:flex;justify-content:space-between;gap:15px;align-items:center;border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:18px;margin-bottom:22px}
+.system-status{display:inline-flex;align-items:center;gap:8px;color:#b9c5ce;font-size:12px;letter-spacing:.12em;text-transform:uppercase}.system-dot{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 16px #fff}
+.command-actions{display:flex;gap:10px;flex-wrap:wrap}.command-btn{border:1px solid rgba(255,255,255,.2);background:#fff;color:#07090c;border-radius:999px;padding:11px 16px;font-weight:800;cursor:pointer}.command-btn.alt{background:transparent;color:#fff}
+.command-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.command-metric{padding:16px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.025)}.command-metric strong{display:block;font:800 28px "Space Grotesk"}.command-metric span{font-size:10px;color:#8f9ba5;letter-spacing:.1em;text-transform:uppercase}
+.telemetry-title{font:700 15px "Space Grotesk";margin-bottom:15px}.telemetry-row{display:grid;grid-template-columns:95px 1fr 45px;gap:9px;align-items:center;margin:14px 0;font-size:11px;color:#9ca8b1}.telemetry-bar{height:7px;border-radius:99px;background:#151a21;overflow:hidden}.telemetry-bar i{display:block;height:100%;width:var(--v);background:linear-gradient(90deg,#fff,#7fa3ff);border-radius:inherit;animation:telemetryPulse 2.5s ease-in-out infinite alternate}@keyframes telemetryPulse{from{filter:brightness(.75)}to{filter:brightness(1.3)}}
+.neural-map{height:570px;margin-top:35px;border:1px solid rgba(255,255,255,.12);border-radius:24px;background:radial-gradient(circle at 50% 50%,rgba(75,120,255,.1),transparent 30%),#06080d;position:relative;overflow:hidden}
+.neural-svg{position:absolute;inset:0;width:100%;height:100%}.neural-line{stroke:rgba(130,160,255,.28);stroke-width:1.2;stroke-dasharray:7 9;animation:neuralFlow 5s linear infinite}@keyframes neuralFlow{to{stroke-dashoffset:-80}}
+.neural-node{position:absolute;transform:translate(-50%,-50%);width:150px;text-align:center;cursor:pointer}.neural-orb{width:68px;height:68px;margin:auto;border-radius:50%;display:grid;place-items:center;background:#0c111a;border:1px solid rgba(255,255,255,.4);box-shadow:0 0 35px rgba(100,140,255,.18);font-size:25px;transition:.3s}.neural-node:hover .neural-orb{transform:scale(1.15);box-shadow:0 0 55px rgba(100,140,255,.4);border-color:#fff}.neural-node b{display:block;margin-top:10px;font:700 14px "Space Grotesk"}.neural-node small{display:block;color:#7e8b95;margin-top:3px;font-size:10px}.neural-core .neural-orb{width:105px;height:105px;background:radial-gradient(circle,#fff 0%,#9cb8ff 8%,#111827 38%,#07090d 70%);box-shadow:0 0 80px rgba(120,160,255,.35)}
+.node-heart{left:18%;top:26%}.node-iris{left:82%;top:25%}.node-customer{left:18%;top:73%}.node-placement{left:82%;top:73%}.node-core{left:50%;top:50%}
+.neural-info{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:min(520px,90%);padding:13px 16px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(0,0,0,.55);color:#aab5bd;text-align:center;font-size:12px;backdrop-filter:blur(10px)}
+.builder-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:18px;margin-top:34px}.builder-card{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#070a0f;padding:26px}.builder-control{margin:20px 0}.builder-control label{display:flex;justify-content:space-between;color:#a9b4bc;font-size:12px;margin-bottom:8px}.builder-control select,.builder-control input[type=range]{width:100%}.builder-control select{padding:11px;border:1px solid rgba(255,255,255,.16);background:#0d1118;color:#fff;border-radius:10px}.builder-result{min-height:100%;display:flex;flex-direction:column;justify-content:center}.training-status{font:800 38px "Space Grotesk"}.train-bar{height:10px;background:#151a21;border-radius:99px;overflow:hidden;margin:18px 0}.train-fill{height:100%;width:0;background:linear-gradient(90deg,#fff,#7fa3ff);transition:width 1.5s cubic-bezier(.16,1,.3,1)}.builder-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.builder-metric{padding:14px;border:1px solid rgba(255,255,255,.1);border-radius:12px}.builder-metric strong{display:block;font-size:24px}.builder-metric span{font-size:10px;color:#8c98a2;text-transform:uppercase}
+.explain-card{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;color:#111}.explain-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.explain-bars{margin-top:14px}.explain-row{display:grid;grid-template-columns:145px 1fr 45px;gap:9px;align-items:center;font-size:12px;margin:10px 0}.explain-row i{height:8px;background:#e8e5de;border-radius:99px;overflow:hidden}.explain-row i b{display:block;height:100%;width:var(--w);background:#111;border-radius:inherit}
+.experiment-section{padding:90px 36px;background:var(--paper)}.experiment-wrap{max-width:1200px;margin:auto}.experiment-table{margin-top:28px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.experiment-row{display:grid;grid-template-columns:1.4fr 1fr .8fr .8fr;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line);font-size:13px}.experiment-row:last-child{border-bottom:0}.experiment-row.head{background:#f0ede6;font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.result-good{font-weight:800}.sim-note{font-size:11px;color:#77818a;margin-top:10px}
+@media(max-width:900px){.command-grid,.builder-grid{grid-template-columns:1fr}.command-metrics{grid-template-columns:1fr 1fr}.neural-map{height:500px}.neural-node{width:115px}.neural-orb{width:54px;height:54px}.node-core .neural-orb{width:78px;height:78px}.node-heart{left:15%;top:27%}.node-iris{left:85%;top:27%}.node-customer{left:15%;top:72%}.node-placement{left:85%;top:72%}.experiment-section{padding:70px 20px}}
+@media(max-width:600px){.command-section,.neural-section,.builder-section{padding:70px 18px}.command-metrics{grid-template-columns:1fr 1fr}.command-metric strong{font-size:22px}.system-line{align-items:flex-start;flex-direction:column}.neural-map{height:440px}.neural-node{width:95px}.neural-node b{font-size:11px}.neural-node small{font-size:8px}.neural-info{font-size:10px}.builder-metrics{grid-template-columns:1fr}.experiment-row{grid-template-columns:1fr 1fr}.experiment-row.head{display:none}}
+</style>
+
 </head>
 <body class="theme-heart">
 
@@ -1324,6 +1476,13 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
   <div class="pet-speech-bubble" id="pet-speech-box">
     <strong id="pet-name-title">Pixel</strong>
     <p id="pet-speech-text">Hi! I'm ready to guide you through Nexora AI. Click next or explore around!</p>
+    <div class="pet-ai-chat">
+      <div class="pet-chat-row">
+        <input id="pet-ai-input" type="text" maxlength="240" placeholder="Ask me anything about Nexora..." aria-label="Ask your AI pet">
+        <button class="pet-chat-send" onclick="sendPetAIMessage()" aria-label="Send message">➤</button>
+      </div>
+      <div class="pet-chat-status" id="pet-ai-status">AI companion online</div>
+    </div>
     <div class="pet-speech-actions">
       <button class="pet-action-btn" onclick="petNextTip()">Next Tip 🐾</button>
       <button class="pet-action-btn" onclick="togglePetFollowMode()" id="pet-follow-btn">Follow Mouse 🖱️</button>
@@ -1342,6 +1501,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
     <a href="#top">Home</a>
     <a href="#registry">Models</a>
     <a href="#lab">Lab</a>
+    <a href="#arena">Arena</a>
+    <a href="#command">Core</a>
+    <a href="#neural-map">Network</a>
     <a href="#evaluation">Evaluation</a>
     <a href="#about">About</a>
     <button class="sound-toggle-btn" id="sound-toggle" onclick="toggleSound()" title="Toggle Sound Effects">🔊</button>
@@ -1351,7 +1513,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
 
 <main id="top">
 <section class="hero reveal-on-scroll">
-  <div>
+  <canvas id="galaxy-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
     <div class="kicker">Nexora AI / Machine-learning studio</div>
     <h1>Welcome<br>to reality.</h1>
     <p>Explore interactive machine learning models in one place. Adjust parameters, run predictions, and understand what drives each output in real time.</p>
@@ -1827,6 +1990,63 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
   </div>
 </section>
 
+<!-- NEXORA AI ARENA -->
+<section id="arena" class="arena-section reveal-on-scroll">
+  <div class="sectionHead">
+    <div class="eyebrow">Nexora Arena</div>
+    <h2>AI Battle Arena</h2>
+    <p>Put two learning agents head-to-head. Pick the fighters, launch the round, and watch their confidence, accuracy, and strategy evolve in real time.</p>
+  </div>
+
+  <div class="arena-shell">
+    <div class="arena-controls">
+      <label>Fighter A
+        <select id="arena-a">
+          <option value="heart">Heart Risk Engine</option>
+          <option value="placement">Placement Intelligence</option>
+          <option value="iris">Iris Classifier</option>
+          <option value="customer">Customer Response AI</option>
+        </select>
+      </label>
+      <div class="arena-vs">VS</div>
+      <label>Fighter B
+        <select id="arena-b">
+          <option value="iris">Iris Classifier</option>
+          <option value="customer">Customer Response AI</option>
+          <option value="heart">Heart Risk Engine</option>
+          <option value="placement">Placement Intelligence</option>
+        </select>
+      </label>
+      <button class="arena-launch" id="arena-launch" onclick="runArenaBattle()">⚡ Start Battle</button>
+    </div>
+
+    <div class="arena-stage" id="arena-stage">
+      <div class="arena-fighter fighter-a">
+        <div class="fighter-icon">🧠</div>
+        <div class="fighter-name" id="arena-name-a">Heart Risk Engine</div>
+        <div class="fighter-role" id="arena-role-a">Predictive Defender</div>
+        <div class="health-track"><div class="health-fill" id="arena-health-a"></div></div>
+        <div class="fighter-stats"><span>ACC <b id="arena-acc-a">--</b></span><span>POWER <b id="arena-power-a">--</b></span></div>
+      </div>
+
+      <div class="arena-core">
+        <div class="arena-ring"></div>
+        <div class="arena-core-text" id="arena-status">READY</div>
+      </div>
+
+      <div class="arena-fighter fighter-b">
+        <div class="fighter-icon">🤖</div>
+        <div class="fighter-name" id="arena-name-b">Iris Classifier</div>
+        <div class="fighter-role" id="arena-role-b">Precision Scout</div>
+        <div class="health-track"><div class="health-fill" id="arena-health-b"></div></div>
+        <div class="fighter-stats"><span>ACC <b id="arena-acc-b">--</b></span><span>POWER <b id="arena-power-b">--</b></span></div>
+      </div>
+    </div>
+
+    <div class="arena-log" id="arena-log">Choose two fighters and start a battle. Your AI pet will comment on the result.</div>
+  </div>
+</section>
+
 <section id="about" class="about reveal-on-scroll">
   <div class="aboutInner">
     <h2>About Nexora</h2>
@@ -1840,6 +2060,128 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
   </div>
 </section>
 </main>
+
+
+
+<!-- NEXORA COMMAND CENTER -->
+<section id="command" class="command-section reveal-on-scroll">
+  <div class="command-wrap">
+    <div class="sectionHead">
+      <div class="eyebrow">Nexora Command Center</div>
+      <h2>One system.<br>Four minds.</h2>
+      <p>Monitor the studio, launch experiments, jump into the Arena, and see how the different intelligence engines connect.</p>
+    </div>
+    <div class="command-grid">
+      <div class="command-panel">
+        <div class="system-line"><span class="system-status"><i class="system-dot"></i> All systems operational</span><span style="font-size:11px;color:#77838d">LOCAL / BROWSER RUNTIME</span></div>
+        <div class="command-metrics">
+          <div class="command-metric"><strong id="cmd-models">4</strong><span>Active models</span></div>
+          <div class="command-metric"><strong id="cmd-battles">128</strong><span>Arena battles</span></div>
+          <div class="command-metric"><strong id="cmd-accuracy">93.8%</strong><span>Studio score</span></div>
+          <div class="command-metric"><strong id="cmd-experiments">1,284</strong><span>Experiments</span></div>
+        </div>
+        <div style="margin:24px 0 14px;font:700 15px 'Space Grotesk'">Launch a workflow</div>
+        <div class="command-actions">
+          <button class="command-btn" onclick="nexoraJump('#lab')">Run an experiment →</button>
+          <button class="command-btn alt" onclick="nexoraJump('#arena')">Enter Arena →</button>
+          <button class="command-btn alt" onclick="nexoraJump('#builder')">Build a model →</button>
+        </div>
+      </div>
+      <div class="telemetry-panel">
+        <div class="telemetry-title">Live studio telemetry</div>
+        <div class="telemetry-row"><span>Inference</span><div class="telemetry-bar"><i style="--v:86%"></i></div><b>14ms</b></div>
+        <div class="telemetry-row"><span>Confidence</span><div class="telemetry-bar"><i style="--v:94%"></i></div><b>94%</b></div>
+        <div class="telemetry-row"><span>Stability</span><div class="telemetry-bar"><i style="--v:98%"></i></div><b>98%</b></div>
+        <div class="telemetry-row"><span>Coverage</span><div class="telemetry-bar"><i style="--v:81%"></i></div><b>81%</b></div>
+        <div class="sim-note">Telemetry shown here is a visual product simulation unless explicitly backed by a measured run.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXORA NEURAL MAP -->
+<section id="neural-map" class="neural-section reveal-on-scroll">
+  <div class="neural-wrap">
+    <div class="sectionHead">
+      <div class="eyebrow">Neural Map</div>
+      <h2>Meet the intelligence network.</h2>
+      <p>Explore the relationship between Nexora's model engines. Select a node to inspect its role, then jump directly into the relevant workflow.</p>
+    </div>
+    <div class="neural-map" id="neural-map-stage">
+      <svg class="neural-svg" viewBox="0 0 1000 570" preserveAspectRatio="none" aria-hidden="true">
+        <line class="neural-line" x1="180" y1="145" x2="500" y2="285"/><line class="neural-line" x1="820" y1="140" x2="500" y2="285"/>
+        <line class="neural-line" x1="180" y1="415" x2="500" y2="285"/><line class="neural-line" x1="820" y1="415" x2="500" y2="285"/>
+      </svg>
+      <button class="neural-node node-heart" onclick="selectNeuralNode('heart')"><span class="neural-orb">♥</span><b>Heart Risk</b><small>Predictive Defender</small></button>
+      <button class="neural-node node-iris" onclick="selectNeuralNode('iris')"><span class="neural-orb">◈</span><b>Iris Classifier</b><small>Precision Scout</small></button>
+      <button class="neural-node node-customer" onclick="selectNeuralNode('customer')"><span class="neural-orb">◉</span><b>Customer AI</b><small>Behavior Analyst</small></button>
+      <button class="neural-node node-placement" onclick="selectNeuralNode('placement')"><span class="neural-orb">↗</span><b>Placement AI</b><small>Career Strategist</small></button>
+      <button class="neural-node neural-core node-core" onclick="selectNeuralNode('core')"><span class="neural-orb">✦</span><b>NEXORA CORE</b><small>Intelligence layer</small></button>
+      <div class="neural-info" id="neural-info">Select a model node to learn what it does.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL EXPLAINABILITY -->
+<section id="explainability" class="section-block reveal-on-scroll" style="padding:90px 36px;background:#f4f1ea">
+  <div class="content-wrap" style="max-width:1200px;margin:auto">
+    <div class="sectionHead" style="margin-left:0">
+      <div class="eyebrow">Explainable Intelligence</div>
+      <h2>Don't just get an answer.<br>Understand it.</h2>
+      <p>Every interactive prediction can be paired with a simple feature-impact view. These values are illustrative for the demo unless generated by a measured model run.</p>
+    </div>
+    <div class="explain-card">
+      <div class="explain-head"><div><strong style="font:700 20px 'Space Grotesk'">Why did the model decide this?</strong><div style="color:#69737a;font-size:12px;margin-top:4px">Example: Heart Risk Engine</div></div><button class="command-btn" style="background:#111;color:#fff" onclick="cycleExplanation()">Change scenario</button></div>
+      <div class="explain-bars" id="explain-bars"></div>
+      <div id="explain-summary" style="margin-top:15px;padding-top:14px;border-top:1px solid #e5e1d8;color:#4d575e;font-size:13px;line-height:1.55"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL BUILDER -->
+<section id="builder" class="builder-section reveal-on-scroll">
+  <div class="builder-wrap">
+    <div class="sectionHead">
+      <div class="eyebrow">Experiment Builder</div>
+      <h2>Build. Train.<br>Compare.</h2>
+      <p>Configure a lightweight educational experiment and watch the simulated training pipeline produce a model card.</p>
+    </div>
+    <div class="builder-grid">
+      <div class="builder-card">
+        <div class="builder-control"><label>Dataset <span id="builder-dataset-label">Iris</span></label><select id="builder-dataset"><option>Iris</option><option>Heart Risk</option><option>Placement</option><option>Customer Response</option></select></div>
+        <div class="builder-control"><label>Algorithm <span id="builder-algo-label">Logistic Regression</span></label><select id="builder-algo"><option>Logistic Regression</option><option>Random Forest</option><option>Extra Trees</option><option>Gradient Boosting</option></select></div>
+        <div class="builder-control"><label>Training split <span id="builder-split-label">80%</span></label><input id="builder-split" type="range" min="60" max="90" value="80" oninput="updateBuilderLabels()"></div>
+        <div class="builder-control"><label>Complexity <span id="builder-complexity-label">50%</span></label><input id="builder-complexity" type="range" min="10" max="90" value="50" oninput="updateBuilderLabels()"></div>
+        <button class="command-btn" style="width:100%;margin-top:5px" onclick="trainNexoraModel()">⚡ Train experiment</button>
+      </div>
+      <div class="builder-card builder-result">
+        <div class="training-status" id="training-status">READY TO TRAIN</div>
+        <div class="train-bar"><div class="train-fill" id="train-fill"></div></div>
+        <div id="training-copy" style="color:#929da6;font-size:13px;line-height:1.55">Configure the experiment and start a local visual training simulation.</div>
+        <div class="builder-metrics" style="margin-top:25px"><div class="builder-metric"><strong id="builder-acc">--</strong><span>Accuracy</span></div><div class="builder-metric"><strong id="builder-auc">--</strong><span>ROC-AUC</span></div><div class="builder-metric"><strong id="builder-latency">--</strong><span>Latency</span></div></div>
+        <div class="sim-note">This builder visualizes an educational simulation. It does not train a new ML model in the browser.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIMENT HISTORY -->
+<section id="experiments" class="experiment-section reveal-on-scroll">
+  <div class="experiment-wrap">
+    <div class="sectionHead" style="margin-left:0">
+      <div class="eyebrow">Experiment History</div>
+      <h2>Your AI notebook.</h2>
+      <p>Recent local interactions appear here while you explore the page.</p>
+    </div>
+    <div class="experiment-table" id="experiment-table">
+      <div class="experiment-row head"><span>Experiment</span><span>Result</span><span>Score</span><span>Time</span></div>
+      <div class="experiment-row"><span>Heart Risk / Demo scenario</span><span class="result-good">HIGH RISK</span><span>88.5%</span><span>Now</span></div>
+      <div class="experiment-row"><span>Iris / Sample input</span><span class="result-good">VIRGINICA</span><span>97.3%</span><span>Earlier</span></div>
+      <div class="experiment-row"><span>Arena / Iris vs Customer</span><span class="result-good">IRIS WON</span><span>91%</span><span>Earlier</span></div>
+    </div>
+    <div class="command-actions" style="margin-top:18px"><button class="command-btn" onclick="exportNexoraUpgradeHistory()">Export JSON</button><button class="command-btn alt" style="color:#111;border-color:#111" onclick="clearNexoraUpgradeHistory()">Clear local activity</button></div>
+  </div>
+</section>
 
 <footer>
   <div>© 2026 Nexora AI Studio</div>
@@ -2030,6 +2372,10 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && petFollowActive) {
     togglePetFollowMode();
   }
+  if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'pet-ai-input') {
+    e.preventDefault();
+    sendPetAIMessage();
+  }
 });
 
 function togglePetBubble() {
@@ -2058,6 +2404,117 @@ function updatePetEmotion(state, message) {
     if (message) speech.textContent = message;
   }
 }
+
+
+// --- Local AI Pet Assistant ---
+const petKnowledge = {
+  greetings: ["Hi! 🐾 I'm ready. Ask me about Nexora, the models, the arena, or how this page works.", 'Hello! What would you like to explore in Nexora AI?'],
+  models: 'Nexora has Heart Risk, Placement Intelligence, Iris Classification, and Customer Response models. Open the Lab section to run them interactively.',
+  arena: "The Arena lets two model agents battle. Pick two fighters and press Start Battle; I'll explain who won and why.",
+  galaxy: 'The hero uses a Canvas particle galaxy with orbital motion, glow, depth, and cursor parallax. It is visual only and does not require an external AI service.',
+  help: 'Try asking: “What models do you have?”, “How does the arena work?”, “Tell me about the galaxy”, or “What should I try first?”',
+  start: 'Start with the Lab for live predictions, then visit the Arena to compare two agents. I can guide you through either one.',
+  thanks: "You're welcome! 🐾 Let's keep exploring."
+};
+
+function normalizePetText(t){ return t.toLowerCase().replace(/[^a-z0-9\s?]/g,' ').replace(/\s+/g,' ').trim(); }
+function petAIReply(message){
+  const t=normalizePetText(message);
+  if(!t) return "Ask me something and I'll do my best to help!";
+  if(/^(hi|hello|hey|yo|namaste)\b/.test(t)) return petKnowledge.greetings[Math.floor(Math.random()*petKnowledge.greetings.length)];
+  if(/thank|thanks|thx/.test(t)) return petKnowledge.thanks;
+  if(/arena|battle|fight|fighter|versus|vs/.test(t)) return petKnowledge.arena;
+  if(/model|machine learning|classifier|heart|iris|placement|customer/.test(t)) return petKnowledge.models;
+  if(/galaxy|space|star|animation|astra/.test(t)) return petKnowledge.galaxy;
+  if(/start|begin|first|where do i|what should i/.test(t)) return petKnowledge.start;
+  if(/help|what can you|commands|ask/.test(t)) return petKnowledge.help;
+  if(/who are you|your name|pet/.test(t)) return `I'm ${selectedPetData.name}, your ${selectedPetData.role.toLowerCase()}. I'm the local AI companion for this Nexora page.`;
+  return `I understand you're asking about “${message.slice(0,90)}”. I can help with Nexora's models, the AI Arena, the galaxy animation, or navigating the site. ${petKnowledge.help}`;
+}
+
+function sendPetAIMessage(){
+  const input=document.getElementById('pet-ai-input');
+  const status=document.getElementById('pet-ai-status');
+  if(!input) return;
+  const message=input.value.trim();
+  if(!message) return;
+  status.textContent='Thinking…';
+  updatePetEmotion('normal', `${selectedPetData.name} is thinking…`);
+  setTimeout(()=>{
+    const reply=petAIReply(message);
+    updatePetEmotion('normal', reply);
+    status.textContent='AI companion online';
+  }, 350 + Math.random()*350);
+  input.value='';
+}
+
+// --- Nexora AI Battle Arena ---
+const arenaAgents={
+  heart:{name:'Heart Risk Engine',role:'Predictive Defender',base:88,power:84},
+  placement:{name:'Placement Intelligence',role:'Career Strategist',base:91,power:87},
+  iris:{name:'Iris Classifier',role:'Precision Scout',base:97,power:79},
+  customer:{name:'Customer Response AI',role:'Behavior Analyst',base:89,power:92}
+};
+let arenaRunning=false;
+
+function runArenaBattle(){
+  if(arenaRunning) return;
+  const aKey=document.getElementById('arena-a').value;
+  const bKey=document.getElementById('arena-b').value;
+  const A=arenaAgents[aKey], B=arenaAgents[bKey];
+  const same=aKey===bKey;
+  arenaRunning=true;
+  const stage=document.getElementById('arena-stage');
+  const launch=document.getElementById('arena-launch');
+  stage.classList.add('battling');
+  launch.disabled=true; launch.textContent='⚡ Battling…';
+  document.getElementById('arena-name-a').textContent=A.name;
+  document.getElementById('arena-role-a').textContent=A.role;
+  document.getElementById('arena-name-b').textContent=B.name;
+  document.getElementById('arena-role-b').textContent=B.role;
+  document.getElementById('arena-health-a').style.width='100%';
+  document.getElementById('arena-health-b').style.width='100%';
+  document.getElementById('arena-acc-a').textContent='--';
+  document.getElementById('arena-acc-b').textContent='--';
+  document.getElementById('arena-power-a').textContent='--';
+  document.getElementById('arena-power-b').textContent='--';
+  document.getElementById('arena-status').textContent='SCAN';
+  document.getElementById('arena-log').textContent=`Scanning ${A.name} and ${B.name}…`;
+  document.querySelector('.fighter-a').classList.remove('winner','loser');
+  document.querySelector('.fighter-b').classList.remove('winner','loser');
+  setTimeout(()=>{
+    document.getElementById('arena-status').textContent='DUEL';
+    document.getElementById('arena-log').textContent=`${A.role} is probing the decision boundary. ${B.role} is adapting…`;
+    document.getElementById('arena-health-a').style.width='72%';
+    document.getElementById('arena-health-b').style.width='66%';
+  },700);
+  setTimeout(()=>{
+    const scoreA=A.base + A.power*.12 + Math.random()*10 - (same?4:0);
+    const scoreB=B.base + B.power*.12 + Math.random()*10;
+    const winnerA=scoreA>=scoreB;
+    const accA=Math.min(99.9,Math.round((A.base+Math.random()*2)*10)/10);
+    const accB=Math.min(99.9,Math.round((B.base+Math.random()*2)*10)/10);
+    const powerA=Math.round(scoreA), powerB=Math.round(scoreB);
+    document.getElementById('arena-acc-a').textContent=accA+'%';
+    document.getElementById('arena-acc-b').textContent=accB+'%';
+    document.getElementById('arena-power-a').textContent=powerA;
+    document.getElementById('arena-power-b').textContent=powerB;
+    document.getElementById('arena-health-a').style.width=(winnerA?86:34)+'%';
+    document.getElementById('arena-health-b').style.width=(winnerA?28:84)+'%';
+    const fa=document.querySelector('.fighter-a'), fb=document.querySelector('.fighter-b');
+    fa.classList.toggle('winner',winnerA); fa.classList.toggle('loser',!winnerA);
+    fb.classList.toggle('winner',!winnerA); fb.classList.toggle('loser',winnerA);
+    const winner=winnerA?A:B, loser=winnerA?B:A;
+    document.getElementById('arena-status').textContent='WIN';
+    document.getElementById('arena-log').textContent=`🏆 ${winner.name} wins. ${winner.role} outperformed ${loser.name} with a simulated battle score of ${winnerA?powerA:powerB}. This Arena is a client-side simulation for exploration, not a benchmark of the underlying models.`;
+    updatePetEmotion('happy',`${winner.name} won the Arena! I liked its ${winner.role.toLowerCase()} strategy. Want to run another matchup?`);
+    stage.classList.remove('battling');
+    launch.disabled=false; launch.textContent='⚡ Start Battle';
+    arenaRunning=false;
+    playSound('success');
+  },1900);
+}
+
 
 // --- Navigation & Tab Switching ---
 function switchStudioTab(tabId, btnElem, themeClass) {
@@ -2661,6 +3118,151 @@ function exportNexoraHistory() {
   playSound('success');
 }
 
+function initGalaxy() {
+  const canvas = document.getElementById('galaxy-canvas');
+  if (!canvas || canvas.dataset.initialized === 'true') return;
+  const ctx = canvas.getContext('2d', { alpha: false });
+  if (!ctx) return;
+  canvas.dataset.initialized = 'true';
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const palette = ['#ffffff', '#eaf4ff', '#b8d8ff', '#80baff', '#d8e8ff', '#9ce8e2'];
+  let width = 1, height = 1, dpr = 1, frame = 0;
+  let pointerX = 0, pointerY = 0, targetX = 0, targetY = 0;
+  let particles = [], backgroundStars = [];
+  const rand = (min, max) => min + Math.random() * (max - min);
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    width = Math.max(1, rect.width);
+    height = Math.max(1, rect.height);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.floor(width * dpr));
+    canvas.height = Math.max(1, Math.floor(height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    createParticles();
+    if (reducedMotion) render(0);
+  }
+
+  function createParticles() {
+    particles = [];
+    backgroundStars = [];
+    const mobile = width < 700;
+    const count = Math.min(mobile ? 1900 : 3800, Math.floor(width * height / (mobile ? 180 : 145)));
+    const arms = 4;
+    const cx = width * 0.66;
+    const cy = height * 0.52;
+    const maxRadius = Math.max(width * 0.72, height * 1.05);
+
+    // Dense, luminous spiral arms, with most particles concentrated near the core.
+    for (let i = 0; i < count; i++) {
+      const arm = i % arms;
+      const radius = Math.pow(Math.random(), 0.66) * maxRadius;
+      const angle = (arm / arms) * Math.PI * 2 + radius * 0.012 + rand(-0.24, 0.24);
+      const spread = 0.7 + radius * 0.018;
+      particles.push({
+        radius,
+        angle,
+        arm,
+        offsetX: rand(-spread, spread),
+        offsetY: rand(-spread * 0.7, spread * 0.7),
+        size: radius < maxRadius * 0.2 ? rand(0.55, 1.75) : rand(0.3, 1.2),
+        alpha: rand(0.22, 0.94),
+        color: palette[Math.floor(Math.random() * palette.length)],
+        speed: rand(0.00006, 0.00022) * (radius < maxRadius * 0.3 ? 1.4 : 1)
+      });
+    }
+    const starCount = Math.min(220, Math.floor(width * height / 4500));
+    for (let i = 0; i < starCount; i++) {
+      backgroundStars.push({ x: Math.random() * width, y: Math.random() * height, size: rand(0.25, 0.9), alpha: rand(0.12, 0.6), phase: rand(0, Math.PI * 2) });
+    }
+  }
+
+  function render(timestamp) {
+    frame++;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, width, height);
+
+    pointerX += (targetX - pointerX) * 0.035;
+    pointerY += (targetY - pointerY) * 0.035;
+    const cx = width * 0.66 + pointerX * 16;
+    const cy = height * 0.52 + pointerY * 10;
+    const maxRadius = Math.max(width * 0.72, height * 1.05);
+
+    // Very faint blue-violet nebula haze on a pure black field.
+    const haze = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxRadius * 0.78);
+    haze.addColorStop(0, 'rgba(40, 75, 130, 0.12)');
+    haze.addColorStop(0.32, 'rgba(18, 38, 76, 0.075)');
+    haze.addColorStop(0.7, 'rgba(8, 16, 34, 0.025)');
+    haze.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = haze;
+    ctx.fillRect(0, 0, width, height);
+
+    // Sparse distant stars twinkle softly behind the spiral.
+    ctx.save();
+    backgroundStars.forEach(star => {
+      const twinkle = reducedMotion ? 1 : 0.72 + 0.28 * Math.sin(frame * 0.025 + star.phase);
+      ctx.globalAlpha = star.alpha * twinkle;
+      ctx.fillStyle = '#dceaff';
+      ctx.fillRect(star.x, star.y, star.size, star.size);
+    });
+    ctx.restore();
+
+    // Soft central light bloom.
+    const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(30, Math.min(width, height) * 0.3));
+    core.addColorStop(0, 'rgba(255,255,255,0.20)');
+    core.addColorStop(0.08, 'rgba(180,215,255,0.12)');
+    core.addColorStop(0.28, 'rgba(78,135,220,0.055)');
+    core.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = core;
+    ctx.fillRect(cx - maxRadius, cy - maxRadius, maxRadius * 2, maxRadius * 2);
+
+    ctx.globalCompositeOperation = 'lighter';
+    particles.forEach(p => {
+      if (!reducedMotion) p.angle -= p.speed * 16;
+      const twist = p.radius * 0.012;
+      const angle = p.angle + twist * 0.18;
+      const squash = 0.62;
+      const x = cx + Math.cos(angle) * p.radius + p.offsetX;
+      const y = cy + Math.sin(angle) * p.radius * squash + p.offsetY;
+      if (x < -4 || x > width + 4 || y < -4 || y > height + 4) return;
+      const twinkle = reducedMotion ? 1 : 0.7 + 0.3 * Math.sin(frame * 0.035 + p.radius * 0.02 + p.arm);
+      ctx.globalAlpha = p.alpha * twinkle;
+      ctx.fillStyle = p.color;
+      ctx.shadowBlur = p.radius < maxRadius * 0.22 ? 7 : 2.2;
+      ctx.shadowColor = p.color;
+      ctx.beginPath();
+      ctx.arc(x, y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+    ctx.globalCompositeOperation = 'source-over';
+
+    // A few brighter particles in the inner arms create a premium, luminous depth.
+    const innerGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 42);
+    innerGlow.addColorStop(0, 'rgba(255,255,255,0.30)');
+    innerGlow.addColorStop(0.25, 'rgba(170,210,255,0.15)');
+    innerGlow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = innerGlow;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 42, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (!reducedMotion) requestAnimationFrame(render);
+  }
+
+  canvas.addEventListener('pointermove', event => {
+    const rect = canvas.getBoundingClientRect();
+    targetX = ((event.clientX - rect.left) / Math.max(1, rect.width) - 0.5) * 2;
+    targetY = ((event.clientY - rect.top) / Math.max(1, rect.height) - 0.5) * 2;
+  }, { passive: true });
+  canvas.addEventListener('pointerleave', () => { targetX = 0; targetY = 0; }, { passive: true });
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  if (!reducedMotion) requestAnimationFrame(render);
+}
 function initScrollObserver() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in-view'); });
@@ -2694,9 +3296,24 @@ function initNexoraMotion(){
       }
     }
   },{passive:true});
+
+  document.querySelectorAll('.registry-card, .panel-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const dx = x - rect.width / 2;
+      const dy = y - rect.height / 2;
+      card.style.transform = `rotateY(${dx / 20}deg) rotateX(${-dy / 20}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateY(0deg) rotateX(0deg) translateY(0)';
+    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initGalaxy();
   buildHeartForm();
   buildPlacementForm();
   buildCustomerForm();
@@ -2710,5 +3327,35 @@ document.addEventListener('DOMContentLoaded', () => {
   initNexoraMotion();
 });
 </script>
+
+<script id="nexora-upgrade-js">
+(function(){
+  const neuralData={
+    heart:{title:'Heart Risk Engine',text:'A predictive classification workflow focused on cardiovascular risk. Open the Lab to adjust patient-style inputs and inspect the result.',target:'#lab'},
+    iris:{title:'Iris Classifier',text:'A compact multiclass classification workflow. Great for learning how standardized measurements map to class probabilities.',target:'#lab'},
+    customer:{title:'Customer Response AI',text:'A behavioral-response model concept designed for scenario analysis and classification of customer outcomes.',target:'#lab'},
+    placement:{title:'Placement Intelligence',text:'A career-oriented prediction workflow that turns academic and profile signals into an educational placement estimate.',target:'#lab'},
+    core:{title:'Nexora Core',text:'The visual intelligence layer connecting experiments, explanations, the Arena, the neural map, and the AI companion.',target:'#command'}
+  };
+  window.nexoraJump=function(id){const el=document.querySelector(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});};
+  window.selectNeuralNode=function(key){const d=neuralData[key];const box=document.getElementById('neural-info');if(!d||!box)return;box.innerHTML='<strong style="color:#fff">'+d.title+'</strong> — '+d.text+' <button onclick="nexoraJump(\''+d.target+'\')" style="margin-left:8px;border:1px solid rgba(255,255,255,.25);background:#fff;color:#111;border-radius:999px;padding:5px 9px;font-weight:700;cursor:pointer">Open →</button>';};
+  const explainScenarios=[
+    {features:[['Age',31],['Cholesterol',24],['Blood pressure',19],['Max heart rate',13],['Other features',13]],summary:'The demo scenario is primarily influenced by age and cholesterol, followed by blood pressure and heart-rate-related signals. These are illustrative contributions, not medical advice.'},
+    {features:[['Chest pain',34],['Exercise response',22],['Blood pressure',18],['Cholesterol',15],['Other features',11]],summary:'This scenario emphasizes symptom and exercise-response signals. The chart is a visual explanation demo and should not be interpreted as a clinical assessment.'},
+    {features:[['Max heart rate',28],['Age',24],['Blood pressure',20],['Cholesterol',17],['Other features',11]],summary:'This variation shifts emphasis toward heart-rate and age-related inputs while keeping the remaining contribution distributed across other features.'}
+  ];
+  let explainIndex=0;
+  window.renderExplanation=function(){const d=explainScenarios[explainIndex],wrap=document.getElementById('explain-bars'),summary=document.getElementById('explain-summary');if(!wrap)return;wrap.innerHTML=d.features.map(x=>'<div class="explain-row"><span>'+x[0]+'</span><i><b style="--w:'+x[1]+'%"></b></i><strong>'+x[1]+'%</strong></div>').join('');summary.textContent=d.summary;};
+  window.cycleExplanation=function(){explainIndex=(explainIndex+1)%explainScenarios.length;renderExplanation();};
+  window.updateBuilderLabels=function(){const s=document.getElementById('builder-split'),c=document.getElementById('builder-complexity');if(s)document.getElementById('builder-split-label').textContent=s.value+'%';if(c)document.getElementById('builder-complexity-label').textContent=c.value+'%';};
+  window.trainNexoraModel=function(){const status=document.getElementById('training-status'),fill=document.getElementById('train-fill'),copy=document.getElementById('training-copy');if(!status||!fill)return;const dataset=document.getElementById('builder-dataset').value,algo=document.getElementById('builder-algo').value;let n=0;status.textContent='TRAINING 0%';fill.style.width='0%';copy.textContent='Preparing '+dataset+' features for '+algo+'...';const timer=setInterval(()=>{n+=10;fill.style.width=n+'%';status.textContent='TRAINING '+n+'%';if(n>=100){clearInterval(timer);const acc=(91+Math.random()*7).toFixed(1),auc=(93+Math.random()*6).toFixed(1),lat=Math.round(9+Math.random()*16);status.textContent='MODEL READY';copy.textContent='Educational training simulation complete. The configuration produced a model card for '+dataset+' using '+algo+'.';document.getElementById('builder-acc').textContent=acc+'%';document.getElementById('builder-auc').textContent=auc+'%';document.getElementById('builder-latency').textContent=lat+'ms';addUpgradeHistory('Builder / '+dataset, 'MODEL READY', acc+'%');}} ,70);};
+  function addUpgradeHistory(exp,result,score){const table=document.getElementById('experiment-table');if(!table)return;const row=document.createElement('div');row.className='experiment-row';row.innerHTML='<span>'+exp+'</span><span class="result-good">'+result+'</span><span>'+score+'</span><span>Just now</span>';table.appendChild(row);try{const h=JSON.parse(localStorage.getItem('nexora_upgrade_history')||'[]');h.unshift({exp,result,score,time:new Date().toISOString()});localStorage.setItem('nexora_upgrade_history',JSON.stringify(h.slice(0,20)));}catch(e){}}
+  window.exportNexoraUpgradeHistory=function(){let h=[];try{h=JSON.parse(localStorage.getItem('nexora_upgrade_history')||'[]')}catch(e){}const blob=new Blob([JSON.stringify(h,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nexora-experiments.json';a.click();URL.revokeObjectURL(a.href);};
+  window.clearNexoraUpgradeHistory=function(){localStorage.removeItem('nexora_upgrade_history');alert('Local Nexora upgrade activity cleared.');};
+  function animateMetric(id,target){const el=document.getElementById(id);if(!el)return;const isPct=String(target).includes('%'),num=parseFloat(String(target).replace(/,/g,''));let start=0,steps=25,count=0;const t=setInterval(()=>{count++;start+=(num-start)*.22;if(count>=steps){start=num;clearInterval(t)}el.textContent=(isPct?start.toFixed(1)+'%':Math.round(start).toLocaleString());},35);}
+  document.addEventListener('DOMContentLoaded',()=>{renderExplanation();updateBuilderLabels();['cmd-battles','cmd-experiments'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='0'});setTimeout(()=>{animateMetric('cmd-battles',128);animateMetric('cmd-experiments',1284);},500);});
+})();
+</script>
+
 </body>
 </html>
