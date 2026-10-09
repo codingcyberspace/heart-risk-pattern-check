@@ -61,7 +61,18 @@ h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.
 .btn.alt { background: transparent; color: #111; }
 .heroMedia { background: #111; min-height: 600px; position: relative; overflow: hidden; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); transition: transform 0.5s cubic-bezier(.22,.61,.36,1); }
 .heroMedia:hover { transform: translateY(-4px); }
-.heroMedia iframe { width: 100%; height: 100%; min-height: 650px; transform: scale(1.12); border: 0; display: block; pointer-events: none; }
+ .heroMedia iframe { width: 100%; height: 100%; min-height: 650px; transform: scale(1.12); border: 0; display: block; pointer-events: none; }
+.video-placeholder { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:#05070b; cursor:pointer; overflow:hidden; }
+.video-placeholder img { width:100%; height:100%; min-height:inherit; object-fit:cover; display:block; opacity:.78; }
+.video-play { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:grid; place-items:center; width:68px; height:48px; border-radius:14px; background:#e62117; color:#fff; font-size:22px; box-shadow:0 6px 24px #0008; }
+.video-hint { position:absolute; left:22px; bottom:62px; color:#fff; font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+.video-placeholder:focus-visible { outline:3px solid #fff; outline-offset:-6px; }
+.video-player-wrap { position:absolute; inset:0; background:#05070b; }
+.video-player-wrap iframe { position:absolute; inset:0; width:100%; height:100%; min-height:0; border:0; display:block; }
+.video-open-fallback { position:absolute; z-index:4; right:14px; bottom:14px; display:inline-flex; align-items:center; gap:7px; padding:9px 12px; border:1px solid rgba(255,255,255,.35); border-radius:999px; background:rgba(0,0,0,.78); color:#fff; font-size:12px; font-weight:600; text-decoration:none; backdrop-filter:blur(8px); }
+.video-open-fallback:hover { background:#fff; color:#111; }
+
+.heroMedia .video-placeholder + .mediaLabel { pointer-events:none; }
 .mediaLabel { position: absolute; left: 28px; bottom: 25px; color: #fff; letter-spacing: .12em; font-size: 12px; text-transform: uppercase; z-index: 2; pointer-events: none; }
 .pill { position: absolute; right: 22px; top: 22px; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; padding: 10px 14px; color: #fff; font-size: 12px; z-index: 2; pointer-events: none; backdrop-filter: blur(4px); }
 
@@ -334,12 +345,12 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 .hero > .hero-content,
 .hero > .heroMedia { position: relative; z-index: 2; }
 @keyframes cinematicFadeUp {
-  0% { opacity: 0; transform: translateY(40px); filter: blur(8px); }
-  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 @keyframes cinematicMediaReveal {
-  0% { opacity: 0; transform: scale(.92) translateY(30px); filter: blur(12px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+  0% { opacity: 0; transform: scale(.97) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 .hero-content > * {
   opacity: 0;
@@ -380,14 +391,18 @@ footer { padding: 28px 42px; border-top: 1px solid var(--line); display: flex; j
 }
 .hero .btn.alt:hover { background: rgba(255,255,255,.1); }
 .hero .hero-stats .stat-pill:hover { border-color: var(--orange); }
-.hero-content, .heroMedia { will-change: transform, opacity; }
+/* Avoid forcing permanent GPU layers; enable transforms only during interaction. */
+.hero-content, .heroMedia, .registry-card, .panel-card { will-change: auto; }
 
 /* Previous-file landing card tilt */
-.registry-card, .panel-card { transform-style: preserve-3d; will-change: transform; }
+.registry-card, .panel-card { transform-style: flat; }
 
 /* Previous-file navigation state */
 .nav.scrolled { background: rgba(244,241,234,.94); border-bottom: 1px solid var(--line); color: var(--ink); }
 .nav.scrolled .sound-toggle-btn:hover { background: var(--soft); }
+
+/* Pause decorative CSS animations while their elements are off-screen. */
+.motion-offscreen { animation-play-state: paused !important; }
 
 /* ===== Dynamic motion layer & Pet styles ===== */
 :root{--motion-ease:cubic-bezier(.22,.61,.36,1);--pointer-x:50%;--pointer-y:20%}
@@ -1404,6 +1419,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
 }
 
 /* Respect reduced-motion preferences on mobile and desktop. */
+@media (prefers-reduced-motion: reduce), (max-width: 700px) {
+  .hero-content > *, .hero .heroMedia, .arena-ring, .arena-core { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1415,6 +1434,9 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
 </style>
 
 <style id="nexora-upgrade-css">
@@ -1532,7 +1554,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
   </div>
   <div class="heroMedia">
     <span class="pill">LIVE / EXPERIMENT 01</span>
-    <iframe src="https://www.youtube.com/embed/w77maKnJrtU?autoplay=1&mute=1&loop=1&playlist=w77maKnJrtU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3" title="Mana AI Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <button class="video-placeholder" type="button" aria-label="Play Mana AI video" data-video-id="w77maKnJrtU">
+      <img src="https://i.ytimg.com/vi/w77maKnJrtU/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+      <span class="video-play" aria-hidden="true">▶</span>
+      <span class="video-hint">Play video</span>
+    </button>
     <div class="mediaLabel">Mana AI Stream</div>
   </div>
 </section>
@@ -3130,13 +3156,15 @@ function initGalaxy() {
   let width = 1, height = 1, dpr = 1, frame = 0;
   let pointerX = 0, pointerY = 0, targetX = 0, targetY = 0;
   let particles = [], backgroundStars = [];
+  let canvasVisible = true, rafId = 0, lastFrameTime = 0;
+  const frameInterval = 1000 / 30; // Cap the decorative background at 30 FPS.
   const rand = (min, max) => min + Math.random() * (max - min);
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
     width = Math.max(1, rect.width);
     height = Math.max(1, rect.height);
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     canvas.width = Math.max(1, Math.floor(width * dpr));
     canvas.height = Math.max(1, Math.floor(height * dpr));
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -3148,7 +3176,7 @@ function initGalaxy() {
     particles = [];
     backgroundStars = [];
     const mobile = width < 700;
-    const count = Math.min(mobile ? 1900 : 3800, Math.floor(width * height / (mobile ? 180 : 145)));
+    const count = Math.min(mobile ? 320 : 720, Math.floor(width * height / (mobile ? 650 : 500)));
     const arms = 4;
     const cx = width * 0.66;
     const cy = height * 0.52;
@@ -3172,13 +3200,20 @@ function initGalaxy() {
         speed: rand(0.00006, 0.00022) * (radius < maxRadius * 0.3 ? 1.4 : 1)
       });
     }
-    const starCount = Math.min(220, Math.floor(width * height / 4500));
+    const starCount = Math.min(240, Math.floor(width * height / 3500));
     for (let i = 0; i < starCount; i++) {
       backgroundStars.push({ x: Math.random() * width, y: Math.random() * height, size: rand(0.25, 0.9), alpha: rand(0.12, 0.6), phase: rand(0, Math.PI * 2) });
     }
   }
 
   function render(timestamp) {
+    rafId = 0;
+    if (document.hidden || !canvasVisible) return;
+    if (!reducedMotion && timestamp && timestamp - lastFrameTime < frameInterval) {
+      scheduleRender();
+      return;
+    }
+    lastFrameTime = timestamp || 0;
     frame++;
     ctx.globalCompositeOperation = 'source-over';
     ctx.fillStyle = '#000000';
@@ -3230,8 +3265,8 @@ function initGalaxy() {
       const twinkle = reducedMotion ? 1 : 0.7 + 0.3 * Math.sin(frame * 0.035 + p.radius * 0.02 + p.arm);
       ctx.globalAlpha = p.alpha * twinkle;
       ctx.fillStyle = p.color;
-      ctx.shadowBlur = p.radius < maxRadius * 0.22 ? 7 : 2.2;
-      ctx.shadowColor = p.color;
+      // Avoid per-particle canvas shadows; they are expensive on integrated GPUs.
+      ctx.shadowBlur = 0;
       ctx.beginPath();
       ctx.arc(x, y, p.size, 0, Math.PI * 2);
       ctx.fill();
@@ -3250,8 +3285,30 @@ function initGalaxy() {
     ctx.arc(cx, cy, 42, 0, Math.PI * 2);
     ctx.fill();
 
-    if (!reducedMotion) requestAnimationFrame(render);
+    scheduleRender();
   }
+
+  function scheduleRender() {
+    if (!reducedMotion && !document.hidden && canvasVisible && !rafId) {
+      rafId = requestAnimationFrame(render);
+    }
+  }
+
+  function syncRenderState() {
+    if (document.hidden || !canvasVisible) {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = 0;
+      return;
+    }
+    if (!reducedMotion) scheduleRender();
+  }
+
+  const canvasObserver = new IntersectionObserver(entries => {
+    canvasVisible = entries.some(entry => entry.isIntersecting);
+    syncRenderState();
+  }, { threshold: 0.01 });
+  canvasObserver.observe(canvas);
+  document.addEventListener('visibilitychange', syncRenderState);
 
   canvas.addEventListener('pointermove', event => {
     const rect = canvas.getBoundingClientRect();
@@ -3261,13 +3318,24 @@ function initGalaxy() {
   canvas.addEventListener('pointerleave', () => { targetX = 0; targetY = 0; }, { passive: true });
   window.addEventListener('resize', resize, { passive: true });
   resize();
-  if (!reducedMotion) requestAnimationFrame(render);
+  if (!reducedMotion) scheduleRender();
 }
 function initScrollObserver() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in-view'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+}
+
+function initOffscreenAnimationPausing() {
+  if (!('IntersectionObserver' in window)) return;
+  const animated = document.querySelectorAll('.hero-content > *, .heroMedia, .arena-ring, .arena-core, .reveal-on-scroll');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('motion-offscreen', !entry.isIntersecting);
+    });
+  }, { threshold: 0.01 });
+  animated.forEach(el => observer.observe(el));
 }
 
 function initNexoraMotion(){
@@ -3283,11 +3351,7 @@ function initNexoraMotion(){
   },{passive:true});
 
   window.addEventListener('pointermove',(e)=>{
-    const x=(e.clientX/window.innerWidth)*100;
-    const y=(e.clientY/window.innerHeight)*100;
-    document.documentElement.style.setProperty('--pointer-x',x+'%');
-    document.documentElement.style.setProperty('--pointer-y',y+'%');
-
+    // Only update the floating companion when it is actively following the pointer.
     if (petFollowActive) {
       const petWidget = document.getElementById('pet-companion-widget');
       if (petWidget && !petWidget.classList.contains('corner-docked')) {
@@ -3297,6 +3361,7 @@ function initNexoraMotion(){
     }
   },{passive:true});
 
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   document.querySelectorAll('.registry-card, .panel-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
@@ -3310,9 +3375,39 @@ function initNexoraMotion(){
       card.style.transform = 'rotateY(0deg) rotateX(0deg) translateY(0)';
     });
   });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.video-placeholder[data-video-id]').forEach(button => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.videoId;
+      if (!id) return;
+
+      // Use the standard YouTube embed endpoint and keep a direct-watch fallback
+      // visible in case the video owner has disabled embedding or the browser blocks it.
+      const wrap = document.createElement('div');
+      wrap.className = 'video-player-wrap';
+
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&mute=1&playsinline=1&controls=1&rel=0`;
+      iframe.title = 'Mana AI Video';
+      iframe.loading = 'eager';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+
+      const fallback = document.createElement('a');
+      fallback.className = 'video-open-fallback';
+      fallback.href = `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+      fallback.target = '_blank';
+      fallback.rel = 'noopener noreferrer';
+      fallback.textContent = 'Open on YouTube ↗';
+
+      wrap.append(iframe, fallback);
+      button.replaceWith(wrap);
+    }, { once: true });
+  });
   initGalaxy();
   buildHeartForm();
   buildPlacementForm();
@@ -3324,6 +3419,7 @@ document.addEventListener('DOMContentLoaded', () => {
   runIrisPredict();
   renderHistoryUI();
   initScrollObserver();
+  initOffscreenAnimationPausing();
   initNexoraMotion();
 });
 </script>
