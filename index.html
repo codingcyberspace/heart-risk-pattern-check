@@ -1475,6 +1475,50 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
 @media(max-width:600px){.command-section,.neural-section,.builder-section{padding:70px 18px}.command-metrics{grid-template-columns:1fr 1fr}.command-metric strong{font-size:22px}.system-line{align-items:flex-start;flex-direction:column}.neural-map{height:440px}.neural-node{width:95px}.neural-node b{font-size:11px}.neural-node small{font-size:8px}.neural-info{font-size:10px}.builder-metrics{grid-template-columns:1fr}.experiment-row{grid-template-columns:1fr 1fr}.experiment-row.head{display:none}}
 </style>
 
+
+<style id="nexora-story-green-contrast-fix">
+/* Match the dark-green architecture section from the reference screenshot. */
+.story {
+  background: #102d25 !important;
+  background-color: #102d25 !important;
+  color: #ffffff !important;
+  isolation: isolate;
+}
+.story::before {
+  background: radial-gradient(520px 300px at var(--pointer-x, 50%) var(--pointer-y, 20%), rgba(231,96,52,.08), transparent 68%) !important;
+  opacity: 1 !important;
+}
+.story .sectionHead h2,
+.story .sectionHead h3,
+.story .arch-visualizer h3,
+.story .arch-info strong {
+  color: #ffffff !important;
+}
+.story .sectionHead p,
+.story .arch-info p {
+  color: #c8d0cc !important;
+}
+.story .sectionHead .eyebrow,
+.story .node-title,
+.story .arch-arrow {
+  color: #a7bbb2 !important;
+}
+.story .arch-visualizer,
+.story .arch-info {
+  background-color: rgba(255,255,255,.055) !important;
+  border-color: rgba(255,255,255,.16) !important;
+}
+.story .node {
+  background: rgba(255,255,255,.10) !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,.28) !important;
+}
+.story .node.core {
+  background: #e76034 !important;
+  border-color: #e76034 !important;
+  color: #ffffff !important;
+}
+</style>
 </head>
 <body class="theme-heart">
 
