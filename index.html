@@ -2156,10 +2156,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
         <line class="neural-line" x1="180" y1="145" x2="500" y2="285"/><line class="neural-line" x1="820" y1="140" x2="500" y2="285"/>
         <line class="neural-line" x1="180" y1="415" x2="500" y2="285"/><line class="neural-line" x1="820" y1="415" x2="500" y2="285"/>
       </svg>
-      <button class="neural-node node-heart" onclick="selectNeuralNode('heart')"><span class="neural-orb">♥</span><b>Heart Risk</b><small>Predictive Defender</small></button>
-      <button class="neural-node node-iris" onclick="selectNeuralNode('iris')"><span class="neural-orb">◈</span><b>Iris Classifier</b><small>Precision Scout</small></button>
-      <button class="neural-node node-customer" onclick="selectNeuralNode('customer')"><span class="neural-orb">◉</span><b>Customer AI</b><small>Behavior Analyst</small></button>
-      <button class="neural-node node-placement" onclick="selectNeuralNode('placement')"><span class="neural-orb">↗</span><b>Placement AI</b><small>Career Strategist</small></button>
+      <button class="neural-node node-heart" onclick="selectNeuralNode('heart')"><span class="neural-orb"><img class="neural-photo" alt="Heart health research visual" src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=240&q=80" loading="lazy"><i>♥</i></span><b>Heart Risk</b><small>Predictive Defender</small></button>
+      <button class="neural-node node-iris" onclick="selectNeuralNode('iris')"><span class="neural-orb"><img class="neural-photo" alt="Iris flower close-up" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=240&q=80" loading="lazy"><i>◈</i></span><b>Iris Classifier</b><small>Precision Scout</small></button>
+      <button class="neural-node node-customer" onclick="selectNeuralNode('customer')"><span class="neural-orb"><img class="neural-photo" alt="Customer analytics visual" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=240&q=80" loading="lazy"><i>◉</i></span><b>Customer AI</b><small>Behavior Analyst</small></button>
+      <button class="neural-node node-placement" onclick="selectNeuralNode('placement')"><span class="neural-orb"><img class="neural-photo" alt="Career planning visual" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=240&q=80" loading="lazy"><i>↗</i></span><b>Placement AI</b><small>Career Strategist</small></button>
       <button class="neural-node neural-core node-core" onclick="selectNeuralNode('core')"><span class="neural-orb">✦</span><b>NEXORA CORE</b><small>Intelligence layer</small></button>
       <div class="neural-info" id="neural-info">Select a model node to learn what it does.</div>
     </div>
@@ -3467,5 +3467,48 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 3500);
 })();
 </script>
-\n</body>
+\n
+<style id="nexora-network-photo-cursor-upgrade">
+/* Model-specific photographic thumbnails in the Neural Network */
+.neural-node{z-index:3;padding:0;border:0;background:transparent;color:#fff;isolation:isolate}
+.neural-orb{position:relative;overflow:hidden;background:#0c111a;isolation:isolate}
+.neural-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.76;filter:saturate(.82) contrast(1.08);transition:transform .45s ease,opacity .3s ease}
+.neural-orb::after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(5,8,14,.06),rgba(5,8,14,.7));z-index:1}
+.neural-orb i{position:relative;z-index:2;font-style:normal;color:#fff;text-shadow:0 2px 8px #000;font-size:23px}
+.neural-node:hover .neural-photo,.neural-node:focus-visible .neural-photo{transform:scale(1.13);opacity:.95}
+.neural-node:hover .neural-orb{border-color:#e76034;box-shadow:0 0 0 3px rgba(231,96,52,.22),0 0 45px rgba(231,96,52,.32)}
+.neural-node:focus-visible{outline:2px solid #e76034;outline-offset:8px;border-radius:12px}
+.neural-core .neural-orb{overflow:hidden}
+.neural-core .neural-orb::after{background:radial-gradient(circle,rgba(231,96,52,.18),rgba(5,7,11,.18) 58%,rgba(5,7,11,.82))}
+#nexora-cursor-glow{position:fixed;left:0;top:0;width:360px;height:360px;border-radius:50%;pointer-events:none;z-index:9997;opacity:0;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(231,96,52,.16) 0%,rgba(231,96,52,.075) 25%,rgba(231,96,52,.025) 48%,transparent 70%);mix-blend-mode:screen;transition:opacity .2s ease}
+body.nexora-pointer-active #nexora-cursor-glow{opacity:1}
+.neural-map .neural-info{border-color:rgba(231,96,52,.24);box-shadow:0 0 30px rgba(231,96,52,.06)}
+@media(max-width:650px){#nexora-cursor-glow{width:240px;height:240px}.neural-map{height:610px}.neural-node{width:125px}.neural-orb{width:58px;height:58px}.neural-core .neural-orb{width:82px;height:82px}.neural-info{bottom:12px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.neural-photo,#nexora-cursor-glow{transition:none}}
+</style>
+
+
+<script id="nexora-orange-cursor-upgrade">
+(function(){
+  if(!document.getElementById('nexora-cursor-glow')){
+    const glow=document.createElement('div');glow.id='nexora-cursor-glow';glow.setAttribute('aria-hidden','true');document.body.appendChild(glow);
+  }
+  const glow=document.getElementById('nexora-cursor-glow');
+  let raf=0,x=-500,y=-500;
+  window.addEventListener('pointermove',function(e){
+    if(e.pointerType==='touch')return;
+    x=e.clientX;y=e.clientY;
+    if(!raf)raf=requestAnimationFrame(function(){glow.style.left=x+'px';glow.style.top=y+'px';document.body.classList.add('nexora-pointer-active');raf=0;});
+  },{passive:true});
+  document.addEventListener('pointerleave',function(){document.body.classList.remove('nexora-pointer-active')});
+  document.addEventListener('pointerdown',function(e){
+    if(e.pointerType==='touch')return;
+    const ring=document.createElement('span');ring.style.cssText='position:fixed;left:'+e.clientX+'px;top:'+e.clientY+'px;width:12px;height:12px;border:2px solid #e76034;border-radius:50%;pointer-events:none;z-index:9996;transform:translate(-50%,-50%);animation:nexoraClickRing .55s ease-out forwards';
+    document.body.appendChild(ring);setTimeout(()=>ring.remove(),600);
+  },{passive:true});
+  const style=document.createElement('style');style.textContent='@keyframes nexoraClickRing{to{width:58px;height:58px;opacity:0;border-width:1px}}';document.head.appendChild(style);
+})();
+</script>
+
+</body>
 </html>
