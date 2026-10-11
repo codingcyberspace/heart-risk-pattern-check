@@ -61,6 +61,8 @@ h1 { font: 500 clamp(76px, 9.2vw, 150px)/.86 "Space Grotesk"; letter-spacing: -.
 .btn.alt { background: transparent; color: #111; }
 .heroMedia { background: #111; min-height: 600px; position: relative; overflow: hidden; border-radius: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); transition: transform 0.5s cubic-bezier(.22,.61,.36,1); }
 .heroMedia:hover { transform: translateY(-4px); }
+.heroMedia .landing-video { position:absolute; inset:0; width:100%; height:100%; min-height:0; display:block; object-fit:cover; background:#05070b; border:0; }
+@media (max-width:650px) { .heroMedia .landing-video { object-fit:contain; } }
  .heroMedia iframe { width: 100%; height: 100%; min-height: 650px; transform: scale(1.12); border: 0; display: block; pointer-events: none; }
 .video-placeholder { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:#05070b; cursor:pointer; overflow:hidden; }
 .video-placeholder img { width:100%; height:100%; min-height:inherit; object-fit:cover; display:block; opacity:.78; }
@@ -1553,13 +1555,12 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
     </div>
   </div>
   <div class="heroMedia">
-    <span class="pill">LIVE / EXPERIMENT 01</span>
-    <button class="video-placeholder" type="button" aria-label="Play Mana AI video" data-video-id="w77maKnJrtU">
-      <img src="https://i.ytimg.com/vi/w77maKnJrtU/hqdefault.jpg" alt="" loading="lazy" decoding="async">
-      <span class="video-play" aria-hidden="true">▶</span>
-      <span class="video-hint">Play video</span>
-    </button>
-    <div class="mediaLabel">Mana AI Stream</div>
+    <span class="pill">NEXORA / PROJECT FILM</span>
+    <video class="landing-video" controls autoplay muted loop playsinline preload="metadata" aria-label="Nexora AI landing page video">
+      <source src="WhatsApp%20Video%202026-10-10%20at%2012.33.55%20AM.mp4" type="video/mp4">
+      Your browser does not support HTML video.
+    </video>
+    <div class="mediaLabel">Nexora AI / Project Stream</div>
   </div>
 </section>
 
@@ -3379,35 +3380,6 @@ function initNexoraMotion(){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.video-placeholder[data-video-id]').forEach(button => {
-    button.addEventListener('click', () => {
-      const id = button.dataset.videoId;
-      if (!id) return;
-
-      // Use the standard YouTube embed endpoint and keep a direct-watch fallback
-      // visible in case the video owner has disabled embedding or the browser blocks it.
-      const wrap = document.createElement('div');
-      wrap.className = 'video-player-wrap';
-
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?autoplay=1&mute=1&playsinline=1&controls=1&rel=0`;
-      iframe.title = 'Mana AI Video';
-      iframe.loading = 'eager';
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen = true;
-
-      const fallback = document.createElement('a');
-      fallback.className = 'video-open-fallback';
-      fallback.href = `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
-      fallback.target = '_blank';
-      fallback.rel = 'noopener noreferrer';
-      fallback.textContent = 'Open on YouTube ↗';
-
-      wrap.append(iframe, fallback);
-      button.replaceWith(wrap);
-    }, { once: true });
-  });
   initGalaxy();
   buildHeartForm();
   buildPlacementForm();
